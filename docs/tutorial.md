@@ -1,8 +1,8 @@
-# LogTransform
+# RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It processes a GCT file by taking the natural log of all positive data-points (turning all other values to 0), and outputs the new resulting GCT file.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on given feature and target data file inputs using Scikit-learn's RandomForestClassifier. Also includes several optional parameters for specifying the ranodm forst algorithm classification process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
-**Author**: Omar Halawa, Mesirov Lab - University of California, San Diego
+**Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
 **Contact**: [Email](mailto:ohalawa@ucsd.edu)
 
@@ -10,15 +10,15 @@
 
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
-This module takes in an input GCT file, process it by taking the natural log of each of its positive data points (turning all non-positive values into 0), and outputs a new GCT file of the processed data.
+It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score. Created for both command-line and module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...) and future features (including optional prediction of other user-provided feature data).
 
 
 ## Source Links
-* [The GenePattern LogTransform source repository](https://github.com/omarhalawa3301/log_normalize)
-* LogTransform uses the [genepattern/notebook-python39:latest Docker image](https://hub.docker.com/layers/genepattern/notebook-python39/21.08/images/sha256-12b175ff4472cfecef354ddea1d7811f2cbf0ae9f114ede11d789b74e08bbc03?context=explore)
+* [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest)
+* RandomForest uses the [genepattern/notebook-python39:22.04](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore)
 
 ## Usage
-python log_normalize.py &lt;filename&gt; (-v)
+python rnd_forest.py **-f** &lt;feature datafile&gt; **-t** &lt;target datafile> -d --bootstrap True --ccp_alpha 0.0 --class_weight None --criterion gini --max_depth None --max_features sqrt --max_leaf_nodes None --max_samples None --min_impurity_decrease 0.0 --min_samples_leaf 1 --min_samples_split 2 --min_weight_fraction_leaf 0.0 --n_estimators 100 --n_jobs None --oob_score False --random_state None --verbose 0 --warm_start False
 
 ## Parameters
 
