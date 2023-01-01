@@ -1,33 +1,30 @@
-### copyright 2017-2021 Regents of the University of California and the Broad Institute. All rights reserved.
-FROM genepattern/docker-python36:0.4
+### Copyright 2003-2023. GenePattern Team @ Mesirov Lab - University of California, San Diego. All rights reserved.
+FROM genepattern/notebook-python39:22.04
 
-MAINTAINER Barbara Hill <bhill@broadinstitute.org>
+### Based almost entirely off of ExampleModule Dockerfile found at https://github.com/genepattern/ExampleModule 
+MAINTAINER Omar Halawa <ohalawa@ucsd.edu>
 
-# While you are debugging/iterating over your module code in the Module integrator comment out the secion below.
-# When you are done, export your module, unzip and move your source files into the src directory in this local workspace.
-# Then, update this section for you module and build using the docker build command below - again updated for your module.
-# Note that you only need to add gpuser if you base image (the image specified in FROM) is run as root. If it runs as another user, you may need to become root (USER root) to add folders...etc. Just make sure to switch back to the non-root user before exiting.
 # -----------------------------------
-#creating a non-root user - see above
+# Creating a non-root user
 RUN useradd -ms /bin/bash gpuser
 USER gpuser
 WORKDIR /home/gpuser
 
-#switch back to root to create dir
+# Switching back to root to create dir
 USER root
-RUN mkdir /ExampleModule \
-    && chown gpuser /ExampleModule
+RUN mkdir /RandomForest \
+    && chown gpuser /RandomForest
 
-#switch to non-root before exiting so that we don't run as root on the server, and copy all of the src files into the container.
+# Switching to non-root before exiting so that we don't run as root on the server, and copying all of the src files into the container.
 USER gpuser
-COPY src/*.py /ExampleModule/
+COPY src/*.py /RandomForest/
 
-RUN /ExampleModule/ExampleModule.py
+RUN /RandomForest/rnd_forest.py
 # -----------------------------------
 
-# docker build --rm https://github.com/genepattern/ExampleModule.git#develop -f Dockerfile -t genepattern/example-module:<tag>
+# docker build --rm https://github.com/omarhalawa3301/RandomForest.git#develop -f Dockerfile -t genepattern/randomforest:<tag>
 # make sure this repo and tag match the manifest & don't forget to docker push!
-# docker push genepattern/example-module:<tag>
+# docker push genepattern/randomforest:<tag>
 
 # you can use this command to run Docker and iterate locally (update for your paths and module name, of course)
-# docker run --rm -it --user gpuser -v /c/Users/MyUSER/PathTo/ExampleModule:/mnt/mydata:rw genepattern/example-module:<tag> bash
+# docker run --rm -it --user gpuser -v /c/Users/MyUSER/PathTo/RandomForest:/mnt/mydata:rw genepattern/randomforest:<tag> bash
