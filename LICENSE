@@ -2,9 +2,9 @@
        *** GENEPATTERN LICENSE AGREEMENT ***
 
 ----------------------------------------------------------------
-The GenePattern ExampleModule is distributed under the following BSD-style license:
+The GenePattern Random Forest Classifier (Non-GPU) is distributed under the following BSD-style license:
 
-Copyright (c) 2003-2021 Regents of the University of California and Broad Institute. All rights reserved.
+Copyright (c) 2003-2023 Regents of the University of California and Broad Institute. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
