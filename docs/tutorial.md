@@ -24,9 +24,9 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 
 * Full command-line usage (optional arguments added): 
 
-        python rnd_forest.py -f <feature datafile> -t <target datafile> (-d) (--bootstrap [bool]) (--ccp_alpha [float])
-        (--class_weight [str or None]) (--criterion [str]) (--max_depth [int or None]) (--max_features [str])
-        (--max_leaf_nodes [int or None]) (--max_samples [float or None]) (--min_impurity_decrease [float]) 
+        python rnd_forest.py -f <feature datafile> -t <target datafile> (-d) (--test_size [float]) (--bootstrap [bool]) 
+        (--ccp_alpha [float]) (--class_weight [str or None]) (--criterion [str]) (--max_depth [int or None])
+        (--max_features [str]) (--max_leaf_nodes [int or None]) (--max_samples [float or None]) (--min_impurity_decrease [float]) 
         (--min_samples_leaf [int]) (--min_samples_split [int]) (--min_weight_fraction_leaf [float]) (--n_estimators [int])
         (--n_jobs [int or None]) (--oob_score [bool]) (--random_state [int or None]) (--verbose [int]) (--warm_start [bool])
 
