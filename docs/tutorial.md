@@ -30,7 +30,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
         (--min_samples_leaf [int]) (--min_samples_split [int]) (--min_weight_fraction_leaf [float]) (--n_estimators [int])
         (--n_jobs [int or None]) (--oob_score [bool]) (--random_state [int or None]) (--verbose [int]) (--warm_start [bool])
         
-* Example with all arguments set to defaults
+* Example with all arguments set to defaults (using iris dataset)
 
         python rnd_forest.py -f iris.gct -t iris.cls -d --test_size 0.3 --bootstrap True --ccp_alpha 0.0 --class_weight None
        --criterion gini --max_depth None --max_features sqrt --max_leaf_nodes None --max_samples None --min_impurity_decrease 0.0
