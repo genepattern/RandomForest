@@ -90,7 +90,7 @@ class Classifier:
         y_pred=clf.predict(X_test)
 
         # Printing prediction of feature training set
-        print(clf.predict(X_train))
+        print("Prediction on feature training set: ", clf.predict(X_train))
 
         # Classifier accuracy check
         print("Accuracy score:", accuracy_score(y_test, y_pred))
