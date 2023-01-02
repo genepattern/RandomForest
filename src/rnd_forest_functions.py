@@ -178,6 +178,16 @@ def get_debug():
     return args.debug
 
 
+def get_test_size():
+    """ Function for determining test/training data split 
+    Returns:
+        args.test_size: a float of test data ratio (0.3 default)
+    """
+
+    # Returning the test data ratio for test/training split
+    return args.test_size
+
+
 # Scikit Random Forest Classifier Getter Methods:
 def get_bootstrap():
     """ Function that returns truth value of boostrap argument

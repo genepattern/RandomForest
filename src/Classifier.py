@@ -78,10 +78,9 @@ class Classifier:
             print()
 
         # Setting values to test and training feature and target dataframes
-        # For 30/70 Test/Training split, see first source
-        # TODO, allow for user input to decide test/training split
+        # For 30/70 Test/Training split default, see first source
         X_train, X_test, y_train, y_test = train_test_split(self.feature.T,
-                                        self.target.T, test_size=0.3)
+                                        self.target.T, test_size=get_test_size())
 
         # Training the model with training sets of X and y
         # Raveling y_train's values for data classification format, see last reference

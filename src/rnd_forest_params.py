@@ -31,7 +31,7 @@ import json
 #       be best approached through overriding the error method in Argparse 
 
 
-# Class to limit possible argument values of type int and float (precise range)
+# Classs to limit possible argument values of type int & float (precise range)
 # (see last source)
 class Range(object):
     # Initializer with self-reference, start value, and end value
@@ -47,6 +47,19 @@ class Range(object):
         # Else, carrying on comparison
         else:
             return self.start <= other <= self.end
+
+# Bound-excluding version, see the above Range class for details  
+# Note: only used for the test_size argument, could not find better solution
+class Exc_Range(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+    def __eq__(self, other):
+        if (other == None):
+            return None
+        else:
+            return self.start < other < self.end
 
 # Helper method to account for str type or None input
 def none_or_str(value):
@@ -94,6 +107,13 @@ parser.add_argument("-t", "--target", help="classifier target data filename"
 # Program debug argument, either True or False, False by default
 parser.add_argument("-d", "--debug", help="output program debug messages",
                     nargs="?", const=1, default=False, type=bool)
+
+# Test/Training set split argument, 30% for test is default (70% for training):
+parser.add_argument("--test_size", 
+                    help="ratio for test data split, rest is training data",
+                    nargs="?", const=1, default=0.3, type=float,
+                    choices=[Exc_Range(0.0, 1.0)])
+
 
 # Random Forest Classifier arguments (optional) as default values exist for all
 parser.add_argument("--bootstrap", help="boolean for bootstrapping",
