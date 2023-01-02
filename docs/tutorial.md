@@ -54,7 +54,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None ("None" in CLI), [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
 | oob_score | Optional boolean for if out-of-bag samples used for generalization score | False |
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None ("None" in CLI) | None |
-| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) | 0 |
+| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 | warm_start | Optional boolean for whether to start new forest or add to past solution | False |
 
 \*  required
