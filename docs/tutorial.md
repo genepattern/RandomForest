@@ -38,7 +38,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | feature (-f) * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
 | target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
 | debug (-d) | Optional flag to turn on program debugging | False |
-| test_size | Optional float for ratio of total data split into the test dataset (for test/training data split, 1- test_size = training_size) | 0.3 |
+| test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** handle input of dictionary/list of) | None |
