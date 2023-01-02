@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on given feature and target data file inputs using Scikit-learn's RandomForestClassifier. Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on user-input feature and target data files using Scikit-learn's RandomForestClassifier. Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
