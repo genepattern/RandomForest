@@ -10,7 +10,7 @@
 
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
-It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score. Created for both command-line and module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...) and future features (including optional prediction of other user-provided feature data).
+It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Created for both command-line and module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...) and future features (including optional prediction of other user-provided feature data).
 
 
 ## Source Links
