@@ -106,7 +106,7 @@ parser.add_argument("-t", "--target", help="classifier target data filename"
 
 # Program debug argument, either True or False, False by default
 parser.add_argument("-d", "--debug", help="output program debug messages",
-                    nargs="?", const=1, default=False, type=bool)
+                    nargs="?", const=1, default=False, type=cli_bool)
 
 # Test/Training set split argument, 30% for test is default (70% for training):
 parser.add_argument("--test_size", 
