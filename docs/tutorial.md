@@ -89,6 +89,10 @@ ALL_AML Example Output:
 
 Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore).
 
+## Miscellaneous
+
+Future development and feature implementation ideas: User-input Test/Training split (default is 30/70, see reference in Classify.py), prediction on other user-input feature data
+
 ## License
 
 `RandomForest` is distributed under a modified BSD license available [here](https://github.com/omarhalawa3301/randomforest/blob/main/LICENSE.txt)
