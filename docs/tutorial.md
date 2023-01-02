@@ -92,7 +92,7 @@ Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.dock
 
 ## Miscellaneous
 
-Future development ideas: User-input Test/Training split (default is 30/70, see [here](https://scholarworks.utep.edu/cs_techrep/1209/) as to why), prediction on other user-input feature data
+Future development ideas: Prediction on other user-input feature data
 
 ## License
 
