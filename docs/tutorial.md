@@ -35,8 +35,8 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 
 | Name | Description | Default Value |
 ---------|--------------|----------------
-| feature (-f) * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
-| target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
+| feature (-f) * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default |
+| target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default |
 | debug (-d) | Optional flag to turn on program debugging | False |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
