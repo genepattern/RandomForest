@@ -79,6 +79,7 @@ class Classifier:
 
         # Setting values to test and training feature and target dataframes
         # For 30/70 Test/Training split, see first source
+        # TODO, allow for user input to decide test/training split
         X_train, X_test, y_train, y_test = train_test_split(self.feature.T,
                                         self.target.T, test_size=0.3)
 
@@ -88,7 +89,7 @@ class Classifier:
 
         # Predicting using test features
         y_pred=clf.predict(X_test)
-        
+
         # Printing prediction of feature training set
         print("Prediction on feature training set: ")
         print(clf.predict(X_train))
@@ -97,6 +98,7 @@ class Classifier:
         print("Accuracy score:", accuracy_score(y_test, y_pred))
 
 
+    # TODO, implement prediction of other user-input feature data
     def predict(self, df):
         """ Function of Classifier class that parses input argument df to
             Scikit Random Forest Classifier's predict method
