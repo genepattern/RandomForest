@@ -53,7 +53,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | max_depth | Optional int for maximum tree depth (>= 1), also takes None ("None" in CLI) | None |
 | max_features | Optional string for number of features per split of either one of the following: {"sqrt," "log2"} ("auto" to be removed in Scikit 1.3), (**future implementation:** handle input of float/int) | "sqrt" |
 | max_leaf_nodes | Optional int for maximum leaf nodes per tree (>= 2), also takes None ("None" in CLI) | None |
-| max_samples | Optional float for ratio of datasets to use per tree (between 0.0 and 1.0, inclusive for both), also takes None ("None" in CLI) | None |
+| max_samples | Optional float for ratio of datasets to use per tree (between 0.0 and 1.0, inclusive for both), also takes None ("None" in CLI); can only be None if bootstrap is False | None |
 | min_impurity_decrease | Optional float for minimum impurity decrease needed per node split (>= 0.0) | 0.0 |
 | min_samples_leaf | Optional int for minimum number of samples required at leaf node (>= 1) | 1 |
 | min_samples_split | Optional int for minimum sample number to split node (>= 2) | 2 |
