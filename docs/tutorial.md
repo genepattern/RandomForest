@@ -99,7 +99,9 @@ Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.dock
 
 ## Miscellaneous
 
-Future development ideas: Prediction on other user-input feature data
+Future development ideas: 
+* Prediction on other user-input feature data
+* min_impurity_split implementation; no current documentation exists? only appears via module usage and not local cli (up-to-date)? 
 
 ## License
 
