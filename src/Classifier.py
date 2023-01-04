@@ -14,7 +14,8 @@ from sklearn.model_selection import train_test_split
     File name:     Classifier.py
     Project:       RandomForest (Non-GPU)
     Description:   Class file that contains the attributes and logic
-                   of the Random Forest Classifier's data classifying process. 
+                   of the Random Forest Classifier's data classifying process.
+                   Also contains functions for Classifier objects. 
     References:    scholarworks.utep.edu/cs_techrep/1209/
                    datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
@@ -30,7 +31,7 @@ class Classifier:
 
         """ Classifier class initializer/constructor
         Arguments:
-            self:    Self-reference variable
+            self:    For self-reference
             feature: Processed DataFrame of feature data file
             target:  Processed DataFrame of target data file
         Returns:     Nothing, class initializer
@@ -40,8 +41,12 @@ class Classifier:
         self.feature = feature
         self.target = target
 
+        # Obtaining debugging boolean and test/training float split 
+        debug_value = get_debug()
+        test_value=get_test_size()
+
         # Assigning Random Forest Classifier arguments using getter methods
-        # Descriptions available in fnd_forest_params.py
+        # Descriptions available in rnd_forest_params.py
         bootstrap_value = get_bootstrap()
         ccp_value = get_ccp()
         weight_value = get_class_weight()
@@ -72,15 +77,17 @@ class Classifier:
         n_jobs=job_value, oob_score=oob_value, random_state=random_value,
         verbose=verbose_value, warm_start=warm_value)
 
-        # Arguemnt value check for clf if debugging is on
-        if (get_debug()):
-            print(clf.get_params(True))
-            print()
+        # Printing list of passed-in values if verbosity is on (value greater than 0)
+        print("Test/Training Split is: ", test_value * 100, "/", (1-test_value) * 100)
+        print()
+        print("Classifier parameter values: ")
+        print(clf.get_params(True))
+        print()
 
         # Setting values to test and training feature and target dataframes
         # For 30/70 Test/Training split default, see first source
         X_train, X_test, y_train, y_test = train_test_split(self.feature.T,
-                                        self.target.T, test_size=get_test_size())
+                                        self.target.T, test_size=test_value)
 
         # Training the model with training sets of X and y
         # Raveling y_train's values for data classification format, see last reference
@@ -89,13 +96,14 @@ class Classifier:
         # Predicting using test features
         y_pred=clf.predict(X_test)
 
+        # Classifier accuracy check
+        accuracy = accuracy_score(y_test, y_pred) * 100
+        print(f"Accuracy score: " + "{0:.2f}%".format(accuracy))
+        print()
+    
         # Printing prediction of feature training set
         print("Prediction on feature training set: ")
         print(clf.predict(X_train))
-
-        # Classifier accuracy check
-        print("Accuracy score:", accuracy_score(y_test, y_pred))
-
 
     # TODO, implement prediction of other user-input feature data
     def predict(self, df):
@@ -103,6 +111,7 @@ class Classifier:
             Scikit Random Forest Classifier's predict method
 
         Argument:
+            self:     For self-reference
             df:       DataFrame to predict withobject's classification
         Returns:
             self.clf.predict(df):  Prediction output data to ease printing

@@ -42,7 +42,7 @@ if ((feature_ext != None) and (target_ext != None)):
     # Creating an instance of the Classifier object as rnd_forest
     rnd_forest = Classifier(feature_df, target_df)
 
-# Otherwise, printing error message to notify user
+# Otherwise, printing error message to notify user (CLI-usage)
 else:
     print("Error in file input, please check above for details.")
 

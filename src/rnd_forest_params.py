@@ -115,7 +115,13 @@ parser.add_argument("--test_size",
                     choices=[Exc_Range(0.0, 1.0)])
 
 
-# Random Forest Classifier arguments (optional) as default values exist for all
+# Random Forest Classifier arguments (optional) as default values exist for all:
+
+# 0 for no verbosity, 1 for basic verbosity, values greater for more verbosity
+parser.add_argument("-v", "--verbose", help="verbosity flag",
+                    nargs="?", const=1, default=0, type=int, 
+                    choices=[Range(0, math.inf)])
+
 parser.add_argument("--bootstrap", help="boolean for bootstrapping",
                     nargs="?", const=1, default=True, type=cli_bool,
                     choices=[True, False])
@@ -194,11 +200,6 @@ parser.add_argument("--random_state",
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int,
                     choices=[Range(0, max_seed), None])
-
-# 0 for no verbosity, 1 for basic verbosity, values greater for more verbosity
-parser.add_argument("--verbose", help="verbosity flag",
-                    nargs="?", const=1, default=0, type=int, 
-                    choices=[Range(0, math.inf)])
 
 parser.add_argument("--warm_start", 
                     help="whether to start new forest or add to past solution",
