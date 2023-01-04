@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
     Project:       RandomForest (Non-GPU)
     Description:   Class file that contains the attributes and logic
                    of the Random Forest Classifier's data classifying process.
-                   Also contains functions for Classifier objects. 
+                   Future implementation: contain methods of Classifier object. 
     References:    scholarworks.utep.edu/cs_techrep/1209/
                    datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
@@ -106,15 +106,15 @@ class Classifier:
         print(clf.predict(X_train))
 
     # TODO, implement prediction of other user-input feature data
-    def predict(self, df):
-        """ Function of Classifier class that parses input argument df to
-            Scikit Random Forest Classifier's predict method
+    # def predict(self, df):
+    #     """ Function of Classifier class that parses input argument df to
+    #         Scikit Random Forest Classifier's predict method
 
-        Argument:
-            self:     For self-reference
-            df:       DataFrame to predict withobject's classification
-        Returns:
-            self.clf.predict(df):  Prediction output data to ease printing
-        """
+    #     Argument:
+    #         self:     For self-reference
+    #         df:       DataFrame to predict withobject's classification
+    #     Returns:
+    #         Classifier.clf.predict(df):  Prediction output data to ease printing
+    #     """
 
-        return self.clf.predict(df)
+    #     return Classifier.clf.predict(df)
