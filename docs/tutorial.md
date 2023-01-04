@@ -101,7 +101,8 @@ Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.dock
 
 Future development ideas: 
 * Prediction on other user-input feature data
-* min_impurity_split implementation; no current documentation exists? only appears via module usage and not local cli (up-to-date)? 
+* Module Scikit ver outdated: min_impurity_split (parameter) outdated (not available in new versions) but still up on module. 
+* Module Scikit ver outdated: log_loss (argument for criterion parameter) new (available in up-to-date versions) but not up on module. 
 
 ## License
 
