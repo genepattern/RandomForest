@@ -46,7 +46,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
 | debug (-d) | Optional boolean for program debugging, (takes "True" or "False" for CLI) | False |
 | test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
-| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
+| verbose (-v) | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 | bootstrap | Optional boolean to turn on classifier bootstrapping, (takes "True" or "False" for CLI) | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** handle input of dictionary/list of) | None |
