@@ -24,18 +24,18 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 
 * Full command-line usage (optional arguments added): 
 
-        python rnd_forest.py -f <feature datafile> -t <target datafile> (-d) (--test_size [float]) (--bootstrap [bool]) 
+        python rnd_forest.py -f <feature> -t <target> (-d [bool]) (--test_size [float])  (-v [int]) (--bootstrap [bool]) 
         (--ccp_alpha [float]) (--class_weight [str or None]) (--criterion [str]) (--max_depth [int or None])
         (--max_features [str]) (--max_leaf_nodes [int or None]) (--max_samples [float or None]) (--min_impurity_decrease [float]) 
         (--min_samples_leaf [int]) (--min_samples_split [int]) (--min_weight_fraction_leaf [float]) (--n_estimators [int])
-        (--n_jobs [int or None]) (--oob_score [bool]) (--random_state [int or None]) (--verbose [int]) (--warm_start [bool])
+        (--n_jobs [int or None]) (--oob_score [bool]) (--random_state [int or None]) (--warm_start [bool])
         
 * Example with all arguments set to defaults (using iris dataset)
 
-        python rnd_forest.py -f iris.gct -t iris.cls -d --test_size 0.3 --bootstrap True --ccp_alpha 0.0 --class_weight None
+        python rnd_forest.py -f iris.gct -t iris.cls -d False --test_size 0.3  -v 0 --bootstrap True --ccp_alpha 0.0 --class_weight None
        --criterion gini --max_depth None --max_features sqrt --max_leaf_nodes None --max_samples None --min_impurity_decrease 0.0
        --min_samples_leaf 1 --min_samples_split 2 --min_weight_fraction_leaf 0.0 --n_estimators 100 --n_jobs None --oob_score False
-       --random_state None --verbose 0 --warm_start False
+       --random_state None --warm_start False
 
 
 ## Parameters
@@ -46,6 +46,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
 | debug (-d) | Optional boolean for program debugging, (takes "True" or "False" for CLI) | False |
 | test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
+| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 | bootstrap | Optional boolean to turn on classifier bootstrapping, (takes "True" or "False" for CLI) | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** handle input of dictionary/list of) | None |
@@ -62,7 +63,6 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None ("None" in CLI), [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
 | oob_score | Optional boolean for if out-of-bag samples used for generalization score, (takes "True" or "False" for CLI) | False |
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None ("None" in CLI) | None |
-| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 | warm_start | Optional boolean for whether to start new forest or add to past solution, (takes "True" or "False" for CLI) | False |
 
 \*  required
