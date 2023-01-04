@@ -6,5 +6,5 @@ MAINTAINER Omar Halawa <ohalawa@ucsd.edu>
 
 ### Ensuring up-to-date pip and importing necessary modules 
 RUN pip install --upgrade pip && \
-    pip install pandas
+    pip install pandas && \
     pip install scikit-learn
