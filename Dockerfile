@@ -1,5 +1,9 @@
 ### Copyright 2003-2023. GenePattern Team @ Mesirov Lab - University of California, San Diego. All rights reserved.
+#
+#
 # Disclaimer: the following Dockerfile is for future implementation, the current module uses the genepattern/notebook-python39:22.04 image.
+#
+#
 FROM genepattern/notebook-python39:22.04
 
 ### Based off of ExampleModule Dockerfile found at https://github.com/genepattern/ExampleModule 
