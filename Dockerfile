@@ -1,12 +1,8 @@
 ### Copyright 2003-2023. GenePattern Team @ Mesirov Lab - University of California, San Diego. All rights reserved.
-#
-# Work in progress.
-# Currently, module uses genepattern/notebook-python39:22.04 image.
-#
 FROM python:3
 
 # Based off of ExampleModule Dockerfile found at https://github.com/genepattern/ExampleModule 
-MAINTAINER Omar Halawa <ohalawa@ucsd.edu>
+LABEL maintainer="Omar Halawa ohalawa@ucsd.edu"
 
 # Setting up proper environment, see ExampleModule Dockerfile for more info
 # -----------------------------------
@@ -29,5 +25,3 @@ RUN pip install --upgrade pip && \
     
 # Running the program
 RUN /RandomForest/rnd_forest.py
-
-
