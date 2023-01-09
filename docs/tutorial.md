@@ -49,7 +49,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | verbose (-v) | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 | bootstrap | Optional boolean to turn on classifier bootstrapping, (takes "True" or "False" for CLI) | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
-| class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm_start if the fitted data differs from the full dataset | None |
+| class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
 | criterion | Optional string for node-splitting criterion of one of the following: {“gini”, “entropy”, “log_loss”} | "gini" |
 | max_depth | Optional int for maximum tree depth (>= 1), also takes None ("None" in CLI) | None |
 | max_features | Optional string for number of features per split of either one of the following: {"sqrt," "log2"} ("auto" to be removed in Scikit 1.3), (**future implementation:** handle input of float/int) | "sqrt" |
