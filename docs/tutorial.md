@@ -61,7 +61,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 | min_weight_fraction_leaf | Optional float for min weighted fraction of weight sum total to be leaf (between 0.0 and 0.5, inclusive for both) | 0.0 |
 | n_estimators | Optional int for number of trees in forest (>= 1) | 100 |
 | n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None ("None" in CLI), [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
-| oob_score | Optional boolean for if out-of-bag samples used for generalization score, (takes "True" or "False" for CLI) | False |
+| oob_score | Optional boolean for if out-of-bag samples used for generalization score, (takes "True" or "False" for CLI); if bootstrap is False, can only be False | False |
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None ("None" in CLI) | None |
 | warm_start | Optional boolean for whether to start new forest or add to past solution, (takes "True" or "False" for CLI) | False |
 
