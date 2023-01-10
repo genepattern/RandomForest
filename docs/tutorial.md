@@ -94,7 +94,7 @@ Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.dock
 
 Future development ideas: 
 * Prediction on other user-input feature data
-* .txt file implementation for both feature and target data (other data types as well)
+* .txt file implementation for both feature and target data (other file types as well)
 * Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
 * Dockerfile for Scikit-learn v1.2 to address the following regarding module Dockerfile being not up-to-date:
   * Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in Scikit v1.2) but still up on module. 
