@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on user-input feature and target data files using Scikit-learn's RandomForestClassifier. Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on user-input feature and target data files using Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -94,8 +94,10 @@ Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.dock
 
 Future development ideas: 
 * Prediction on other user-input feature data
-* Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in new versions) but still up on module. 
-* Module Scikit version outdated: log_loss (argument for criterion parameter) new (available in up-to-date versions) but not up on module. 
+* Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
+* Dockerfile for Scikit-learn v1.2 to address the following regarding module Dockerfile being not up-to-date:
+  * Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in Scikit v1.2) but still up on module. 
+  * Module Scikit version outdated: log_loss (criterion argument) in Scikit v1.2 (stable) but not up on module. 
 
 ## License
 
