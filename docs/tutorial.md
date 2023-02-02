@@ -10,7 +10,7 @@
 
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
-It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Created for both command-line and module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...) and future features (including optional prediction of other user-provided feature data).
+It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Also outputs an odf.pred file for results. Created for module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...).
 
 
 ## Source Links
@@ -18,45 +18,34 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 * RandomForest uses the [genepattern/notebook-python39:22.04](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore)
 
 ## Usage
-* Basic command-line usage: 
- 
-        python rnd_forest.py -f <feature datafile> -t <target datafile>
-
-* Full command-line usage (optional arguments added): 
-
-        python rnd_forest.py -f <feature> -t <target> (-d [bool]) (--test_size [float])  (-v [int]) (--bootstrap [bool]) (--ccp_alpha [float]) (--class_weight [str or None]) (--criterion [str]) (--max_depth [int or None]) (--max_features [str]) (--max_leaf_nodes [int or None]) (--max_samples [float or None]) (--min_impurity_decrease [float]) (--min_samples_leaf [int]) (--min_samples_split [int]) (--min_weight_fraction_leaf [float]) (--n_estimators [int]) (--n_jobs [int or None]) (--oob_score [bool]) (--random_state [int or None]) (--warm_start [bool])
-        
-* Example with all arguments set to defaults (using iris dataset)
-
-        python rnd_forest.py -f iris.gct -t iris.cls -d False --test_size 0.3  -v 0 --bootstrap True --ccp_alpha 0.0 --class_weight None --criterion gini --max_depth None --max_features sqrt --max_leaf_nodes None --max_samples None --min_impurity_decrease 0.0 --min_samples_leaf 1 --min_samples_split 2 --min_weight_fraction_leaf 0.0 --n_estimators 100 --n_jobs None --oob_score False --random_state None --warm_start False
-
+This module only requires feature (.gct) and target (.cls) classifier data as input, with other parameters being optional, maintaining default values if left unchanged (see below).
 
 ## Parameters
 
 | Name | Description | Default Value |
 ---------|--------------|----------------
-| feature (-f) * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
-| target (-t) * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
-| debug (-d) | Optional boolean for program debugging, (takes "True" or "False" for CLI) | False |
+| feature * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
+| target * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
 | test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
-| verbose (-v) | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
-| bootstrap | Optional boolean to turn on classifier bootstrapping, (takes "True" or "False" for CLI) | True |
+| bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
-| class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ("None" in CLI); (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
+| class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
 | criterion | Optional string for node-splitting criterion of one of the following: {“gini”, “entropy”, “log_loss”} | "gini" |
-| max_depth | Optional int for maximum tree depth (>= 1), also takes None ("None" in CLI) | None |
+| max_depth | Optional int for maximum tree depth (>= 1), also takes None | None |
 | max_features | Optional string for number of features per split of either one of the following: {"sqrt," "log2"} ("auto" to be removed in Scikit 1.3), (**future implementation:** handle input of float/int) | "sqrt" |
-| max_leaf_nodes | Optional int for maximum leaf nodes per tree (>= 2), also takes None ("None" in CLI) | None |
-| max_samples | Optional float for ratio of datasets to use per tree (between 0.0 and 1.0, inclusive for both), also takes None ("None" in CLI); if bootstrap is False, can only be None | None |
+| max_leaf_nodes | Optional int for maximum leaf nodes per tree (>= 2), also takes None | None |
+| max_samples | Optional float for ratio of datasets to use per tree (between 0.0 and 1.0, inclusive for both), also takes None; if bootstrap is False, can only be None | None |
 | min_impurity_decrease | Optional float for minimum impurity decrease needed per node split (>= 0.0) | 0.0 |
 | min_samples_leaf | Optional int for minimum number of samples required at leaf node (>= 1) | 1 |
 | min_samples_split | Optional int for minimum sample number to split node (>= 2) | 2 |
 | min_weight_fraction_leaf | Optional float for min weighted fraction of weight sum total to be leaf (between 0.0 and 0.5, inclusive for both) | 0.0 |
 | n_estimators | Optional int for number of trees in forest (>= 1) | 100 |
-| n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None ("None" in CLI), [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
-| oob_score | Optional boolean for if out-of-bag samples used for generalization score, (takes "True" or "False" for CLI); if bootstrap is False, can only be False | False |
-| random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None ("None" in CLI) | None |
-| warm_start | Optional boolean for whether to start new forest or add to past solution, (takes "True" or "False" for CLI) | False |
+| n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None, [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
+| oob_score | Optional boolean for if out-of-bag samples used for generalization score; if bootstrap is False, can only be False | False |
+| random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None | None |
+| warm_start | Optional boolean for whether to start new forest or add to past solution | False |
+| debug | Optional boolean for program debugging | False |
+| verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 
 \*  required
 
@@ -96,7 +85,7 @@ Future development ideas:
 * Current GP Dockerfile uses outdated Scikit version. Currently working on Dockerfile that uses Scikit-learn v1.2 in order to address the following issues:
   * Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in Scikit v1.2) but still up on module. 
   * Module Scikit version outdated: log_loss (criterion argument) in Scikit v1.2 (stable) but not up on module. 
-* Prediction on other user-input feature data
+* Further prediction on other user-input feature data using results
 * .txt file implementation for both feature and target data (other file types as well)
 * Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
 
