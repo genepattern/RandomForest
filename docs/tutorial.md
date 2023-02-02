@@ -60,20 +60,20 @@ This module only requires feature (.gct) and target (.cls) classifier data as in
     
 ## Output Files
 
-No output files in current implementation (future versions to include optional file output of prediction done on user-provided feature data)
+Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format) file standard](https://www.genepattern.org/file-formats-guide#ODF). It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on TODO against the true values.
 
 ## Example Data
 
 Iris Dataset Inputs:
 [iris.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.gct) and [iris.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.cls)  
 Iris Example Output:
-[example_output_iris.txt](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/example_output_iris.txt)
+[iris.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/iris.pred.odf)
 
 
 ALL_AML Dataset Inputs:
 [all_aml_train.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.gct) and [all_aml_train.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.cls)  
 ALL_AML Example Output:
-[example_output_all_aml.txt](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/example_output_all_aml.txt)
+[all_aml.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/all_aml.pred.odf)
 
 ## Requirements
 
