@@ -1,0 +1,55 @@
+ODF 1.0
+HeaderLines=8
+COLUMN_NAMES:	Samples	True Class	Predicted Class	Confidence	Correct?
+COLUMN_TYPES:	String 	String	String	float	boolean
+Model=Prediction Results
+PredictorModel=Random Forest Classifier
+NumFeatures=0
+NumCorrect=43
+NumErrors=2
+DataLines=45
+85	Iris-Versicolour	Iris-Versicolour	1	TRUE
+56	Iris-Versicolour	Iris-Versicolour	1	TRUE
+49	Iris-Setosa	Iris-Setosa	1	TRUE
+149	Iris-Virginica	Iris-Virginica	1	TRUE
+106	Iris-Virginica	Iris-Versicolour	1	FALSE
+60	Iris-Versicolour	Iris-Versicolour	1	TRUE
+145	Iris-Virginica	Iris-Virginica	1	TRUE
+88	Iris-Versicolour	Iris-Versicolour	1	TRUE
+67	Iris-Versicolour	Iris-Versicolour	1	TRUE
+47	Iris-Setosa	Iris-Setosa	1	TRUE
+42	Iris-Setosa	Iris-Setosa	1	TRUE
+41	Iris-Setosa	Iris-Setosa	1	TRUE
+15	Iris-Setosa	Iris-Setosa	1	TRUE
+99	Iris-Versicolour	Iris-Versicolour	1	TRUE
+110	Iris-Virginica	Iris-Virginica	1	TRUE
+31	Iris-Setosa	Iris-Setosa	1	TRUE
+62	Iris-Versicolour	Iris-Versicolour	1	TRUE
+6	Iris-Setosa	Iris-Setosa	1	TRUE
+93	Iris-Versicolour	Iris-Versicolour	1	TRUE
+78	Iris-Versicolour	Iris-Versicolour	1	TRUE
+113	Iris-Virginica	Iris-Virginica	1	TRUE
+7	Iris-Setosa	Iris-Setosa	1	TRUE
+83	Iris-Versicolour	Iris-Virginica	1	FALSE
+21	Iris-Setosa	Iris-Setosa	1	TRUE
+118	Iris-Virginica	Iris-Virginica	1	TRUE
+94	Iris-Versicolour	Iris-Versicolour	1	TRUE
+89	Iris-Versicolour	Iris-Versicolour	1	TRUE
+121	Iris-Virginica	Iris-Virginica	1	TRUE
+5	Iris-Setosa	Iris-Setosa	1	TRUE
+87	Iris-Versicolour	Iris-Versicolour	1	TRUE
+143	Iris-Virginica	Iris-Virginica	1	TRUE
+97	Iris-Versicolour	Iris-Versicolour	1	TRUE
+130	Iris-Virginica	Iris-Virginica	1	TRUE
+133	Iris-Virginica	Iris-Virginica	1	TRUE
+112	Iris-Virginica	Iris-Virginica	1	TRUE
+86	Iris-Versicolour	Iris-Versicolour	1	TRUE
+136	Iris-Virginica	Iris-Virginica	1	TRUE
+8	Iris-Setosa	Iris-Setosa	1	TRUE
+72	Iris-Versicolour	Iris-Versicolour	1	TRUE
+64	Iris-Versicolour	Iris-Versicolour	1	TRUE
+23	Iris-Setosa	Iris-Setosa	1	TRUE
+124	Iris-Virginica	Iris-Virginica	1	TRUE
+57	Iris-Versicolour	Iris-Versicolour	1	TRUE
+117	Iris-Virginica	Iris-Virginica	1	TRUE
+132	Iris-Virginica	Iris-Virginica	1	TRUE
