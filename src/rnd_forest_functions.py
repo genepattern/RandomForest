@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-# Importing from current directory files
-from rnd_forest_params import *
+# Importing classes to differentiate feature & target logic and extensions
 from Marker import *
 from Extension import *
 
@@ -14,10 +13,9 @@ from os.path import exists
     Email:         ohalawa@ucsd.edu
     File name:     rnd_forest_functions.py
     Project:       RandomForest (Non-GPU)
-    Description:   Non-GPU RandomForest python script that contains all file
-                   handling, Random Forest Classifier logic, and argument value
-                   getter functions which are used in the main script and the
-                   Classifier class file.
+    Description:   Non-GPU RandomForest python script that contains file
+                   handling functions which are used in the main script.
+    References:    github.com/genepattern/genepattern-python/blob/master/gp/
 """
 
 
@@ -88,26 +86,6 @@ def file_valid(name, marker):
         return None
 
 
-def get_feature():
-    """ Function that returns name of the file input for classifier feature(s)
-    Returns:
-        args.feature: a String of the classifier feature data file's name
-    """
-
-    # Returning the classifier feature data file name
-    return args.feature
-        
-
-def get_target():
-    """ Function that returns name of the file input for classifier target(s)
-    Returns:
-        args.target: a String of the classifier target data file's name
-    """
-
-    # Returning the classifier target data file name
-    return args.target
-
-
 def process(name, ext, marker):
     """ Function that processes valid file given its extension as an argument
 
@@ -164,206 +142,87 @@ def cls_process(name):
     return cls_file
 
 
-# def txt_process(name, marker)
-#     return None
+def write_odf(df, path, headers):
+    """ Function to write out result .pred.odf file and creates its header str
 
-
-def get_debug():
-    """ Function that returns truth value of debug argument
+    Argument:
+        df:         DataFrame for file to contain
+        path        path to output file to (and name)
     Returns:
-        args.debug: a Boolean value of whether debugging is on
+        Nothing, just outputs file
     """
 
-    # Returning the Boolean value
-    return args.debug
+    # Add the initial ODF version line
+    head = 'ODF 1.0\n'
+
+    # Add HeaderLines
+    head += 'HeaderLines=' + str(len(headers)-1) + '\n'
+    head += 'COLUMN_NAMES:\t' + str(headers['COLUMN_NAMES']) + '\n'
+    head += 'COLUMN_TYPES:\t' + str(headers['COLUMN_TYPES']) + '\n'
+    head += 'Model=' + str(headers['Model']) + '\n'
+    head += 'PredictorModel=' + str(headers['PredictorModel']) + '\n'
+    head += 'NumFeatures=' + str(headers['NumFeatures']) + '\n'
+    head += 'NumCorrect=' + str(headers['NumCorrect']) + '\n'
+    head += 'NumErrors=' + str(headers['NumErrors']) + '\n'
+    head += 'DataLines=' + str(headers['DataLines']) + '\n'
+
+    # Processes headers using gp method and and writes out file, see reference 
+    with open(path, 'w') as file:
+        file.write(head)
+        df.to_csv(file, sep='\t', header=False, index=False, mode='w+')
 
 
-def get_test_size():
-    """ Function for determining test/training data split 
+def pred_filename(name):
+    """ Function that takes in a full filename and returns it as a string
+        without its extension. Uses feature file by default. 
+
+    Argument:
+        name:       name of target file to cut extension off of
     Returns:
-        args.test_size: a float of test data ratio (0.3 default)
+        filename:   processed pandas df of the .cls target data file
+        None:       if no match
+    """
+    
+    # Checking if the extension is one that exists in the array of feature exts
+
+    # Processing end of feature file
+    feature_end = "." + name.split(".")[1]
+    feature_name = name.split(".")[0]
+
+    # Iterating through all feature file extensions
+    for ext in Extension.FEAT_EXT:
+
+        # Checking for match
+        if (feature_end == ext):
+            # Returning pre-extension str if so
+            return (feature_name + Extension.ODF_EXT)
+
+        else:
+            return None
+
+    
+def tar_array(name, ext):
+    """ Function that takes in a a target data filename and its extension
+        and returns an array of all possible target values in the same order. 
+
+    Argument:
+        name:        name of target file
+         ext:        ext of target file
+    Returns:
+         tar:        ordered array of all possible target
     """
 
-    # Returning the test data ratio for test/training split
-    return args.test_size
+    
+    # If statement for future file format implementation
+    if (ext == Extension.CLS_EXT):
 
+        # Processing file's 2nd line by reading it in, stripping newline char,
+        # and removing first character ("#")
+        tar_file = open(name, "r")
+        tar_file.readline()
+        tar = tar_file.readline().strip('\n')
+        tar = tar.split(' ', -1)
+        tar.__delitem__(0)
 
-# Scikit Random Forest Classifier Getter Methods:
-def get_bootstrap():
-    """ Function that returns truth value of boostrap argument
-    Returns:
-        args.bootstrap: a Boolean value of whether boostrapping is on
-    """
-
-    # Returning the Boolean value
-    return args.bootstrap
-
-
-def get_ccp():
-    """ Function that returns the float value of ccp_alpha argument
-    Returns:
-        args.ccp_alpha: float value of ccp_alpha
-    """
-
-    # Returning the float value
-    return args.ccp_alpha
-
-
-def get_class_weight():
-    """ Function returning the dict (or list of) value of class_weight argument
-    Returns:
-        args.class_weight: json.loads dict (or list of) value of class_weight
-    """
-
-    # Returning the json.loads dict (or list of) value
-    return args.class_weight
-
-
-def get_criterion():
-    """ Function returning the String value of the criterion argument
-    Returns:
-        args.criterion: String value of the criterion argument
-    """
-
-    # Returning the string value
-    return args.criterion
-
-
-def get_max_depth():
-    """ Function returning the integer value of the max_depth argument
-    Returns:
-        args.max_depth: Integer value of the max_depth argument
-    """
-
-    # Returning the integer value
-    return args.max_depth
-
-
-def get_max_features():
-    """ Function returning the String/float value of the max_features argument
-    Returns:
-        args.max_features: String/float value of the max_features argument
-    """
-
-    # Returning the String/float value
-    return args.max_features
-
-
-def get_max_nodes():
-    """ Function returning the integer value of the max_leaf_nodes argument
-    Returns:
-        args.max_leaf_nodes: Integer value of the max_leaf_nodes argument
-    """
-
-    # Returning the integer value
-    return args.max_leaf_nodes
-
-
-def get_max_samples():
-    """ Function returning the float value of the max_samples argument
-    Returns:
-        args.max_samples: Float value of the max_samples argument
-    """
-
-    # Returning the float value
-    return args.max_samples
-
-
-def get_impurity():
-    """ Function returning float value of the min_impurity_decrease argument
-    Returns:
-        args.min_impurity_decrease: Float value of min_impurity_decrease
-    """
-
-    # Returning the float value
-    return args.min_impurity_decrease
-
-
-def get_min_samples_leaf():
-    """ Function returning the integer value of the min_samples_leaf argument
-    Returns:
-        args.min_samples_leaf: Integer value of the min_samples_leaf argument
-    """
-
-    # Returning the integer value
-    return args.min_samples_leaf
-
-
-def get_split():
-    """ Function returning the integer value of the min_samples_split argument
-    Returns:
-        args.min_samples_split: Integer value of the min_samples_split argument
-    """
-
-    # Returning the integer value
-    return args.min_samples_split
-
-
-def get_min_weight_fraction():
-    """ Function returning float value of the min_weight_fraction_leaf argument
-    Returns:
-        args.min_weight_fraction_leaf: Float value of min_weight_fraction_leaf
-    """
-
-    # Returning the float value
-    return args.min_weight_fraction_leaf
-
-
-def get_estimators():
-    """ Function returning the integer value of the n_estimators argument
-    Returns:
-        args.n_estimators: Integer value of the n_estimators argument
-    """
-
-    # Returning the integer value
-    return args.n_estimators
-
-
-def get_jobs():
-    """ Function returning the integer value of the n_jobs argument
-    Returns:
-        args.n_jobs: Integer value of the n_jobs argument
-    """
-
-    # Returning the integer value
-    return args.n_jobs
-
-
-def get_oob():
-    """ Function returning the boolean value of the oob_score argument
-    Returns:
-        args.oob_score: boolean value of the oob_score argument
-    """
-
-    # Returning the boolean value
-    return args.oob_score
-
-
-def get_random():
-    """ Function returning the integer value of the random_state argument
-    Returns:
-        args.random_state: Integer value of the random_state argument
-    """
-
-    # Returning the integer value
-    return args.random_state
-
-
-def get_verbose():
-    """ Function returning the integer value of the verbose argument
-    Returns:
-        args.verbose: Integer value of the verbose argument
-    """
-
-    # Returning the integer value
-    return args.verbose
-
-
-def get_warm():
-    """ Function returning the boolean value of the warm_start argument
-    Returns:
-        args.warm_start: boolean value of the warm_start argument
-    """
-
-    # Returning the boolean value
-    return args.warm_start
+        # Returning the array of target values
+        return tar

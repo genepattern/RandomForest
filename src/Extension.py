@@ -15,6 +15,7 @@
 # Initializing Extension class and its variables for file_valid logic
 # Designed to allow for smooth implementation of other file types
 class Extension:
+    ODF_EXT = ".pred.odf"
     GCT_EXT = ".gct"
     CLS_EXT = ".cls"
     TXT_EXT = ".txt"        # .txt format to be implemented
