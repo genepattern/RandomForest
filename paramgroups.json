@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Required parameters:",
+        "description": "The following parameters are required as two input files must be provided: classifier feature datafile (.gct) and classifier target datafile (.cls). More file format implementation to come.",
+        "hidden": false,
+        "parameters": [
+            "feature.filename",
+            "target.filename",
+            "result.filename"
+        ]
+    },
+    {
+        "name": "Optional parameters:",
+        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to https://tiny.cc/scikit_rnd_forest",
+        "hidden": true,
+        "parameters": [
+            "test_size",
+            "bootstrap",
+            "ccp_alpha",
+            "class_weight",
+            "criterion",
+            "max_depth",
+            "max_features",
+            "max_leaf_nodes",
+            "max_samples",
+            "min_impurity_decrease",
+            "min_samples_leaf",
+            "min_samples_split",
+            "min_weight_fraction_leaf",
+            "n_estimators",
+            "n_jobs",
+            "oob_score",
+            "random_state",
+            "warm_start"
+        ]
+    },
+    {
+        "name": "For developer use:",
+        "description": "Contains developer debugging parameter",
+        "hidden": true,
+        "parameters": [
+            "debug",
+            "verbose"
+        ]
+    }
+]
