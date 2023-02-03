@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on user-input feature and target data files using Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -10,7 +10,7 @@
 
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
-It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Also outputs an odf.pred file for results. Created for module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...).
+It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs random forest classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Also outputs an odf.pred file for results. Created for module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...).
 
 
 ## Source Links
@@ -18,14 +18,15 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 * RandomForest uses the [genepattern/notebook-python39:22.04](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore)
 
 ## Usage
-This module only requires feature (.gct) and target (.cls) classifier data as input, with other parameters being optional, maintaining default values if left unchanged (see below).
+This module only requires feature (.gct) and target (.cls) classifier data files as well as an output filename as user-input. Other parameters are optional, maintaining default values if left unchanged (see below).
 
 ## Parameters
 
 | Name | Description | Default Value |
 ---------|--------------|----------------
-| feature * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
-| target * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
+| feature.filename * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
+| target.filename * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
+| result.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (feature.file_basename).pred.odf |
 | test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
@@ -60,7 +61,7 @@ This module only requires feature (.gct) and target (.cls) classifier data as in
     
 ## Output Files
 
-Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format) file standard](https://www.genepattern.org/file-formats-guide#ODF). It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on TODO against the true values.
+Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on TODO against the true values.
 
 ## Example Data
 
