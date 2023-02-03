@@ -1,0 +1,22 @@
+ODF 1.0
+HeaderLines=8
+COLUMN_NAMES:	Samples	True Class	Predicted Class	Confidence	Correct?
+COLUMN_TYPES:	String 	String	String	float	boolean
+Model=Prediction Results
+PredictorModel=Random Forest Classifier
+NumFeatures=0
+NumCorrect=12
+NumErrors=0
+DataLines=12
+AML_14	AML	AML	1	TRUE
+ALL_17281_B-cell	ALL	ALL	1	TRUE
+ALL_19769_B-cell	ALL	ALL	1	TRUE
+ALL_16415_T-cell	ALL	ALL	1	TRUE
+ALL_17638_T-cell	ALL	ALL	1	TRUE
+AML_7	AML	AML	1	TRUE
+ALL_22474_T-cell	ALL	ALL	1	TRUE
+AML_5	AML	AML	1	TRUE
+ALL_9186_T-cell	ALL	ALL	1	TRUE
+ALL_R23_B-cell	ALL	ALL	1	TRUE
+ALL_549_B-cell	ALL	ALL	1	TRUE
+ALL_17269_T-cell	ALL	ALL	1	TRUE
