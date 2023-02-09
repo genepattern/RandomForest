@@ -1,7 +1,6 @@
 ### Copyright 2003-2023. GenePattern Team @ Mesirov Lab - University of California, San Diego. All rights reserved.
 #
-# Work in progress.
-# Currently, module uses genepattern/notebook-python39:22.04 image.
+# Currently, module uses python:3 image.
 FROM python:3
 
 # Based off of ExampleModule Dockerfile found at https://github.com/genepattern/ExampleModule 
@@ -25,6 +24,6 @@ COPY src/*.py /RandomForest/
 RUN pip install --upgrade pip && \
     pip install pandas && \
     pip install scikit-learn
-    
-# Running the program
-RUN /RandomForest/rnd_forest.py
+
+# Build using "docker build -t <TAG> ."
+# Run using "docker run -it --rm <IMAGE ID> bash"
