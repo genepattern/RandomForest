@@ -22,8 +22,8 @@ COPY src/*.py /RandomForest/
 
 # Ensuring up-to-date pip and importing necessary modules 
 RUN pip install --upgrade pip && \
-    pip install pandas && \
-    pip install scikit-learn
+    pip install pandas:1.5.3 && \
+    pip install scikit-learn:1.2.1
 
 # Build using "docker build -t <TAG> ."
 # Run using "docker run -it --rm <IMAGE ID> bash"
