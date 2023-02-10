@@ -87,7 +87,8 @@ Future development ideas:
   * Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in Scikit v1.2) but still up on module. 
   * Module Scikit version outdated: log_loss (criterion argument) in Scikit v1.2 (stable) but not up on module. 
 * Further prediction on other user-input feature data using results
-* .txt file implementation for both feature and target data (other file types as well)
+* .res file implementation for feature data
+* .txt file implementation for both feature and target data
 * Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
 
 
