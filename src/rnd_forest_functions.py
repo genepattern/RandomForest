@@ -184,10 +184,10 @@ def pred_filename(name):
     """
     
     # Checking if the extension is one that exists in the array of feature exts
-
     # Processing end of feature file
-    feature_end = "." + name.split(".")[1]
-    feature_name = name.split(".")[0]
+    # Splitting at final occurence of a dot for both cases
+    feature_end = "." + name.rsplit(".", 1)[1]
+    feature_name = name.rsplit(".", 1)[0]
 
     # Iterating through all feature file extensions
     for ext in Extension.FEAT_EXT:
@@ -211,7 +211,6 @@ def tar_array(name, ext):
     Returns:
          tar:        ordered array of all possible target
     """
-
     
     # If statement for future file format implementation
     if (ext == Extension.CLS_EXT):
@@ -221,7 +220,9 @@ def tar_array(name, ext):
         tar_file = open(name, "r")
         tar_file.readline()
         tar = tar_file.readline().strip('\n')
-        tar = tar.split(' ', -1)
+        
+        # Removing any string of spaces (tab or whitespace) as .cls head delim
+        tar = tar.split(sep=None)
         tar.__delitem__(0)
 
         # Returning the array of target values
