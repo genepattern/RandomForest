@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification via LOOCV (leave-one-out cross validation) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -15,7 +15,7 @@ It takes in two files, one for classifier feature data (.gct), and one for class
 
 ## Source Links
 * [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest)
-* RandomForest uses the [genepattern/notebook-python39:22.04](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore)
+* RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
 ## Usage
 This module only requires feature (.gct) and target (.cls) classifier data files as well as an output filename as user-input. Other parameters are optional, maintaining default values if left unchanged (see below).
@@ -24,10 +24,9 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 
 | Name | Description | Default Value |
 ---------|--------------|----------------
-| feature.filename * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
-| target.filename * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
-| result.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (feature.file_basename).pred.odf |
-| test_size | Optional float for ratio of total data split for testing (for test/training data split, rest for training), (between 0.0 and 1.0, exclusive for both) | 0.3 |
+| data.file * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
+| cls.file * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
+| prediction.results.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (feature.file_basename).pred.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
@@ -52,40 +51,41 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 
 ## Input Files
 
-1. feature datafile  
+1. data file  
     This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct), but future support for other feature data formats will be implemented.  
       
-2. target datafile  
+2. cls file  
     This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls), but future support for other feature data formats will be implemented.  
 
     
 ## Output Files
 
-Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on TODO against the true values.
+Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values.
 
 ## Example Data
-
-Iris Dataset Inputs:
-[iris.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.gct) and [iris.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.cls)  
-Iris Example Output:
-[iris.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/iris.pred.odf)
-
 
 ALL_AML Dataset Inputs:
 [all_aml_train.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.gct) and [all_aml_train.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.cls)  
 ALL_AML Example Output:
 [all_aml.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/all_aml.pred.odf)
 
+BRCA_HUGO Dataset Inputs:
+[DP_4_BRCA_HUGO_symbols.preprocessed.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
+Iris Example Output:
+[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
+
+Iris Dataset Inputs:
+[iris.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.gct) and [iris.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.cls)  
+Iris Example Output:
+[iris.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/iris.pred.odf)
+
 ## Requirements
 
-Requires the [genepattern/notebook-python39:22.04 Docker image](https://hub.docker.com/layers/genepattern/notebook-python39/22.04/images/sha256-1182e33d0a4d944e676003b2d4a410ec3a197db13847292cedca441a0541513d?context=explore).
+Requires the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
 ## Miscellaneous
 
 Future development ideas:
-* Current GP Dockerfile uses outdated Scikit version. Currently working on Dockerfile that uses Scikit-learn v1.2 in order to address the following issues:
-  * Module Scikit version outdated: min_impurity_split (parameter) outdated (not available in Scikit v1.2) but still up on module. 
-  * Module Scikit version outdated: log_loss (criterion argument) in Scikit v1.2 (stable) but not up on module. 
 * Further prediction on other user-input feature data using results
 * .res file implementation for feature data
 * .txt file implementation for both feature and target data
