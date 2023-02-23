@@ -30,7 +30,7 @@ As such, having to balance the risk of overfitting and not wanting to compensate
 
 * Bagging: An ensemble technqiue that utilizes bootstrapping and aggregation (done in that order).
     * Bootstrapping: This is when each decision tree is trained on a random subset of the samples while still maintaining the same number of samples as the original (due to sample selection being done one at a time, this allows repeats which is perfectly fine)
-    * Aggregation: 
+    * Aggregation: This is when, during classification, we carry out the prediction for each decision tree and perform majority voting on the output target value, yielding the final classification
 
 * Random Feature Selection: For each decision tree, with regards to feature data, two things must occur: 
     1. A random subset of features is selected for each decision tree
