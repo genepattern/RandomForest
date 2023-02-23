@@ -27,8 +27,7 @@ import argparse as ap
                    Designed to allow for further file type implementation.
                    Created for GenePattern module usage.
                    
-    References:    scholarworks.utep.edu/cs_techrep/1209/
-                   datacamp.com/tutorial/random-forests-classifier-python
+    References:    datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
 """
 
