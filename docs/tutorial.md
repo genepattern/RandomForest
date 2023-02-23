@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification via LOOCV (leave-one-out cross validation) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -10,7 +10,8 @@
 
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
-It takes in two files, one for classifier feature data (.gct), and one for classifier target data (.cls). Then, it processes them into DataFrames and performs random forest classification on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction done on the feature training data. Also outputs an odf.pred file for results. Created for module usage through optional arguments for classifier parameters. Designed for smooth implementation of other file type inputs (.txt input, etc...).
+
+It takes in two files, one for feature data (.gct), and one for target data (.cls). Then, it processes them into DataFrames and performs random forest classification via LOOCV (leave-one-out cross validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a target prediction done on the entire feature dataset. Outputs a prediction results (.pred.odf) file. Created for module usage through optional arguments for classifier parameters.
 
 
 ## Source Links
