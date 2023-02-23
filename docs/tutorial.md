@@ -1,6 +1,6 @@
 # RandomForest (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs random forest classification via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier. Designed for smooth implementation of future features and other file type inputs (.txt input, etc...).
+**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/omarhalawa3301/randomforest/docs/randomforest.md) via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier. Designed for smooth implementation of future features and other file type inputs (.txt input, etc...).
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
