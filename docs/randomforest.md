@@ -22,21 +22,23 @@ _Side Note:_ Decision nodes by no means have to be exclusively binary. They coul
 
 
 ## Cons of Decision Trees
-With that said, however, decision trees suffer from being highly prone to **overfitting**, behavior characterized by a model accurately predicting its training data but failing to do so with data it has not encountered before (new data, which is the general case). This is a byproduct of many potential issues, but it is primarily due to the primitive nature of individual decision trees in that they will capture the noise of the training data so much so that the tree will end up with extremely specific, unrealistic branches that are almost guaranteed to do more harm than good in general classification cases. This can be somewhat prevented with setting a maximum tree-depth. However, doing so dilutes the predictive power of a decision tree and introduces error due to bias as, in a way, the tree may not be going as deep as it should and would therefore be making more biased decisions (see [here](https://towardsdatascience.com/decision-trees-and-random-forests-df0c3123f991)).
+With that said, however, decision trees suffer from being highly prone to **overfitting**, behavior characterized by a model accurately predicting its training data but failing to do so with data it has not encountered before (new data, which is the general case). This is a byproduct of many potential issues, but it is primarily due to the primitive nature of individual decision trees in that they will capture the noise of the training data so much so that the tree will end up with extremely specific, unrealistic branches that are almost guaranteed to do more harm than good in general classification cases. This high senitivity to the training data can lead to variance. This can be somewhat prevented with setting a maximum tree-depth. However, doing so dilutes the predictive power of a decision tree and introduces issue, error due to bias, as the tree may not be going as deep as it should and would therefore be making more biased decisions (see [here](https://towardsdatascience.com/decision-trees-and-random-forests-df0c3123f991)).
 
 
 ## Random Forest
-As such, having to balance the risk of overfitting and not wanting to compensate with a much weaker predictive model, individual decision trees are not ideal for the purposes of classification. However, through an ensemble of slightly different decision trees, we can minimize risk of overfitting greatly while maintaining a strong predictive classification model. This is the core concept of Random Forest - an ensemble of decision trees that utilizes **bagging** (or **bootstrapping and aggregation**) as well as **majority voting**. 
+As such, having to balance the risk of overfitting and not wanting to compensate with a much weaker, less accurate predictive model, individual decision trees are not ideal for the purposes of classification. However, through a large ensemble of slightly different decision trees , we can minimize risk of overfitting greatly while maintaining a strong predictive classification model. This is the core concept of Random Forest - an ensemble of decision trees that utilizes **bagging** (or **bootstrapping and aggregation**) as well as **random feature selection**.
+
+* Bagging: An ensemble technqiue that utilizes bootstrapping and aggregation (done in that order).
+    * Bootstrapping: This is when each decision tree is trained on a random subset of the samples while still maintaining the same number of samples as the original (due to sample selection being done one at a time, this allows repeats which is perfectly fine)
+    * Aggregation: 
+
+* Random Feature Selection: For each decision tree, with regards to feature data, two things must occur: 
+    1. A random subset of features is selected for each decision tree
+    2. The number of features for each decision tree is the same, and for optimal splitting, is typically sqrt(number of features) or log(number of features) (see [here](https://link.springer.com/article/10.1007/s10994-006-6226-1) for why)
+
+_Note:_ These techniques that make Random Forest what it is can of course be altered by the user, but that would probably defeat the purpose of the Random Forest Classifier.
 
 ## Motivation
-This module only requires feature (.gct) and target (.cls) classifier data files as well as an output filename as user-input. Other parameters are optional, maintaining default values if left unchanged (see below).
 
-## Required Inputs
-
-1. data file  
-    This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct), but future support for other feature data formats will be implemented.  
-      
-2. cls file  
-    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls), but future support for other feature data formats will be implemented.  
 
 ## Miscellaneous
