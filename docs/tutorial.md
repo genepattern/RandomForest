@@ -26,7 +26,7 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 ---------|--------------|----------------
 | data.file * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
 | cls.file * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
-| prediction.results.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (feature.file_basename).pred.odf |
+| prediction.results.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (data.file_basename).pred.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
