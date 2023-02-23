@@ -4,15 +4,21 @@
 
 **Contact**: [Email](mailto:ohalawa@ucsd.edu)
 
-## Description
+## Introduction
 
-Random Forest is a an [ensemble](https://machinelearningmastery.com/tour-of-ensemble-learning-algorithms/) machine learning algorithm. Specifically, it is an enesemble of decision trees (hence the _forest_ part) which are essentially.
+Random Forest is a an [_ensemble_](https://machinelearningmastery.com/tour-of-ensemble-learning-algorithms/) machine learning algorithm. Specifically, it is an ensemble of **decision trees** (hence the _forest_ part) which basically means that it combines multiple decsision trees in its model. In order to understand Random Forest classification and regression, let us first take one step back and understand what decision trees are.
+
+## Decision Trees
+
+Decision trees are fundamentally quite simple, as they essentially help you answer a classification question (i.e, "Is it X or Y"). These "X" and "Y" (and however many you want) labels are called **target** values. In classification, they are essentially what we want s is best illustrated through an example. In technical terms, it is a ""
+
+_Note_: Decision trees by no means have to be binary trees. They could be ternary (one decision node splits into 3 leaves), or they could have as many splits as you want. It all depends on the conditional statement(s) for each decision node. In fact, any ternary decision tree could be represented as a decision tree, and that applies to any ([this answer is a nice sanity check for that](https://stats.stackexchange.com/a/12227)). **HOWEVER**, the reason you may almost always see decision trees as binary is probably due to two asepcts.
+
+1. asdfjldkafs
+2. 
 
 
-It takes in two files, one for feature data (.gct), and one for target data (.cls). Then, it processes them into DataFrames and performs random forest classification via LOOCV (leave-one-out cross validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a target prediction done on the entire feature dataset. Outputs a prediction results (.pred.odf) file. Created for module usage through optional arguments for classifier parameters.
-
-
-## Example
+## Decision Tree Example
 * [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest)
 * RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
