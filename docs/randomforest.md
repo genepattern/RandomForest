@@ -4,6 +4,9 @@
 
 **Contact**: [Email](mailto:ohalawa@ucsd.edu)
 
+## Original Paper
+Breiman, L. Random Forests. Machine Learning 45, 5–32 (2001). https://doi.org/10.1023/A:1010933404324
+
 ## Introduction
 
 Random Forest is a an [_ensemble_](https://machinelearningmastery.com/tour-of-ensemble-learning-algorithms/) machine learning algorithm. Specifically, it is an ensemble of **decision trees** (hence the _forest_ part) which basically means that it combines multiple decsision trees in its model. In order to understand Random Forest classification, let us first take one step back and understand what decision trees are.
