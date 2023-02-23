@@ -52,5 +52,5 @@ For the module's purposes of performing classification on an input feature datas
 ![LOOCV](https://dataaspirant.com/wp-content/uploads/2020/12/7-LOOCV-Leave-One-Out-Cross-Validation.png)
 
 ## Motivation
-
+Random Forest classification is a very powerful and diverse tool for not only machine learning technologies but also medical and bioinformatics applications as well. It reaps the benefits of decision trees while minimizing their flaws, and its only real shortcoming is in being very computationally-demanding. However, with future [SDSC](https://www.sdsc.edu/) implementation, a GPU Random Forest classifier will not only serve as a powerful tool for all kinds of biologists and researchers, but it will also be a great entry point into further GPU-centric GenePattern modules as well as a more solid standardization of GPU-centric module development.
 
