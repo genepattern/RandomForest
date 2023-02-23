@@ -38,6 +38,11 @@ As such, having to balance the risk of overfitting and not wanting to compensate
 
 _Note:_ These techniques that make Random Forest what it is can of course be altered by the user, but that would probably defeat the purpose of the Random Forest Classifier.
 
+See the following image which represents the entire process of Random Forest Classification [(image source)](https://catalyst.earth/catalyst-system-files/help/concepts/focus_c/oa_classif_intro_rt.html).
+
+![Random Forest](https://catalyst.earth/catalyst-system-files/help/COMMON/references/images/RT_schematic.png)
+
+
 ## Motivation
 
 
