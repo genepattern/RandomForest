@@ -36,14 +36,18 @@ As such, having to balance the risk of overfitting and not wanting to compensate
     1. A random subset of features is selected for each decision tree
     2. The number of features for each decision tree is the same, and for optimal splitting, is typically sqrt(number of features) or log(number of features) (see [here](https://link.springer.com/article/10.1007/s10994-006-6226-1) for why)
 
-_Note:_ These techniques that make Random Forest what it is can of course be altered by the user, but that would probably defeat the purpose of the Random Forest Classifier.
+_Note:_ These techniques that make Random Forest what it is can of course be altered by the user, but that would probably defeat the purpose of the Random Forest classifier.
 
 See the following image which represents the entire process of Random Forest Classification [(image source)](https://catalyst.earth/catalyst-system-files/help/concepts/focus_c/oa_classif_intro_rt.html).
 
 ![Random Forest](https://catalyst.earth/catalyst-system-files/help/COMMON/references/images/RT_schematic.png)
 
 
+## Leave-One-Out Cross Validation
+For the module's purposes of performing classification on an input feature dataset, a test/train split would not work as that would bring about **data leakage** through testing with the same data that the model has been trained on. Therefore, in order to achieve random forest classification on a feature dataset as the only provided input, we can perform Leave-One-Out Cross Validation (LOOCV). Essentially, for each sample of the data, we perform Random Forest classification using every other sample. This allows us to obtain a predicted target value for every sample, giving us the desired Random Forest classification. See the following [(image source)](https://dataaspirant.com/7-loocv-leave-one-out-cross-validation/):
+
+![LOOCV](https://dataaspirant.com/wp-content/uploads/2020/12/7-LOOCV-Leave-One-Out-Cross-Validation.png)
+
 ## Motivation
 
 
-## Miscellaneous
