@@ -29,7 +29,7 @@
 
 <target name="create-zip">
     <zip destfile="${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
-        <fileset dir="." includes="manifest, paramgroups.json, LICENSE, Dockerfile"/>
+        <fileset dir="." includes="manifest, paramgroups.json, LICENSE.txt, Dockerfile"/>
         <fileset dir="./src" includes="*.py"/>
     </zip>
 </target>
