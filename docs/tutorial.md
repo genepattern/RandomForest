@@ -55,7 +55,7 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 1. data file  
     This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct), but future support for other feature data formats will be implemented.  
       
-2. cls file  
+2. class file  
     This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls), but future support for other feature data formats will be implemented.  
 
     
