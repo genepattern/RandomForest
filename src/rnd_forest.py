@@ -209,8 +209,8 @@ if ((feature_ext != None) and (target_ext != None)):
         oob_score=args.oob_score, random_state=args.random_state, 
         verbose=args.verbose, warm_start=args.warm_start)
     
-    if (args.debug()):
-        print(cls.get_params(deep=True))
+    if (args.debug):
+        print(cls.get_params(deep=True), "\n")
 
     # Creating array for holding target prediction values
     pred_arr = []
