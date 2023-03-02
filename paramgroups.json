@@ -4,9 +4,9 @@
         "description": "The following parameters are required as two input files must be provided: classifier feature datafile (.gct) and classifier target datafile (.cls). More file format implementation to come.",
         "hidden": false,
         "parameters": [
-            "feature.filename",
-            "target.filename",
-            "result.filename"
+            "data.file",
+            "class.file",
+            "prediction.results.filename"
         ]
     },
     {
@@ -14,7 +14,6 @@
         "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to https://tiny.cc/scikit_rnd_forest",
         "hidden": true,
         "parameters": [
-            "test_size",
             "bootstrap",
             "ccp_alpha",
             "class_weight",
