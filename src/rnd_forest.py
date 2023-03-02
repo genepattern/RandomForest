@@ -14,10 +14,10 @@ import argparse as ap
 
 
 import os
-print(os.listdir(/opt))
-print(os.listdir(/opt/gpbeta_2))
-print(os.listdir(/opt/gpbeta_2/gp_home))
-print(os.listdir(/opt/gpbeta_2/gp_home/jobResults))
+print(os.listdir(opt))
+print(os.listdir(opt/gpbeta_2))
+print(os.listdir(opt/gpbeta_2/gp_home))
+print(os.listdir(opt/gpbeta_2/gp_home/jobResults))
 print(os.getcwd())
 
 
