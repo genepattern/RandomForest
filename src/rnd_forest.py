@@ -210,7 +210,7 @@ if ((feature_ext != None) and (target_ext != None)):
         verbose=args.verbose, warm_start=args.warm_start)
     
     if (args.debug):
-        print(cls.get_params(deep=True), "\n")
+        print(clf.get_params(deep=True), "\n")
 
     # Creating array for holding target prediction values
     pred_arr = []
