@@ -15,7 +15,7 @@ It takes in two files, one for feature data (.gct), and one for target data (.cl
 
 
 ## Source Links
-* [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest/blob/main/docs/randomforest.md)
+* [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest/blob/main)
 * RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
 ## Usage
