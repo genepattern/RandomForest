@@ -12,15 +12,6 @@ from sklearn.model_selection import LeaveOneOut
 import pandas as pd
 import argparse as ap
 
-
-import os
-print(os.listdir("/opt"))
-print(os.listdir("/opt/gpbeta_2"))
-print(os.listdir("/opt/gpbeta_2/gp_home"))
-print(os.listdir("/opt/gpbeta_2/gp_home/jobResults"))
-print(os.getcwd())
-
-
 """
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
@@ -217,6 +208,9 @@ if ((feature_ext != None) and (target_ext != None)):
         n_estimators=args.n_estimators, n_jobs=args.n_jobs, 
         oob_score=args.oob_score, random_state=args.random_state, 
         verbose=args.verbose, warm_start=args.warm_start)
+    
+    if (args.debug()):
+        print(cls.get_params(deep=True))
 
     # Creating array for holding target prediction values
     pred_arr = []
