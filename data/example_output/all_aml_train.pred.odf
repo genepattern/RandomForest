@@ -5,8 +5,8 @@ COLUMN_TYPES:	String 	String	String	float	boolean
 Model=Prediction Results
 PredictorModel=Random Forest Classifier
 NumFeatures=0
-NumCorrect=35
-NumErrors=3
+NumCorrect=34
+NumErrors=4
 DataLines=38
 1	ALL_19769_B-cell	ALL	ALL	1	TRUE
 2	ALL_23953_B-cell	ALL	ALL	1	TRUE
@@ -40,9 +40,9 @@ DataLines=38
 30	AML_14	AML	AML	1	TRUE
 31	AML_16	AML	AML	1	TRUE
 32	AML_20	AML	AML	1	TRUE
-33	AML_1	AML	AML	1	TRUE
-34	AML_2	AML	ALL	1	FALSE
+33	AML_1	AML	ALL	1	FALSE
+34	AML_2	AML	AML	1	TRUE
 35	AML_3	AML	AML	1	TRUE
-36	AML_5	AML	AML	1	TRUE
+36	AML_5	AML	ALL	1	FALSE
 37	AML_6	AML	ALL	1	FALSE
 38	AML_7	AML	AML	1	TRUE

@@ -5,8 +5,8 @@ COLUMN_TYPES:	String 	String	String	float	boolean
 Model=Prediction Results
 PredictorModel=Random Forest Classifier
 NumFeatures=0
-NumCorrect=143
-NumErrors=7
+NumCorrect=144
+NumErrors=6
 DataLines=150
 1	0	Iris-Setosa	Iris-Setosa	1	TRUE
 2	1	Iris-Setosa	Iris-Setosa	1	TRUE
@@ -142,7 +142,7 @@ DataLines=150
 132	131	Iris-Virginica	Iris-Virginica	1	TRUE
 133	132	Iris-Virginica	Iris-Virginica	1	TRUE
 134	133	Iris-Virginica	Iris-Versicolour	1	FALSE
-135	134	Iris-Virginica	Iris-Versicolour	1	FALSE
+135	134	Iris-Virginica	Iris-Virginica	1	TRUE
 136	135	Iris-Virginica	Iris-Virginica	1	TRUE
 137	136	Iris-Virginica	Iris-Virginica	1	TRUE
 138	137	Iris-Virginica	Iris-Virginica	1	TRUE
