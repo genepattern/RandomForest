@@ -88,8 +88,6 @@ Requires the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhal
 
 Future development ideas:
 * Further prediction on other user-input feature data using results
-* .res file implementation for feature data
-* .txt file implementation for both feature and target data
 * Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
 
 
