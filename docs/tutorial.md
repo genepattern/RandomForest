@@ -43,7 +43,7 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 | n_estimators | Optional int for number of trees in forest (>= 1) | 100 |
 | n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None, [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
 | oob_score | Optional boolean for if out-of-bag samples used for generalization score; if bootstrap is False, can only be False | False |
-| random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None | None |
+| random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
 | warm_start | Optional boolean for whether to start new forest or add to past solution | False |
 | debug | Optional boolean for program debugging | False |
 | verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
