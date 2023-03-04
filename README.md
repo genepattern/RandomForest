@@ -5,7 +5,7 @@ The following repository is a GenePattern module written in Python 3, using the 
 \
 It serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
-It takes in two files, one for feature data (.gct), and one for target data (.cls). Then, it processes them into DataFrames and performs random forest classification via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a target prediction done on the entire feature dataset. Outputs a prediction results (.pred.odf) file. Created for module usage through optional arguments for classifier parameters.
+It takes in two files, one for feature data (.gct), and one for target data (.cls). Then, it processes them into DataFrames and performs random forest classification via LOOCV ([leave-one-out cross validation](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md#leave-one-out-cross-validation)) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a target prediction done on the entire feature dataset. Outputs a prediction results (.pred.odf) file. Created for module usage through optional arguments for classifier parameters.
 
 Documentation on usage and implementation is found [here](https://github.com/omarhalawa3301/randomforest/blob/main/docs/tutorial.md).
 A detailed step-by-step explanation behind how Random Forest works is found [here](https://github.com/omarhalawa3301/randomforest/blob/main/docs/randomforest.md).
