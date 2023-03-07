@@ -1,6 +1,6 @@
 # Random Forest Classifier (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/omarhalawa3301/randomforest/blob/main/docs/randomforest.md) via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md) via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -15,7 +15,7 @@ It takes in two files, one for feature data (.gct), and one for target data (.cl
 
 
 ## Source Links
-* [The GenePattern RandomForest source repository](https://github.com/omarhalawa3301/randomforest/blob/main)
+* [The GenePattern RandomForest source repository](https://github.com/genepattern/RandomForestClassifier/blob/main)
 * RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
 ## Usage
