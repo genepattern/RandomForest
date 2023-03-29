@@ -1,17 +1,38 @@
 [
     {
-        "name": "Required parameters:",
-        "description": "The following parameters are required as two input files must be provided: classifier feature datafile (.gct) and classifier target datafile (.cls). More file format implementation to come.",
+        "name": "Inputs (for cross-validation, only use 'Training Data'):",
+        "description": "To perform cross-validation, only provide the data and class files in 'Training Data.' Otherwise, for test-train prediction, provide inputs in both 'Training Data' and 'Testing Data.'",
+        "hidden": false
+    },
+    {
+        "name": "Inputs (for cross-validation, only use 'Training Data'):/Training Data",
+        "description": "Provide data (feature) and class (target) files for training dataset (required).",
         "hidden": false,
         "parameters": [
-            "data.file",
-            "class.file",
+            "train.data.filename",
+            "train.class.filename"
+        ]
+    },
+    {
+        "name": "Inputs (for cross-validation, only use 'Training Data'):/Testing Data",
+        "description": "Provide data (feature) and class (target) files for test dataset (only needed for test-train prediction, not cross-validation).",
+        "hidden": true,
+        "parameters": [
+            "test.data.filename",
+            "test.class.filename"
+        ]
+    },
+    {
+        "name": "Inputs (for cross-validation, only use 'Training Data'):/Prediction Result",
+        "description": "Provide prediction results filename. Default is to use training data base filename.",
+        "hidden": true,
+        "parameters": [
             "prediction.results.filename"
         ]
     },
     {
-        "name": "Optional parameters:",
-        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to https://tiny.cc/scikit_rnd_forest",
+        "name": "Optional Classifier Parameters:",
+        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to https://tiny.cc/scikit_rnd_forest.",
         "hidden": true,
         "parameters": [
             "bootstrap",
@@ -27,15 +48,13 @@
             "min_samples_split",
             "min_weight_fraction_leaf",
             "n_estimators",
-            "n_jobs",
             "oob_score",
-            "random_state",
-            "warm_start"
+            "random_state"
         ]
     },
     {
-        "name": "For developer use:",
-        "description": "Contains developer debugging parameter",
+        "name": "For Developer Use:",
+        "description": "Contains developer debugging parameter.",
         "hidden": true,
         "parameters": [
             "debug",
