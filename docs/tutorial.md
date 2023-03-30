@@ -1,6 +1,6 @@
 # Random Forest Classifier (Non-GPU)
 
-**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md) via LOOCV ([leave-one-out cross validation](https://towardsdatascience.com/cross-validation-explained-evaluating-estimator-performance-e51e5430ff85)) on feature and target data files and outputs prediction results. It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train predidction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -11,7 +11,7 @@
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
 
-It takes in two files, one for feature data (.gct), and one for target data (.cls). Then, it processes them into DataFrames and performs random forest classification via LOOCV (leave-one-out cross validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a target prediction done on the entire feature dataset. Outputs a prediction results (.pred.odf) file. Created for module usage through optional arguments for classifier parameters.
+It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction results file (.pred.odf) that compares the "true" class to the model's prediction. Created for module usage through optional arguments for classifier parameters.
 
 
 ## Source Links
@@ -19,15 +19,17 @@ It takes in two files, one for feature data (.gct), and one for target data (.cl
 * RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
 
 ## Usage
-This module only requires feature (.gct) and target (.cls) classifier data files as well as an output filename as user-input. Other parameters are optional, maintaining default values if left unchanged (see below).
+For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module **additionally** requires another dataset in the form of a testing feature (.gct) and testing target (.cls) data file. Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
 
 ## Parameters
 
-| Name | Description | Default Value |
----------|--------------|----------------
-| data.file * |  Classifier feature data filename to be read from user (.gct, more format support to come) | No default value |
-| class.file * |  Classifier target data filename to be read from user (.cls, more format support to come) | No default value |
-| prediction.results.filename * |  Classifier prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (data.file_basename).pred.odf |
+| Name | Description | Default Value | Cross-Validation | Test-Train Prediction
+---------|--------------|----------------|----------------|----------------
+| train.data.filename * |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
+| train.class.filename * |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
+| test.data.filename |  Optional (only provide when doing test-train prediction) testing feature data file to be read from user (.gct) | No default value |  | ✔ |
+| test.class.filename |  Optional (only provide when doing test-train prediction) testing target data file to be read from user (.cls) | No default value |  | ✔ |
+| prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
@@ -41,10 +43,8 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 | min_samples_split | Optional int for minimum sample number to split node (>= 2) | 2 |
 | min_weight_fraction_leaf | Optional float for min weighted fraction of weight sum total to be leaf (between 0.0 and 0.5, inclusive for both) | 0.0 |
 | n_estimators | Optional int for number of trees in forest (>= 1) | 100 |
-| n_jobs | Optional int for number of parallel streams for building the forest (nonzero), also takes None, [more info](https://scikit-learn.org/stable/glossary.html#term-n_jobs) (-1 for all CPUs) | None |
 | oob_score | Optional boolean for if out-of-bag samples used for generalization score; if bootstrap is False, can only be False | False |
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
-| warm_start | Optional boolean for whether to start new forest or add to past solution | False |
 | debug | Optional boolean for program debugging | False |
 | verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 
@@ -52,33 +52,47 @@ This module only requires feature (.gct) and target (.cls) classifier data files
 
 ## Input Files
 
-1. data file  
-    This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct), but future support for other feature data formats will be implemented.  
+1. Training Data Feature File   
+    This is the input file of classifier training feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct).  
       
-2. class file  
-    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls), but future support for other feature data formats will be implemented.  
+2. Training Data Class File 
+    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls).  
 
+3. Test Data Feature File  
+    This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct).  
+      
+4. Test Data Class File
+    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls).  
     
 ## Output Files
 
 Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values.
 
-## Example Data
+
+## Test-Train Example Data
 
 ALL_AML Dataset Inputs:
-[all_aml_train.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.gct) and [all_aml_train.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/all_aml_train.cls)  
+[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls), [all_aml_test.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_test.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
 ALL_AML Example Output:
-[all_aml.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/all_aml.pred.odf)
+[all_aml_tt.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/all_aml_tt.pred.odf)
+
+
+## Cross-Validation Example Data
+
+ALL_AML Dataset Inputs:
+[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct) and [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
+ALL_AML Example Output:
+[all_aml_xval.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/all_aml_xval.pred.odf)
 
 BRCA_HUGO Dataset Inputs:
-[DP_4_BRCA_HUGO_symbols.preprocessed.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
-Iris Example Output:
-[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
+[DP_4_BRCA_HUGO_symbols.preprocessed.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
+BRCA_HUGO Example Output:
+[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
 
 Iris Dataset Inputs:
-[iris.gct](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.gct) and [iris.cls](https://github.com/omarhalawa3301/randomforest/blob/main/data/iris.cls)  
+[iris.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/iris.gct) and [iris.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/iris.cls)  
 Iris Example Output:
-[iris.pred.odf](https://github.com/omarhalawa3301/randomforest/blob/main/data/example_output/iris.pred.odf)
+[iris.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/iris.pred.odf)
 
 ## Requirements
 
@@ -87,13 +101,12 @@ Requires the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhal
 ## Miscellaneous
 
 Future development ideas:
-* Further prediction on other user-input feature data using results
 * Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
 
 
 ## License
 
-`RandomForest` is distributed under a modified BSD license available [here](https://github.com/omarhalawa3301/randomforest/blob/main/LICENSE.txt)
+`RandomForest` is distributed under a modified BSD license available [here](https://github.com/genepattern/RandomForestClassifier/blob/main/LICENSE.txt)
 
 ## Version Comments
 
