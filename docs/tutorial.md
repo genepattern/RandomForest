@@ -53,16 +53,16 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 ## Input Files
 
 1. Training Data Feature File   
-    This is the input file of classifier training feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct).  
+    This is the required input file of classifier training feature data which is used to create the random forest model. For cross-validation, this is the only feature data input which also has prediction done against it via LOOCV. The parameter expects a GCT file (.gct).  
       
-2. Training Data Class File 
-    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls).  
+2. Training Data Class File   
+    This is the required input file of classifier training target data which is used to create the random forest model. For cross-validation, this is the only target data input whose values are considered as "true." The parameter expects a CLS file (.cls).  
 
-3. Test Data Feature File  
-    This is the input file of classifier feature data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a GCT file (.gct).  
+3. Testing Data Feature File   
+    This is the optional (only passed in for test-train prediction) input file of classifier testing feature data which the random forest model will predict the class values of. The parameter expects a GCT file (.gct).  
       
-4. Test Data Class File
-    This is the input file of classifier target data which will be read in by the python script and ultimately will be processed through random forest classification. The parameter expects a CLS file (.cls).  
+4. Testing Data Class File   
+    This is the optional (only passed in for test-train prediction) input file of classifier testing target data whose values are considered as "true." The parameter expects a CLS file (.cls).  
     
 ## Output Files
 
@@ -72,7 +72,7 @@ Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open 
 ## Test-Train Example Data
 
 ALL_AML Dataset Inputs:
-[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls), [all_aml_test.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_test.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
+[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls), [all_aml_test.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), and [all_aml_test.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
 ALL_AML Example Output:
 [all_aml_tt.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/all_aml_tt.pred.odf)
 
