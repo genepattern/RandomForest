@@ -21,13 +21,16 @@ import argparse as ap
                     - Process optional classifier arguments
                     - Validate feature (.gct) & target (.cls) data file inputs
                     - Call functions to process files into DataFrames
-                    - Perform Random Forest classification using leave-one-out
+                    - Perform Random Forest classification using either:
+                      leave-one-out cross-validation (given 2 files) or 
+                      test-train prediction (given 4 files)
                     - Predict feature dataset and compare to "true" target file
                    Outputs accuracy (to stdout) and a results (.pred.odf) file.
                    Designed to allow for further file type implementation.
                    Created for GenePattern module usage.
                    
-    References:    datacamp.com/tutorial/random-forests-classifier-python
+    References:    scholarworks.utep.edu/cs_techrep/1209/
+                   datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
 """
 
@@ -63,6 +66,7 @@ def str_bool(value):
 # .pred.odf file output, scikit RandomForest classifier parameters, & debugging
 parser = ap.ArgumentParser(description='Scikit Random Forest Classifier')
 
+
 # Adding file input arguments (required)
 # Feature file input (.gct):
 parser.add_argument("-f", "--feature", help="classifier feature data filename"
@@ -76,7 +80,16 @@ parser.add_argument("-p", "--pred_odf", help="prediction output filename",
                     nargs="?", const=1)
 
 
-# Random Forest Classifier arguments (optional) as default values exist for all:
+# Test-train classification arguments (optional as can opt for LOOCV):
+# Feature file input (.gct):
+parser.add_argument("--test_feat", help="classifier test feature data filename"
+                    + " Valid file format(s): .gct")
+# Target file input (.cls):
+parser.add_argument("--test_tar", help="classifier test target data filename"
+                    + " Valid file format(s): .cls")
+
+
+# Random Forest Classifier arguments (optional) as defaults exist for all:
 # Either True or False
 parser.add_argument("--bootstrap", help="boolean for bootstrapping",
                     nargs="?", const=1, default=True, type=str_bool)
@@ -100,7 +113,7 @@ parser.add_argument("--criterion", help="criterion of node splitting",
 parser.add_argument("--max_depth", help="maximum tree depth",
                     nargs="?", const=1, default=None, type=none_or_int)
 
-# TODO, can be "sqrt", "log2", "auto" ("auto" removed in 1.3), a float, or an int
+# TODO, can be "sqrt", "log2", "auto" ("auto" removed in 1.3), a float, or int
 parser.add_argument("--max_features", 
                     help="number (ratio in cuML) of features per split",
                     nargs="?", const=1, default="sqrt", type=str)
@@ -160,11 +173,6 @@ max_seed = (2**32) - 1
 parser.add_argument("--random_state", 
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int)
-
-# Either True or False
-parser.add_argument("--warm_start", 
-                    help="whether to start new forest or add to past solution",
-                    nargs="?", const=1, default=False, type=str_bool)
                     
 # 0 for no verbosity, 1 for basic verbosity, values greater for more verbosity
 # Range is integers greater than or equal to 0
@@ -185,15 +193,19 @@ if (args.debug):
 
 # Checking for feature and target data file validity by calling file_valid
 # Obtained output corresponds to file extension if valid, None if invalid
+# Train input (required)
 feature_ext = file_valid(args.feature, Marker.FEAT)
 target_ext = file_valid(args.target, Marker.TAR)
+# Test input (optional)
+test_feat_ext = file_valid(args.test_feat, Marker.FEAT)
+test_tar_ext = file_valid(args.test_tar, Marker.TAR)
 
 # Only carrying out Random Forest Classification if both files are valid
 if ((feature_ext != None) and (target_ext != None)):
 
     # Processing the valid files into dataframes with parent function "process"
-    feature_df = process(args.feature, feature_ext, Marker.FEAT)
-    target_df = process(args.target, target_ext, Marker.TAR)
+    feature_df = process(args.feature, feature_ext, None, Marker.FEAT)
+    target_df = process(args.target, target_ext, None, Marker.TAR)
 
     # Creating instance of Random Forest Classifier with arguments parsed
     clf = RandomForestClassifier(
@@ -206,62 +218,117 @@ if ((feature_ext != None) and (target_ext != None)):
         min_samples_split=args.min_samples_split,
         min_weight_fraction_leaf=args.min_weight_fraction_leaf,
         n_estimators=args.n_estimators, n_jobs=args.n_jobs, 
-        oob_score=args.oob_score, random_state=args.random_state, 
-        verbose=args.verbose, warm_start=args.warm_start)
-    
+        oob_score=args.oob_score, random_state=args.random_state)
+        
     if (args.debug):
         print(clf.get_params(deep=True), "\n")
 
     # Creating array for holding target prediction values
     pred_arr = []
 
-    # Creating instance of Leave-One-Out Cross Validation
-    loo = LeaveOneOut()
+    # Case of no test dataset provided, so doing LOOCV
+    if ((test_feat_ext == None) and (test_tar_ext == None)):
+        
+        # Instantiating variable to hold value of column names
+        # to use for prediction results
+        cols = feature_df.columns
+
+        # Creating instance of Leave-One-Out Cross Validation
+        loo = LeaveOneOut()
+        
+        if (args.debug):
+            print("Number of splitting iterations in LOOCV:", 
+                    loo.get_n_splits(feature_df.T), "\n")
+            print("Feature DataFrame: \n", feature_df, "\n")
+            print("Target DataFrame: \n", target_df, "\n\n")
+
+        # Iterating through each sample to do RF Classification by LOOCV
+        for i, (train_index, test_index) in enumerate(loo.split(feature_df.T)):
+
+            # Obtaining column and row names
+            col = feature_df.columns[i]
+            row = target_df.columns[i]
+
+            # Doing LOOCV by creating training data without left-out sample
+            X_train = (feature_df.drop(col, axis=1)).T
+            y_train = (target_df.drop(row, axis=1)).T
+
+            # Training the model with training sets of X and y
+            # Raveling y_train for data classification format, see last source
+            clf.fit(X_train, y_train.values.ravel())
+
+            # Initialzing iteration's X_test value
+            # Reshaping necessary as array always 1D (single sample's data)
+            X_test = (feature_df.loc[:,col].T).values.reshape(1, -1)
+
+            # Predicting target value of left-out sample feature data
+            pred = clf.predict(X_test)
+
+            # Using [0] for X_test and pred for formatting
+            if (args.debug):
+                print("Sample:", i, "\n")
+                print ("Feature training set with debug sample removed:\n",
+                    X_train, "\n")
+                print("Target training set with debug sample removed:\n",
+                    y_train, "\n")
+                print ("LOOCV run feature testing data (debug sample):\n",
+                    X_test[0], "\n")
+                print("LOOCV run target pred. (debug sample prediction):\n",
+                    pred[0], "\n\n")
+
+            # Appending prediction to list (pred is array, hence pred[0])
+            pred_arr.append(pred[0])
+
+        # Initializing variable for true target values (train in this case)
+        true = target_df.iloc[0].values
+
+
+    # Case of test-train prediction (4 files given, 2 test and 2 train)
+    else:
+
+        # Processing test files into dataframes with parent function "process"
+        test_feat_df = process(args.test_feat, feature_ext, args.feature, 
+                               Marker.FEAT)
+        test_tar_df = process(args.test_tar, target_ext, None, Marker.TAR)
+
+        # Instantiating variable to hold value of column names
+        #  to use for prediction results
+        cols = test_feat_df.columns
+
+        # Assigning variables for training feature and target data
+        X_train = feature_df.T
+        y_train = target_df.T
+
+        # Assigning variable for testing feature and target data
+        X_test = test_feat_df.T
+        y_test = test_tar_df.T
+
+        if (args.debug):
+            print("Training Feature DataFrame: \n", feature_df, "\n")
+            print("Training Target DataFrame: \n", target_df, "\n\n")
+        if (args.debug):
+            print("Testing Feature DataFrame: \n", test_feat_df, "\n")
+            print("Testing Target DataFrame: \n", test_tar_df, "\n\n")
     
-    if (args.debug):
-        print("Number of splitting iterations in LOOCV:", 
-                loo.get_n_splits(feature_df.T), "\n")
-        print("Feature DataFrame: \n", feature_df, "\n")
-        print("Target DataFrame: \n", target_df, "\n")
-
-    # Iterating through each sample to do Random Forest Classification by LOOCV
-    for i, (train_index, test_index) in enumerate(loo.split(feature_df.T)):
-
-        # Obtaining column and row names
-        col = feature_df.columns[i]
-        row = target_df.columns[i]
-
-        # Performing LOOCV by creating training data without left-out sample
-        X_train = (feature_df.drop(col, axis=1)).T
-        y_train = (target_df.drop(row, axis=1)).T
-
         # Training the model with training sets of X and y
-        # Raveling y_train for data classification format, see last reference
+        # Raveling y_train for data classification format, see last source
         clf.fit(X_train, y_train.values.ravel())
 
-        # Initialzing iteration's X_test value
-        # Reshaping necessary as array always 1D (single sample's data)
-        X_test = (feature_df.loc[:,col].T).values.reshape(1, -1)
+        # Predicting using test features
+        y_pred=clf.predict(X_test)
 
-        # Predicting target value of left-out sample feature data
-        pred = clf.predict(X_test)
+        # Initializing variable for true target values (test in this case)
+        true = test_tar_df.iloc[0].values
 
-        # Using [0] for X_test and pred for formatting
-        if (args.debug and i == 0):
-            print ("Feature training set with first sample removed:\n", 
-                X_train, "\n")
-            print("Target training set with first sample removed:\n", 
-                y_train, "\n")
-            print ("First LOOCV run feature testing data (first sample):\n", 
-                X_test[0], "\n")
-            print("First LOOCV run target pred. (first sample prediction):\n", 
-                pred[0], "\n")
+        pred_arr = y_pred
 
-        # Appending prediction to list (pred is itself an array, hence pred[0])
-        pred_arr.append(pred[0])
 
-    # Initializing variable for true target values
-    true = target_df.iloc[0].values
+    # If no value was provided for pred_odf filename, 
+    # uses name of feature target (or test, if provided) file:
+    if ((args.pred_odf == None) and (args.test_feat != None)):
+        pred_odf = pred_filename(args.test_feat)
+    else:
+        pred_odf = args.pred_odf
 
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
@@ -269,14 +336,7 @@ if ((feature_ext != None) and (target_ext != None)):
 
     # Classifier accuracy check
     accuracy = accuracy_score(true, pred_arr) * 100
-    print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n")
-
-    # If no value was provided for pred_odf filename, uses name of feature file
-    if (args.pred_odf == None):
-        pred_odf = pred_filename(args.feature)
-    # Else, uses passed-in name
-    else:
-        pred_odf = args.pred_odf   
+    print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n") 
 
     # Creating pred.odf dataframe
     df = pd.DataFrame(columns=range(true.size))
@@ -305,14 +365,16 @@ if ((feature_ext != None) and (target_ext != None)):
 
         # Assigning true's and preds's values to the respective sample values
         # and evaluating differences. Using tar array to specify target names
-        df[i] = [i+1, list(feature_df.columns)[i], tar[true[i]],
+        df[i] = [i+1, list(cols)[i], tar[true[i]],
                 tar[pred_arr[i]], 1, value]
 
     # Creating dictionary for pred_odf file header
     header_dict = {
         "HeaderLines" : "",
-        "COLUMN_NAMES" : "Samples\t" + "True Class\t" + "Predicted Class\t" + "Confidence\t" + "Correct?",
-        "COLUMN_TYPES" : "String \t" + "String\t" + "String\t" + "float\t" + "boolean",
+        "COLUMN_NAMES" : "Samples\t" + "True Class\t" + "Predicted Class\t" 
+            + "Confidence\t" + "Correct?",
+        "COLUMN_TYPES" : "String \t" + "String\t" + "String\t" + "float\t" 
+            + "boolean",
         "Model" : "Prediction Results",
         "PredictorModel" : "Random Forest Classifier",
         "NumFeatures" : 0,
@@ -330,4 +392,3 @@ if ((feature_ext != None) and (target_ext != None)):
 # Otherwise, printing error message to notify user (in dev case CLI-usage)
 else:
     print("Error in file input, please check above for details.")
-

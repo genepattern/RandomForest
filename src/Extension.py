@@ -18,7 +18,5 @@ class Extension:
     ODF_EXT = ".pred.odf"
     GCT_EXT = ".gct"
     CLS_EXT = ".cls"
-    TXT_EXT = ".txt"        # .txt format to be implemented
-    RES_EXT = ".txt"        # .res format to be implemented
     FEAT_EXT =  [GCT_EXT]
     TAR_EXT = [CLS_EXT]

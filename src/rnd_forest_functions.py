@@ -32,6 +32,10 @@ def file_valid(name, marker):
         None: if the file name or extension are not valid
     """
 
+    # Checking for case of no provided input (test dataset input)
+    if (name == None):
+        return None
+
     # Intializing placeholder for proper file extension list
     curr_list = None
     # Initalizing placeholder for file extension
@@ -86,12 +90,14 @@ def file_valid(name, marker):
         return None
 
 
-def process(name, ext, marker):
+def process(name, ext, train_df, marker):
     """ Function that processes valid file given its extension as an argument
 
     Arguments:
         name:   name of file to process
         ext:    extension of file to process (obtained from file_valid call)
+        train_df:   Training feature filename, provided only if processing Test 
+                    feature data, else is None (needed for gct_process)
         marker: String value indicating whether file is of features or targets
                 (only in cases of a file type that can be both target & marker)
     Returns:    returns a call to the appropriate helper function that contains
@@ -99,29 +105,45 @@ def process(name, ext, marker):
     """
 
     if (ext == Extension.GCT_EXT):
-        return gct_process(name)
+        return gct_process(name, train_df)
     elif (ext == Extension.CLS_EXT):
         return cls_process(name)
     # elif (ext == Extension.TXT_EXT):
     #     return txt_process(name,marker)
 
 
-def gct_process(name):
+def gct_process(name, train_df):
     """ Function that processes .gct file of feature data to a pandas DataFrame
 
     Argument:
         name:       name of .gct file to process into df
+        train_df:   Training feature filename, provided only if processing Test 
+                    feature data, else is None
     Returns:
         gct_file:   processed pandas df of the .gct feature data file
     """
-
-    # Creating df of features from classifier feature data file (.gct process)
+    # Creating df of features from classifier feature file (.gct process)
     gct_file = pd.read_csv(name, skiprows = 2, sep = '\t')
+
+    # Making sure to sort data by the required "Names" column, alphabetical 
+    gct_file.sort_values("Name")
+    
+    # Processing if working with test and train datasets (not LOOCV)
+    if (train_df != None):
+
+        # Creating df of the training data
+        train = pd.read_csv(train_df, skiprows = 2, sep = '\t')
+
+        # Getting intersection the two dataframes via their common row names
+        gct_file = gct_file[gct_file.Name.isin(train.Name)]
+
+        # Resetting index after the intersection
+        gct_file = gct_file.reset_index(drop=True)
 
     # Removing non-biological data columns
     gct_file.pop("Name")
     gct_file.pop("Description")
-
+    
     # Returning processed df
     return gct_file
 
@@ -137,7 +159,7 @@ def cls_process(name):
 
     # Creating df of target(s) from classifier target data file (.cls process)
     cls_file = pd.read_csv(name, skiprows = 2, sep = '\s+', 
-                            header=None)
+                            header=None)    
     # Returning processed df
     return cls_file
 
