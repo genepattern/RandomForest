@@ -25,11 +25,11 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 
 | Name | Description | Default Value | Cross-Validation | Test-Train Prediction
 ---------|--------------|----------------|----------------|----------------
-| train.data.filename * |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
-| train.class.filename * |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
+| train.data.filename* |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
+| train.class.filename* |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
 | test.data.filename |  Optional (only provide when doing test-train prediction) testing feature data file to be read from user (.gct) | No default value |  | ✔ |
 | test.class.filename |  Optional (only provide when doing test-train prediction) testing target data file to be read from user (.cls) | No default value |  | ✔ |
-| prediction.results.filename * | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
+| prediction.results.filename* | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
