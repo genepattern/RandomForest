@@ -47,7 +47,7 @@ See the following image which represents the entire process of Random Forest Cla
 
 
 ## Leave-One-Out Cross Validation
-For the module's purposes of performing classification on an input feature dataset, a test/train split would not work as that would bring about **data leakage** through testing with the same data that the model has been trained on. Therefore, in order to achieve random forest classification on a feature dataset as the only provided input, we can perform Leave-One-Out Cross Validation (LOOCV). Essentially, for each sample of the data, we perform Random Forest classification using every other sample. This allows us to obtain a predicted target value for every sample, giving us the desired Random Forest classification. See the following [(image source)](https://dataaspirant.com/7-loocv-leave-one-out-cross-validation/):
+For one of the module's purposes which is performing classification on an input feature dataset (i.e, cross-validation), a test/train split would not work as that would bring about **data leakage** through testing with the same data that the model has been trained on. Therefore, in order to achieve random forest classification on a single dataset as the only provided input, we can perform Leave-One-Out Cross Validation (LOOCV). Essentially, for each sample of the data, we perform Random Forest classification using every other sample. This allows us to obtain a predicted target value for every sample, giving us the desired Random Forest classification. See the following [(image source)](https://dataaspirant.com/7-loocv-leave-one-out-cross-validation/):
 
 ![LOOCV](https://dataaspirant.com/wp-content/uploads/2020/12/7-LOOCV-Leave-One-Out-Cross-Validation.png)
 
