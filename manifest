@@ -1,5 +1,5 @@
 #RandomForestClassifier
-#Thu Apr 06 21:42:14 UTC 2023
+#Thu Apr 06 21:54:58 UTC 2023
 JVMLevel=
 LSID=urn\:lsid\:gp-dev-ami.genepattern.org\:genepatternmodules\:34\:1.1
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
@@ -202,8 +202,8 @@ p22_description=Classifier prediction results filename (.pred.odf, follows GeneP
 p22_fileFormat=
 p22_flag=-p
 p22_name=prediction.results.filename
-p22_numValues=0..1
-p22_optional=on
+p22_numValues=1..1
+p22_optional=
 p22_prefix=
 p22_prefix_when_specified=
 p22_type=java.lang.String
