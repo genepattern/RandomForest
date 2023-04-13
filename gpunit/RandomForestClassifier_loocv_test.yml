@@ -1,0 +1,34 @@
+
+name: RandomForestClassifier_loocv_test
+# description: created from job 91263, debugging off so NO stdout output, random_state is 0 to reproduce easily
+# server:  https://beta.genepattern.org/gp/
+module: RandomForestClassifier
+# lsid: urn:lsid:genepattern.org:module.analysis:00436
+params:
+    "train.data.filename": "inputs/DP_4_BRCA_HUGO_symbols.preprocessed.gct"
+    "train.class.filename": "inputs/Pred_2_BRCA_HUGO_symbols.preprocessed.cls"
+    "test.data.filename": ""
+    "test.class.filename": ""
+    "bootstrap": "True"
+    "ccp_alpha": "0.0"
+    "class_weight": "None"
+    "criterion": "gini"
+    "max_depth": "None"
+    "max_features": "sqrt"
+    "max_leaf_nodes": "None"
+    "max_samples": "None"
+    "min_impurity_decrease": "0.0"
+    "min_samples_leaf": "1"
+    "min_samples_split": "2"
+    "min_weight_fraction_leaf": "0.0"
+    "n_estimators": "100"
+    "oob_score": "False"
+    "random_state": "0"
+    "debug": "False"
+    "verbose": "0"
+    "prediction.results.filename": "<train.data.filename_basename>.pred.odf"
+
+assertions:
+    jobStatus: success
+    files:
+        outputs/Pred_2_BRCA_HUGO_symbols.preprocessed.pred.odf: !!null
