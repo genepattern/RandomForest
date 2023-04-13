@@ -1,7 +1,7 @@
 #RandomForestClassifier
-#Thu Apr 06 21:54:58 UTC 2023
+#Thu Apr 13 23:28:30 UTC 2023
 JVMLevel=
-LSID=urn\:lsid\:gp-dev-ami.genepattern.org\:genepatternmodules\:34\:1.1
+LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:681\:1
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
 categories=beta;classifier;prediction;random forest;scikit
 commandLine=python <libdir>rnd_forest.py -f <train.data.filename> -t <train.class.filename> <test.data.filename> <test.class.filename> -p <prediction.results.filename> --n_jobs <job.cpuCount> <bootstrap> <ccp_alpha> <class_weight> <criterion> <max_depth> <max_features> <max_leaf_nodes> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <min_weight_fraction_leaf> <n_estimators> <oob_score> <random_state>  <verbose> <debug> 
@@ -140,7 +140,7 @@ p18_optional=on
 p18_prefix=--oob_score 
 p18_prefix_when_specified=--oob_score 
 p18_type=java.lang.String
-p18_value=True\=True;False\=False
+p18_value=False\=False;True\=True
 p19_MODE=
 p19_TYPE=Integer
 p19_default_value=None
@@ -315,11 +315,9 @@ p9_range=1+
 p9_type=java.lang.Integer
 p9_value=
 privacy=public
-quality=development
-requiredPatchLSIDs=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.server.patch\:GenePattern_3_4_2\:2
-requiredPatchURLs=http\://www.broad.mit.edu/webservices/gpModuleRepository/download/prod/patch/?file\=/GenePattern_3_4_2/broad.mit.edu\:cancer.software.genepattern.server.patch/GenePattern_3_4_2/2/GenePattern_3_4_2.zip
+quality=preproduction
 src.repo=https\://github.com/genepattern/RandomForestClassifier/
 taskDoc=
 taskType=beta
-userid=devomarhalawa
-version=Implementation of test-train prediction
+userid=omarhalawabeta
+version=Initial beta version (equivalent to Dev 1.1)
