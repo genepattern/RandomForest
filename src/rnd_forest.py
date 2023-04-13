@@ -333,7 +333,7 @@ if ((feature_ext != None) and (target_ext != None)):
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
         print("Predicted target values:\n", *pred_arr, "\n", sep=" ")
-    
+
     if (args.debug):
         # Classifier accuracy check
         accuracy = accuracy_score(true, pred_arr) * 100
