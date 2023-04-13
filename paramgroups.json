@@ -32,7 +32,7 @@
     },
     {
         "name": "Optional Classifier Parameters:",
-        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to https://tiny.cc/scikit_rnd_forest.",
+        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to <a href=https://tiny.cc/scikit_rnd_forest>this</a>",
         "hidden": true,
         "parameters": [
             "bootstrap",
