@@ -333,10 +333,11 @@ if ((feature_ext != None) and (target_ext != None)):
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
         print("Predicted target values:\n", *pred_arr, "\n", sep=" ")
-
-    # Classifier accuracy check
-    accuracy = accuracy_score(true, pred_arr) * 100
-    print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n") 
+    
+    if (args.debug):
+        # Classifier accuracy check
+        accuracy = accuracy_score(true, pred_arr) * 100
+        print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n") 
 
     # Creating pred.odf dataframe
     df = pd.DataFrame(columns=range(true.size))
