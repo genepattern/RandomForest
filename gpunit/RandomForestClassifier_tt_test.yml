@@ -1,0 +1,35 @@
+
+name: RandomForestClassifier_test_train_test
+# description: created from job 91254, debugging on so stdout file is output, random_state is 0 to reproduce easily
+# server:  https://beta.genepattern.org/gp/
+module: RandomForestClassifier
+# lsid: urn:lsid:genepattern.org:module.analysis:00436
+params:
+    "train.data.filename": "inputs/all_aml_train.gct"
+    "train.class.filename": "inputs/all_aml_train.cls"
+    "test.data.filename": "inputs/all_aml_test.gct"
+    "test.class.filename": "inputs/all_aml_test.cls"
+    "bootstrap": "True"
+    "ccp_alpha": "0.0"
+    "class_weight": "None"
+    "criterion": "gini"
+    "max_depth": "None"
+    "max_features": "sqrt"
+    "max_leaf_nodes": "None"
+    "max_samples": "None"
+    "min_impurity_decrease": "0.0"
+    "min_samples_leaf": "1"
+    "min_samples_split": "2"
+    "min_weight_fraction_leaf": "0.0"
+    "n_estimators": "100"
+    "oob_score": "False"
+    "random_state": "0"
+    "debug": "True"
+    "verbose": "0"
+    "prediction.results.filename": "<train.data.filename_basename>.pred.odf"
+
+assertions:
+    jobStatus: success
+    files:
+        outputs/all_aml_train.pred.odf: !!null
+        outputs/stdout.txt: !!null
