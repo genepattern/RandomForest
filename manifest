@@ -316,8 +316,6 @@ p9_type=java.lang.Integer
 p9_value=
 privacy=public
 quality=preproduction
-requiredPatchLSIDs=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.server.patch\:GenePattern_3_4_2\:2
-requiredPatchURLs=http\://www.broad.mit.edu/webservices/gpModuleRepository/download/prod/patch/?file\=/GenePattern_3_4_2/broad.mit.edu\:cancer.software.genepattern.server.patch/GenePattern_3_4_2/2/GenePattern_3_4_2.zip
 src.repo=https\://github.com/genepattern/RandomForestClassifier/
 taskDoc=
 taskType=beta
