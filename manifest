@@ -1,12 +1,12 @@
 #RandomForestClassifier
-#Thu Apr 13 23:28:30 UTC 2023
+#Fri Apr 14 00:03:07 UTC 2023
 JVMLevel=
 LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:681\:1
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
 categories=beta;classifier;prediction;random forest;scikit
 commandLine=python <libdir>rnd_forest.py -f <train.data.filename> -t <train.class.filename> <test.data.filename> <test.class.filename> -p <prediction.results.filename> --n_jobs <job.cpuCount> <bootstrap> <ccp_alpha> <class_weight> <criterion> <max_depth> <max_features> <max_leaf_nodes> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <min_weight_fraction_leaf> <n_estimators> <oob_score> <random_state>  <verbose> <debug> 
 cpuType=any
-description=Performs random forest classification on data and class files (cross-validation or test-train), outputting a prediction results file.
+description=Performs random forest classification on data and class files (cross-validation or test-train prediction), outputting a prediction results file.
 documentationUrl=https\://github.com/genepattern/RandomForestClassifier/blob/main/docs/tutorial.md
 fileFormat=.pred.odf
 job.cpuCount=
@@ -316,6 +316,8 @@ p9_type=java.lang.Integer
 p9_value=
 privacy=public
 quality=preproduction
+requiredPatchLSIDs=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.server.patch\:GenePattern_3_4_2\:2
+requiredPatchURLs=http\://www.broad.mit.edu/webservices/gpModuleRepository/download/prod/patch/?file\=/GenePattern_3_4_2/broad.mit.edu\:cancer.software.genepattern.server.patch/GenePattern_3_4_2/2/GenePattern_3_4_2.zip
 src.repo=https\://github.com/genepattern/RandomForestClassifier/
 taskDoc=
 taskType=beta
