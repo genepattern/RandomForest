@@ -28,7 +28,7 @@
 <project basedir="" default="create-zip" name="RandomForestClassifier">
 
 <target name="create-zip">
-    <zip destfile="${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
+    <zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
         <fileset dir="." includes="manifest, paramgroups.json, LICENSE.txt, Dockerfile"/>
         <fileset dir="./src" includes="*.py"/>
     </zip>
