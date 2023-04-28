@@ -14,7 +14,6 @@ job.docker.image=omarhalawa/randomforest\:1.0
 job.memory=
 job.walltime=
 language=any
-license=LICENSE.txt
 name=RandomForestClassifier
 os=any
 p10_MODE=
