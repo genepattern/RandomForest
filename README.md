@@ -1,4 +1,4 @@
-# Random Forest Classifier (Non-GPU)
+# Random Forest
 #### Omar Halawa (ohalawa@ucsd.edu) of the GenePattern Team @ Mesirov Lab - UCSD
 \
 The following repository is a GenePattern module written in Python 3, using the following [Docker image](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo). 
