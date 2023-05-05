@@ -15,7 +15,7 @@ It processes files into DataFrames and performs random forest classification (us
 
 
 ## Source Links
-* [The GenePattern RandomForest source repository](/)
+* [The GenePattern RandomForest source repository](~)
 * RandomForest uses the [genepattern/randomforest:0.3](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore) docker image
 
 ## Usage
