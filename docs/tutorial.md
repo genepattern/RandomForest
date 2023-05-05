@@ -1,4 +1,4 @@
-# Random Forest Classifier (Non-GPU)
+# Random Forest
 
 **Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process.
 
