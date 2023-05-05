@@ -106,7 +106,7 @@ Future development ideas:
 
 ## License
 
-`RandomForest` is distributed under a modified BSD license available [here](https://github.com/genepattern/RandomForestClassifier/blob/main/LICENSE.txt)
+`RandomForest` is distributed under a modified BSD license available [here](/LICENSE.txt)
 
 ## Version Comments
 
