@@ -31,4 +31,4 @@ params:
 assertions:
     jobStatus: success
     files:
-        outputs/Pred_2_BRCA_HUGO_symbols.preprocessed.pred.odf: !!null
+        DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf: !!null

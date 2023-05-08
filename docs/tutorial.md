@@ -1,6 +1,6 @@
-# Random Forest Classifier (Non-GPU)
+# Random Forest
 
-**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](https://github.com/genepattern/RandomForestClassifier/blob/main/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process. This module/repo serves as a foundation for implementing the cuML-based GPU Random Forest Classifier.
+**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -15,8 +15,8 @@ It processes files into DataFrames and performs random forest classification (us
 
 
 ## Source Links
-* [The GenePattern RandomForest source repository](https://github.com/genepattern/RandomForestClassifier/blob/main)
-* RandomForest uses the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
+* [The GenePattern RandomForest source repository](/../../)
+* RandomForest uses the [genepattern/randomforest:0.3](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore) docker image
 
 ## Usage
 For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module **additionally** requires another dataset in the form of a testing feature (.gct) and testing target (.cls) data file. Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
@@ -53,50 +53,50 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 ## Input Files
 
 1. Training Data Feature File   
-    This is the required input file of classifier training feature data which is used to create the random forest model. For cross-validation, this is the only feature data input which also has prediction done against it via LOOCV. The parameter expects a GCT file (.gct).  
+    This is the required input file of classifier training feature data which is used to create the random forest model. For cross-validation, this is the only feature data input which also has prediction done against it via LOOCV. The parameter expects a GCT file (.gct) that follows the [GenePattern GCT](https://www.genepattern.org/file-formats-guide#GCT) file standard.
       
 2. Training Data Class File   
-    This is the required input file of classifier training target data which is used to create the random forest model. For cross-validation, this is the only target data input whose values are considered as "true." The parameter expects a CLS file (.cls).  
+    This is the required input file of classifier training target data which is used to create the random forest model. For cross-validation, this is the only target data input whose values are considered as "true." The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
 
 3. Testing Data Feature File   
-    This is the optional (only passed in for test-train prediction) input file of classifier testing feature data which the random forest model will predict the class values of. The parameter expects a GCT file (.gct).  
+    This is the optional (only passed in for test-train prediction) input file of classifier testing feature data which the random forest model will predict the class values of. The parameter expects a GCT file (.gct) that follows the [GenePattern GCT](https://www.genepattern.org/file-formats-guide#GCT) file standard.
       
 4. Testing Data Class File   
-    This is the optional (only passed in for test-train prediction) input file of classifier testing target data whose values are considered as "true." The parameter expects a CLS file (.cls).  
+    This is the optional (only passed in for test-train prediction) input file of classifier testing target data whose values are considered as "true." The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
     
 ## Output Files
 
-Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Open Document Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values.
+Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values.
 
 
 ## Test-Train Example Data
 
 ALL_AML Dataset Inputs:
-[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls), [all_aml_test.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct), and [all_aml_test.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
+[all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Output:
-[all_aml_tt.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/all_aml_tt.pred.odf)
+[all_aml_tt.pred.odf](/data/example_output/all_aml_tt.pred.odf)
 
 
 ## Cross-Validation Example Data
 
 ALL_AML Dataset Inputs:
-[all_aml_train.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.gct) and [all_aml_train.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/all_aml_train.cls)  
+[all_aml_train.gct](/data/all_aml_train.gct) and [all_aml_train.cls](/data/all_aml_train.cls)  
 ALL_AML Example Output:
-[all_aml_xval.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/all_aml_xval.pred.odf)
+[all_aml_xval.pred.odf](/data/example_output/all_aml_xval.pred.odf)
 
 BRCA_HUGO Dataset Inputs:
-[DP_4_BRCA_HUGO_symbols.preprocessed.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
+[DP_4_BRCA_HUGO_symbols.preprocessed.gct](/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
 BRCA_HUGO Example Output:
-[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
+[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
 
 Iris Dataset Inputs:
-[iris.gct](https://github.com/genepattern/RandomForestClassifier/blob/main/data/iris.gct) and [iris.cls](https://github.com/genepattern/RandomForestClassifier/blob/main/data/iris.cls)  
+[iris.gct](/data/iris.gct) and [iris.cls](/data/iris.cls)  
 Iris Example Output:
-[iris.pred.odf](https://github.com/genepattern/RandomForestClassifier/blob/main/data/example_output/iris.pred.odf)
+[iris.pred.odf](/data/example_output/iris.pred.odf)
 
 ## Requirements
 
-Requires the [omarhalawa/randomforest:1.0](https://hub.docker.com/layers/omarhalawa/randomforest/1.0/images/sha256-995d424aa0fa77f608aaa5575faafad6cea966a377fdb8dd51e9144e74f7ff21?context=repo) docker image
+Requires the [genepattern/randomforest:0.3](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore) docker image
 
 ## Miscellaneous
 
@@ -106,7 +106,7 @@ Future development ideas:
 
 ## License
 
-`RandomForest` is distributed under a modified BSD license available [here](https://github.com/genepattern/RandomForestClassifier/blob/main/LICENSE.txt)
+`RandomForest` is distributed under a modified BSD license available [here](/LICENSE.txt)
 
 ## Version Comments
 

@@ -31,5 +31,5 @@ params:
 assertions:
     jobStatus: success
     files:
-        outputs/all_aml_train.pred.odf: !!null
-        outputs/stdout.txt: !!null
+        all_aml_train.pred.odf: !!null
+        stdout.txt: !!null
