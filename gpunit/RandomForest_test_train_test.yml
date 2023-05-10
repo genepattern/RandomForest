@@ -1,8 +1,8 @@
 
-name: RandomForestClassifier_test_train_test
-# description: created from job 91254, debugging on so stdout file is output, random_state is 0 to reproduce easily
-# server:  https://beta.genepattern.org/gp/
-module: RandomForestClassifier
+name: RandomForest_test_train_test
+# description: created from job 91435, debugging on so stdout file is output, random_state is 0 to reproduce easily
+# server:  https://beta.genepattern.org/gp
+module: RandomForest
 # lsid: urn:lsid:genepattern.org:module.analysis:00436
 params:
     "train.data.filename": "inputs/all_aml_train.gct"

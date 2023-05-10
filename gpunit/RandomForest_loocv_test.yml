@@ -1,8 +1,8 @@
 
-name: RandomForestClassifier_loocv_test
-# description: created from job 91263, debugging off so NO stdout output, random_state is 0 to reproduce easily
-# server:  https://beta.genepattern.org/gp/
-module: RandomForestClassifier
+name: RandomForest_loocv_test
+# description: created from job 91436, debugging off so NO stdout output, random_state is 0 to reproduce easily
+# server:  https://beta.genepattern.org/gp
+module: RandomForest
 # lsid: urn:lsid:genepattern.org:module.analysis:00436
 params:
     "train.data.filename": "inputs/DP_4_BRCA_HUGO_symbols.preprocessed.gct"
