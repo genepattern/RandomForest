@@ -1,7 +1,7 @@
 
 name: RandomForest_loocv_test
-# description: created from job 350, debugging off so NO stdout output, random_state is 0 to reproduce easily
-# server:  https://gp-dev-ami.genepattern.org/gp
+# description: created from job 91436, debugging off so NO stdout output, random_state is 0 to reproduce easily
+# server:  https://beta.genepattern.org/gp
 module: RandomForest
 # lsid: urn:lsid:genepattern.org:module.analysis:00436
 params:
