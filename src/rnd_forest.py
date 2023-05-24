@@ -75,7 +75,7 @@ parser.add_argument("-f", "--feature", help="classifier feature data filename"
 parser.add_argument("-t", "--target", help="classifier target data filename"
                     + " Valid file format(s): .cls", required=True)
 
-# Target file input (.pred.odf) (optional as default value exists):
+# Assigning results file's name (.pred.odf) (optional as default value exists):
 parser.add_argument("-p", "--pred_odf", help="prediction output filename",
                     nargs="?", const=1)
 
