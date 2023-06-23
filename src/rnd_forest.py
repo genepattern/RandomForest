@@ -25,7 +25,7 @@ import argparse as ap
                       leave-one-out cross-validation (given 2 files) or 
                       test-train prediction (given 4 files)
                     - Predict feature dataset and compare to "true" target file
-                   Outputs accuracy (to stdout) and a results (.pred.odf) file.
+                   Outputs a results (.pred.odf) file (& optional details too).
                    Designed to allow for further file type implementation.
                    Created for GenePattern module usage.
                    
