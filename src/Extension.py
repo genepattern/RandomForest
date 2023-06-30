@@ -4,7 +4,7 @@
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
     File name:     Extension.py
-    Project:       RandomForest (Non-GPU)
+    Project:       RandomForest (GPU)
     Description:   Class file that contains the static Strings for the valid
                    file extensions as well as two static lists, each containing
                    the extensions that are valid for feature data files and
