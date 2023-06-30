@@ -95,15 +95,15 @@ parser.add_argument("--test_tar", help="classifier test target data filename"
 parser.add_argument("--bootstrap", help="boolean for bootstrapping",
                     nargs="?", const=1, default=True, type=str_bool)
 
-# Values for classification are "gini" or "entropy"
+# Values for classification are "gini" or "entropy" (Module-based restriction)
 parser.add_argument("--split_criterion", help="criterion of node splitting",
                     nargs="?", const=1, default="gini", type=str)
 
-# Range is integers greater than or equal to 1
+# Range is integers greater than or equal to 1 (Module-based restriction)
 parser.add_argument("--max_depth", help="maximum tree depth",
                     nargs="?", const=1, default=16, type=int)
 
-# Range is all integers betwen greater than or equal to 2
+# Range is all integers betwen greater than or equal to 2 (Module-based restriction)
 # -1 means unlimited
 parser.add_argument("--max_leaves", help="maximum leaf nodes per tree",
                     nargs="?", const=1, default=-1, type=int)
@@ -113,6 +113,12 @@ parser.add_argument("--max_samples",
                     help="Ratio of datasets to use per tree",
                     nargs="?", const=1, default=1.0, type=float)
 
+# Can be "sqrt", "log2", "auto" (default)
+# TODO: float and int implementation
+parser.add_argument("--max_features", 
+                    help="ratio of number of features per split",
+                    nargs="?", const=1, default="auto", type=str)
+
 # Range is all floats greater than or equal to 0.0
 parser.add_argument("--min_impurity_decrease", 
                     help="minimum impurity decrease needed per node split",
@@ -120,11 +126,12 @@ parser.add_argument("--min_impurity_decrease",
 
 # Range is all ints greater than or equal to 1
 # Using integer implementation [1, inf) and NOT float implementation (0.0, 1.0)
+# TODO: float implementation
 parser.add_argument("--min_samples_leaf", 
                     help="minimum number of samples required at leaf node",
                     nargs="?", const=1, default=1, type=int)
 
-# Range is all ints greater than or equal to 2
+# Range is all ints greater than or equal to 2 (Module-based restriction)
 # Using integer implementation [2, inf) and NOT float implementation (0.0, 1.0)
 parser.add_argument("--min_samples_split", 
                     help="minimum sample number to split node",
@@ -145,17 +152,13 @@ parser.add_argument("--n_streams",
                     help="number of parallel streams for building the forest",
                     nargs="?", const=1, default=4, type=int)
 
-# Range is all ints between 0 and max seed (2^32 - 1 = 4294967295),
-# inclusive of both, can also be None (default value)
 # Note: Does not currently guarantee exact same result
-max_seed = (2**32) - 1
 parser.add_argument("--random_state", 
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int)
                     
-# Range is all nonzero integers
-# TODO: look into how/if to implement
-# If None, a new cuml.handle is created
+# # TODO: look into how/if to implement
+# # If None, a new cuml.handle is created
 # parser.add_argument("--handle", 
 #                     help="cuml.handle that holds internal CUDA state for model's computation",
 #                     nargs="?", const=1, default=None)
@@ -165,7 +168,7 @@ parser.add_argument("--max_batch_size",
                     help="maximum number of nodes that can be processed in a given batch",
                     nargs="?", const=1, default=4096, type=int)
 
-# TODO: Look into whether or not to implement 
+# # TODO: Look into whether or not to implement 
 # parser.add_argument("--output_type", 
 #                     help="",
 #                     nargs="?", const=1, default=None, type=none_or_str)
@@ -205,16 +208,15 @@ if ((feature_ext != None) and (target_ext != None)):
 
     # Creating instance of Random Forest Classifier with arguments parsed
     clf = cuRF(
-        bootstrap=args.bootstrap, 
-        class_weight=args.class_weight, criterion=args.criterion,
+        bootstrap=args.bootstrap, split_criterion=args.split_criterion,
         max_depth=args.max_depth, max_features=args.max_features,
-        max_leaf_nodes=args.max_leaf_nodes, max_samples=args.max_samples,
+        max_leaves=args.max_leaves, max_samples=args.max_samples,
         min_impurity_decrease=args.min_impurity_decrease,
         min_samples_leaf=args.min_samples_leaf,
         min_samples_split=args.min_samples_split,
-        min_weight_fraction_leaf=args.min_weight_fraction_leaf,
-        n_estimators=args.n_estimators, n_bins=args.n_jobs, 
-        oob_score=args.oob_score, random_state=args.random_state)
+        n_estimators=args.n_estimators, n_bins=args.n_bins, 
+        random_state=args.random_state, n_streams=args.n_streams, 
+        verbose=args.verbose, max_batch_size=args.max_batch_size)
         
     if (args.debug):
         print(clf.get_params(deep=True), "\n")
