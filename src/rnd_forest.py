@@ -47,12 +47,6 @@ def none_or_int(value):
         return None
     return int(value)
 
-# Helper method to account for float type or None input
-def none_or_float(value):
-    if value == 'None':
-        return None
-    return float(value)
-
 # Helper method to account for command line boolean input
 def str_bool(value):
     # Checking for string input ("True" or "False")
@@ -180,6 +174,10 @@ parser.add_argument("-v", "--verbose", help="classifier verbosity flag",
 
 # Program debug argument, either True or False, False by default
 parser.add_argument("-d", "--debug", help="program debug messages",
+                    nargs="?", const=1, default=False, type=str_bool)
+
+# Model export as JSON, either True or False, False by default
+parser.add_argument("-j", "--json", help="export model as JSON string",
                     nargs="?", const=1, default=False, type=str_bool)
 
 # Parsing arguments for future calls within script to utilize
