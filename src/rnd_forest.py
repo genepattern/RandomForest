@@ -65,7 +65,7 @@ def str_bool(value):
 
 # Adding arguments to script for classifier feature & target file input,
 # .pred.odf file output, scikit RandomForest classifier parameters, & debugging
-parser = ap.ArgumentParser(description='Scikit Random Forest Classifier')
+parser = ap.ArgumentParser(description='cuML Random Forest Classifier')
 
 
 # Adding file input arguments (required)
@@ -95,40 +95,23 @@ parser.add_argument("--test_tar", help="classifier test target data filename"
 parser.add_argument("--bootstrap", help="boolean for bootstrapping",
                     nargs="?", const=1, default=True, type=str_bool)
 
-# Range is floats greater than or equal to 0.0
-parser.add_argument("--ccp_alpha", 
-                    help="complexity parameter of min cost-complexity pruning",
-                    nargs="?", const=1, default=0.0, type=float)
-
-# TODO, is dict/lis of, but generally,is "balanced" or "balanced_subsample"
-# Can also be None (default value)
-parser.add_argument("--class_weight", help="class weight specification",
-                    nargs="?", const=1, default=None, type=none_or_str)
-
-# Values are "gini," "entropy," or "log_loss"
-parser.add_argument("--criterion", help="criterion of node splitting",
+# Values for classification are "gini" or "entropy"
+parser.add_argument("--split_criterion", help="criterion of node splitting",
                     nargs="?", const=1, default="gini", type=str)
 
 # Range is integers greater than or equal to 1
-# Can also be None (default value)
 parser.add_argument("--max_depth", help="maximum tree depth",
-                    nargs="?", const=1, default=None, type=none_or_int)
-
-# TODO, can be "sqrt", "log2", "auto" ("auto" removed in 1.3), a float, or int
-parser.add_argument("--max_features", 
-                    help="number (ratio in cuML) of features per split",
-                    nargs="?", const=1, default="sqrt", type=str)
+                    nargs="?", const=1, default=16, type=int)
 
 # Range is all integers betwen greater than or equal to 2
-# Also takes None (default value)
-parser.add_argument("--max_leaf_nodes", help="maximum leaf nodes per tree",
-                    nargs="?", const=1, default=None, type=none_or_int)
+# -1 means unlimited
+parser.add_argument("--max_leaves", help="maximum leaf nodes per tree",
+                    nargs="?", const=1, default=-1, type=int)
 
 # Range is all floats betwen 0.0 and 1.0, inclusive of both
-# Also takes None (default value)
 parser.add_argument("--max_samples", 
-                    help="number (ratio for cuML) of datasets to use per tree",
-                    nargs="?", const=1, default=None, type=none_or_float)
+                    help="Ratio of datasets to use per tree",
+                    nargs="?", const=1, default=1.0, type=float)
 
 # Range is all floats greater than or equal to 0.0
 parser.add_argument("--min_impurity_decrease", 
@@ -147,34 +130,46 @@ parser.add_argument("--min_samples_split",
                     help="minimum sample number to split node",
                     nargs="?", const=1, default=2, type=int)
 
-# Range is all floats between 0.0 and 0.5, inclusive of both
-parser.add_argument("--min_weight_fraction_leaf", 
-                help="min weighted fraction of weight sum total to be leaf",
-                nargs="?", const=1, default=0.0, type=float)
-
 # Range is all integers greater than or equal to 1
 parser.add_argument("--n_estimators", 
                     help="number of trees in forest",
                     nargs="?", const=1, default=100, type=int)
 
-# Note, n_jobs=0 has no meaning in Random Forest Classifier, -1 for all CPUs
-# Range is all nonzero integers, can also be None (default value)
-parser.add_argument("--n_jobs", 
-                    help="number of parallel streams for building the forest",
-                    nargs="?", const=1, default=None, type=none_or_int)
+# Range is all nonzero integers 
+parser.add_argument("--n_bins", 
+                    help="max num of bins used by split algorithm per feature",
+                    nargs="?", const=1, default=128, type=int)
 
-# Either True or False
-parser.add_argument("--oob_score",
-                    help="if out-of-bag samples used for generalization score",
-                    nargs="?", const=1, default=False, type=str_bool)
+# Range is all nonzero integers
+parser.add_argument("--n_streams", 
+                    help="number of parallel streams for building the forest",
+                    nargs="?", const=1, default=4, type=int)
 
 # Range is all ints between 0 and max seed (2^32 - 1 = 4294967295),
 # inclusive of both, can also be None (default value)
+# Note: Does not currently guarantee exact same result
 max_seed = (2**32) - 1
 parser.add_argument("--random_state", 
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int)
                     
+# Range is all nonzero integers
+# TODO: look into how/if to implement
+# If None, a new cuml.handle is created
+# parser.add_argument("--handle", 
+#                     help="cuml.handle that holds internal CUDA state for model's computation",
+#                     nargs="?", const=1, default=None)
+
+# Range is all nonzero integers
+parser.add_argument("--max_batch_size", 
+                    help="maximum number of nodes that can be processed in a given batch",
+                    nargs="?", const=1, default=4096, type=int)
+
+# TODO: Look into whether or not to implement 
+# parser.add_argument("--output_type", 
+#                     help="",
+#                     nargs="?", const=1, default=None, type=none_or_str)
+
 # 0 for no verbosity, 1 for basic verbosity, values greater for more verbosity
 # Range is integers greater than or equal to 0
 parser.add_argument("-v", "--verbose", help="classifier verbosity flag",
@@ -209,8 +204,8 @@ if ((feature_ext != None) and (target_ext != None)):
     target_df = process(args.target, target_ext, None, Marker.TAR)
 
     # Creating instance of Random Forest Classifier with arguments parsed
-    clf = RandomForestClassifier(
-        bootstrap=args.bootstrap, ccp_alpha=args.ccp_alpha, 
+    clf = cuRF(
+        bootstrap=args.bootstrap, 
         class_weight=args.class_weight, criterion=args.criterion,
         max_depth=args.max_depth, max_features=args.max_features,
         max_leaf_nodes=args.max_leaf_nodes, max_samples=args.max_samples,
@@ -218,7 +213,7 @@ if ((feature_ext != None) and (target_ext != None)):
         min_samples_leaf=args.min_samples_leaf,
         min_samples_split=args.min_samples_split,
         min_weight_fraction_leaf=args.min_weight_fraction_leaf,
-        n_estimators=args.n_estimators, n_jobs=args.n_jobs, 
+        n_estimators=args.n_estimators, n_bins=args.n_jobs, 
         oob_score=args.oob_score, random_state=args.random_state)
         
     if (args.debug):
