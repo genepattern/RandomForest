@@ -12,8 +12,8 @@ from os.path import exists
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
     File name:     rnd_forest_functions.py
-    Project:       RandomForest (Non-GPU)
-    Description:   Non-GPU RandomForest python script that contains file
+    Project:       RandomForest (GPU)
+    Description:   GPU RandomForest python script that contains file
                    handling functions which are used in the main script.
     References:    github.com/genepattern/genepattern-python/blob/master/gp/
 """
