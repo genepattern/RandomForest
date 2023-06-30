@@ -4,7 +4,7 @@
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
     File name:     Marker.py
-    Project:       RandomForest (Non-GPU)
+    Project:       RandomForest (GPU)
     Description:   Class file that contains the static variables serving as
                    flags for differentiating feature and target data processes
 """
