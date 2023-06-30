@@ -6,7 +6,7 @@ from rnd_forest_functions import *
 from Marker import *
 
 # Importing modules
-from sklearn.ensemble import RandomForestClassifier
+from cuml.ensemble import RandomForestClassifier as cuRF
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import LeaveOneOut
 import pandas as pd
@@ -16,8 +16,8 @@ import argparse as ap
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
     File name:     rnd_forest.py
-    Project:       RandomForest (Non-GPU)
-    Description:   Non-GPU RandomForest main python script to: 
+    Project:       RandomForest (GPU)
+    Description:   GPU RandomForest main python script to: 
                     - Process optional classifier arguments
                     - Validate feature (.gct) & target (.cls) data file inputs
                     - Call functions to process files into DataFrames
@@ -30,6 +30,7 @@ import argparse as ap
                    Created for GenePattern module usage.
                    
     References:    scholarworks.utep.edu/cs_techrep/1209/
+                   docs.rapids.ai/api/cuml/stable/api/#random-forest
                    datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
 """
