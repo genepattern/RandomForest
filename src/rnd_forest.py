@@ -318,7 +318,9 @@ if ((feature_ext != None) and (target_ext != None)):
 
         pred_arr = y_pred
 
-
+        if (args.json):
+            print(clf.get_json())
+    
     # If no value was provided for pred_odf filename, 
     # uses name of feature target (or test, if provided) file:
     if ((args.pred_odf == None) and (args.test_feat != None)):
@@ -373,7 +375,7 @@ if ((feature_ext != None) and (target_ext != None)):
         "COLUMN_TYPES" : "String \t" + "String\t" + "String\t" + "float\t" 
             + "boolean",
         "Model" : "Prediction Results",
-        "PredictorModel" : "Random Forest Classifier",
+        "PredictorModel" : "Random Forest Classifier (GPU)",
         "NumFeatures" : 0,
         "NumCorrect" : (true.size - counter),
         "NumErrors" : counter,
