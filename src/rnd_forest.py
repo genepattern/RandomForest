@@ -11,24 +11,29 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import LeaveOneOut
 import pandas as pd
 import argparse as ap
+import os
+import warnings
+
+# For pickling UserWarning messages from cuML
+warnings.simplefilter("ignore", UserWarning)
 
 """
     Name:          Omar Halawa
     Email:         ohalawa@ucsd.edu
     File name:     rnd_forest.py
     Project:       RandomForest (GPU)
-    Description:   GPU RandomForest main python script to: 
+    Description:   GPU RandomForest main python script to:
                     - Process optional classifier arguments
                     - Validate feature (.gct) & target (.cls) data file inputs
                     - Call functions to process files into DataFrames
                     - Perform Random Forest classification using either:
-                      leave-one-out cross-validation (given 2 files) or 
+                      leave-one-out cross-validation (given 2 files) or
                       test-train prediction (given 4 files)
                     - Predict feature dataset and compare to "true" target file
                    Outputs a results (.pred.odf) file (& optional details too).
                    Designed to allow for further file type implementation.
                    Created for GenePattern module usage.
-                   
+
     References:    scholarworks.utep.edu/cs_techrep/1209/
                    docs.rapids.ai/api/cuml/stable/api/#random-forest
                    datacamp.com/tutorial/random-forests-classifier-python
@@ -55,7 +60,7 @@ def str_bool(value):
         return eval(value)
     else:
         return value
-        
+
 
 # Adding arguments to script for classifier feature & target file input,
 # .pred.odf file output, scikit RandomForest classifier parameters, & debugging
@@ -103,67 +108,67 @@ parser.add_argument("--max_leaves", help="maximum leaf nodes per tree",
                     nargs="?", const=1, default=-1, type=int)
 
 # Range is all floats betwen 0.0 and 1.0, inclusive of both
-parser.add_argument("--max_samples", 
+parser.add_argument("--max_samples",
                     help="Ratio of datasets to use per tree",
                     nargs="?", const=1, default=1.0, type=float)
 
 # Can be "sqrt", "log2", "auto" (default)
 # TODO: float and int implementation
-parser.add_argument("--max_features", 
+parser.add_argument("--max_features",
                     help="ratio of number of features per split",
                     nargs="?", const=1, default="auto", type=str)
 
 # Range is all floats greater than or equal to 0.0
-parser.add_argument("--min_impurity_decrease", 
+parser.add_argument("--min_impurity_decrease",
                     help="minimum impurity decrease needed per node split",
                     nargs="?", const=1, default=0.0, type=float)
 
 # Range is all ints greater than or equal to 1
 # Using integer implementation [1, inf) and NOT float implementation (0.0, 1.0)
 # TODO: float implementation
-parser.add_argument("--min_samples_leaf", 
+parser.add_argument("--min_samples_leaf",
                     help="minimum number of samples required at leaf node",
                     nargs="?", const=1, default=1, type=int)
 
 # Range is all ints greater than or equal to 2 (Module-based restriction)
 # Using integer implementation [2, inf) and NOT float implementation (0.0, 1.0)
-parser.add_argument("--min_samples_split", 
+parser.add_argument("--min_samples_split",
                     help="minimum sample number to split node",
                     nargs="?", const=1, default=2, type=int)
 
 # Range is all integers greater than or equal to 1
-parser.add_argument("--n_estimators", 
+parser.add_argument("--n_estimators",
                     help="number of trees in forest",
                     nargs="?", const=1, default=100, type=int)
 
-# Range is all nonzero integers 
-parser.add_argument("--n_bins", 
+# Range is all nonzero integers
+parser.add_argument("--n_bins",
                     help="max num of bins used by split algorithm per feature",
                     nargs="?", const=1, default=128, type=int)
 
 # Range is all nonzero integers
-parser.add_argument("--n_streams", 
+parser.add_argument("--n_streams",
                     help="number of parallel streams for building the forest",
                     nargs="?", const=1, default=4, type=int)
 
 # Note: Does not currently guarantee exact same result
-parser.add_argument("--random_state", 
+parser.add_argument("--random_state",
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int)
-                    
+
 # # TODO: look into how/if to implement
 # # If None, a new cuml.handle is created
-# parser.add_argument("--handle", 
+# parser.add_argument("--handle",
 #                     help="cuml.handle that holds internal CUDA state for model's computation",
 #                     nargs="?", const=1, default=None)
 
 # Range is all nonzero integers
-parser.add_argument("--max_batch_size", 
+parser.add_argument("--max_batch_size",
                     help="maximum number of nodes that can be processed in a given batch",
                     nargs="?", const=1, default=4096, type=int)
 
-# # TODO: Look into whether or not to implement 
-# parser.add_argument("--output_type", 
+# # TODO: Look into whether or not to implement
+# parser.add_argument("--output_type",
 #                     help="",
 #                     nargs="?", const=1, default=None, type=none_or_str)
 
@@ -212,10 +217,10 @@ if ((feature_ext != None) and (target_ext != None)):
         min_impurity_decrease=args.min_impurity_decrease,
         min_samples_leaf=args.min_samples_leaf,
         min_samples_split=args.min_samples_split,
-        n_estimators=args.n_estimators, n_bins=args.n_bins, 
-        random_state=args.random_state, n_streams=args.n_streams, 
+        n_estimators=args.n_estimators, n_bins=args.n_bins,
+        random_state=args.random_state, n_streams=args.n_streams,
         verbose=args.verbose, max_batch_size=args.max_batch_size)
-        
+
     if (args.debug):
         print(clf.get_params(deep=True), "\n")
 
@@ -224,16 +229,16 @@ if ((feature_ext != None) and (target_ext != None)):
 
     # Case of no test dataset provided, so doing LOOCV
     if ((test_feat_ext == None) and (test_tar_ext == None)):
-        
+
         # Instantiating variable to hold value of column names
         # to use for prediction results
         cols = feature_df.columns
 
         # Creating instance of Leave-One-Out Cross Validation
         loo = LeaveOneOut()
-        
+
         if (args.debug):
-            print("Number of splitting iterations in LOOCV:", 
+            print("Number of splitting iterations in LOOCV:",
                     loo.get_n_splits(feature_df.T), "\n")
             print("Feature DataFrame: \n", feature_df, "\n")
             print("Target DataFrame: \n", target_df, "\n\n")
@@ -252,6 +257,11 @@ if ((feature_ext != None) and (target_ext != None)):
             # Training the model with training sets of X and y
             # Raveling y_train for data classification format, see last source
             clf.fit(X_train, y_train.values.ravel())
+
+            if (args.json):
+               os.makedirs("json") if not os.path.exists("json") else None
+               with open("json/"+"json_model_"+str(i+1)+".txt", "w") as f:
+                  f.write(clf.get_json())
 
             # Initialzing iteration's X_test value
             # Reshaping necessary as array always 1D (single sample's data)
@@ -283,7 +293,7 @@ if ((feature_ext != None) and (target_ext != None)):
     else:
 
         # Processing test files into dataframes with parent function "process"
-        test_feat_df = process(args.test_feat, feature_ext, args.feature, 
+        test_feat_df = process(args.test_feat, feature_ext, args.feature,
                                Marker.FEAT)
         test_tar_df = process(args.test_tar, target_ext, None, Marker.TAR)
 
@@ -305,10 +315,15 @@ if ((feature_ext != None) and (target_ext != None)):
         if (args.debug):
             print("Testing Feature DataFrame: \n", test_feat_df, "\n")
             print("Testing Target DataFrame: \n", test_tar_df, "\n\n")
-    
+
         # Training the model with training sets of X and y
         # Raveling y_train for data classification format, see last source
         clf.fit(X_train, y_train.values.ravel())
+
+        if (args.json):
+           os.makedirs("json") if not os.path.exists("json") else None
+           with open("json/json_model.txt", "w") as f:
+              f.write(clf.get_json())
 
         # Predicting using test features
         y_pred=clf.predict(X_test)
@@ -318,13 +333,10 @@ if ((feature_ext != None) and (target_ext != None)):
 
         pred_arr = y_pred
 
-        if (args.json):
-            print(clf.get_json())
-    
-    # If no value was provided for pred_odf filename, 
+    # If no value was provided for pred_odf filename,
     # uses name of feature target (or test, if provided) file:
-    if ((args.pred_odf == None) and (args.test_feat != None)):
-        pred_odf = pred_filename(args.test_feat)
+    if (args.pred_odf == None):
+        pred_odf = pred_filename(args.feature)
     else:
         pred_odf = args.pred_odf
 
@@ -335,7 +347,7 @@ if ((feature_ext != None) and (target_ext != None)):
     if (args.debug):
         # Classifier accuracy check
         accuracy = accuracy_score(true, pred_arr) * 100
-        print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n") 
+        print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n")
 
     # Creating pred.odf dataframe
     df = pd.DataFrame(columns=range(true.size))
@@ -349,13 +361,12 @@ if ((feature_ext != None) and (target_ext != None)):
     if (args.debug):
         print("Target names array:", tar, "\n")
 
-
     # Iterating through each sample
     for i in range(0,true.size):
 
         # Creating boolean for mismatch check
         check = true[i] == pred_arr[i]
-        
+
         if (check == True):
             value = "TRUE"
         else:
@@ -365,14 +376,14 @@ if ((feature_ext != None) and (target_ext != None)):
         # Assigning true's and preds's values to the respective sample values
         # and evaluating differences. Using tar array to specify target names
         df[i] = [i+1, list(cols)[i], tar[true[i]],
-                tar[pred_arr[i]], 1, value]
+                tar[int(pred_arr[i])], 1, value]
 
     # Creating dictionary for pred_odf file header
     header_dict = {
         "HeaderLines" : "",
-        "COLUMN_NAMES" : "Samples\t" + "True Class\t" + "Predicted Class\t" 
+        "COLUMN_NAMES" : "Samples\t" + "True Class\t" + "Predicted Class\t"
             + "Confidence\t" + "Correct?",
-        "COLUMN_TYPES" : "String \t" + "String\t" + "String\t" + "float\t" 
+        "COLUMN_TYPES" : "String \t" + "String\t" + "String\t" + "float\t"
             + "boolean",
         "Model" : "Prediction Results",
         "PredictorModel" : "Random Forest Classifier (GPU)",
@@ -389,5 +400,3 @@ if ((feature_ext != None) and (target_ext != None)):
     write_odf(df.T, pred_odf, header_dict)
 
 # Otherwise, printing error message to notify user (in dev case CLI-usage)
-else:
-    print("Error in file input, please check above for details.")
