@@ -12,6 +12,7 @@ from sklearn.model_selection import LeaveOneOut
 import pandas as pd
 import argparse as ap
 import os
+import re
 import warnings
 
 # For pickling UserWarning messages from cuML
@@ -259,7 +260,7 @@ if ((feature_ext != None) and (target_ext != None)):
             clf.fit(X_train, y_train.values.ravel())
 
             if (args.json):
-               os.makedirs("json") if not os.path.exists("json") else None
+               os.makedirs("json", exist_ok=True) if not os.path.exists("json") else None
                with open("json/"+"json_model_"+str(i+1)+".txt", "w") as f:
                   f.write(clf.get_json())
 
@@ -321,7 +322,7 @@ if ((feature_ext != None) and (target_ext != None)):
         clf.fit(X_train, y_train.values.ravel())
 
         if (args.json):
-           os.makedirs("json") if not os.path.exists("json") else None
+           os.makedirs("json", exist_ok=True) if not os.path.exists("json") else None
            with open("json/json_model.txt", "w") as f:
               f.write(clf.get_json())
 
@@ -340,11 +341,12 @@ if ((feature_ext != None) and (target_ext != None)):
     else:
         pred_odf = args.pred_odf
 
+    # Removing all /path/before/ (output file in curr dir)
+    pred_odf = re.sub('.*/', '', pred_odf)
+
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
         print("Predicted target values:\n", *pred_arr, "\n", sep=" ")
-
-    if (args.debug):
         # Classifier accuracy check
         accuracy = accuracy_score(true, pred_arr) * 100
         print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n")
@@ -398,5 +400,3 @@ if ((feature_ext != None) and (target_ext != None)):
 
     # Passing transposed odf dataframe and header_dict into GP write_odf()
     write_odf(df.T, pred_odf, header_dict)
-
-# Otherwise, printing error message to notify user (in dev case CLI-usage)
