@@ -36,20 +36,18 @@
         "hidden": true,
         "parameters": [
             "bootstrap",
-            "ccp_alpha",
-            "class_weight",
-            "criterion",
+            "split_criterion",
             "max_depth",
             "max_features",
-            "max_leaf_nodes",
+            "max_leaves",
             "max_samples",
             "min_impurity_decrease",
             "min_samples_leaf",
             "min_samples_split",
-            "min_weight_fraction_leaf",
             "n_estimators",
-            "oob_score",
-            "random_state"
+            "random_state",
+            "max_batch_size",
+            "json"
         ]
     },
     {
