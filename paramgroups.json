@@ -45,6 +45,7 @@
             "min_samples_leaf",
             "min_samples_split",
             "n_estimators",
+            "n_bins",
             "random_state",
             "max_batch_size",
             "json"
