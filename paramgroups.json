@@ -6,11 +6,12 @@
     },
     {
         "name": "Inputs (for cross-validation, only use 'Training Data'):/Training Data",
-        "description": "Provide data (feature) and class (target) files for training dataset (required).",
+        "description": "Provide data (feature) and class (target) files for training dataset (required)",
         "hidden": false,
         "parameters": [
-            "train.data.filename",
-            "train.class.filename"
+            "train.data.file",
+            "train.class.file",
+            "model_output"
         ]
     },
     {
@@ -18,8 +19,8 @@
         "description": "Provide data (feature) and class (target) files for test dataset (only needed for test-train prediction, not cross-validation).",
         "hidden": true,
         "parameters": [
-            "test.data.filename",
-            "test.class.filename"
+            "test.data.file",
+            "test.class.file"
         ]
     },
     {
@@ -47,8 +48,7 @@
             "n_estimators",
             "n_bins",
             "random_state",
-            "max_batch_size",
-            "json"
+            "max_batch_size"
         ]
     },
     {
