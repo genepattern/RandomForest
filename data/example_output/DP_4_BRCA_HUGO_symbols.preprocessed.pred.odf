@@ -3,10 +3,10 @@ HeaderLines=8
 COLUMN_NAMES:	Samples	True Class	Predicted Class	Confidence	Correct?
 COLUMN_TYPES:	String 	String	String	float	boolean
 Model=Prediction Results
-PredictorModel=Random Forest Classifier
+PredictorModel=Random Forest Classifier (GPU)
 NumFeatures=0
-NumCorrect=38
-NumErrors=2
+NumCorrect=39
+NumErrors=1
 DataLines=40
 1	A7-A0CE-normal	matched_normal	matched_normal	1	TRUE
 2	A7-A0CH-normal	matched_normal	matched_normal	1	TRUE
@@ -17,7 +17,7 @@ DataLines=40
 7	A7-A13G-normal	matched_normal	matched_normal	1	TRUE
 8	AC-A23H-normal	matched_normal	matched_normal	1	TRUE
 9	AC-A2FB-normal	matched_normal	matched_normal	1	TRUE
-10	AC-A2FF-normal	matched_normal	primary_tumor	1	FALSE
+10	AC-A2FF-normal	matched_normal	matched_normal	1	TRUE
 11	AC-A2FM-normal	matched_normal	matched_normal	1	TRUE
 12	BH-A0AU-normal	matched_normal	matched_normal	1	TRUE
 13	BH-A0AY-normal	matched_normal	matched_normal	1	TRUE

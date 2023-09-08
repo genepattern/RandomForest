@@ -3,10 +3,10 @@ HeaderLines=8
 COLUMN_NAMES:	Samples	True Class	Predicted Class	Confidence	Correct?
 COLUMN_TYPES:	String 	String	String	float	boolean
 Model=Prediction Results
-PredictorModel=Random Forest Classifier
+PredictorModel=Random Forest Classifier (GPU)
 NumFeatures=0
-NumCorrect=144
-NumErrors=6
+NumCorrect=143
+NumErrors=7
 DataLines=150
 1	0	Iris-Setosa	Iris-Setosa	1	TRUE
 2	1	Iris-Setosa	Iris-Setosa	1	TRUE
@@ -80,7 +80,7 @@ DataLines=150
 70	69	Iris-Versicolour	Iris-Versicolour	1	TRUE
 71	70	Iris-Versicolour	Iris-Virginica	1	FALSE
 72	71	Iris-Versicolour	Iris-Versicolour	1	TRUE
-73	72	Iris-Versicolour	Iris-Versicolour	1	TRUE
+73	72	Iris-Versicolour	Iris-Virginica	1	FALSE
 74	73	Iris-Versicolour	Iris-Versicolour	1	TRUE
 75	74	Iris-Versicolour	Iris-Versicolour	1	TRUE
 76	75	Iris-Versicolour	Iris-Versicolour	1	TRUE
