@@ -2,7 +2,7 @@
 name: RandomForestGPU_loocv_test
 # description: created from job 8691, debugging off so NO stdout output, random_state is 0 to try and reproduce (but RAPIDs.ai does not guarantee that)
 # server:  https://genepattern.ucsd.edu
-module: RandomForestGPU
+module: RandomForest.GPU
 # lsid: urn:lsid:8080.genepattern.genepattern.sdsc.edu:genepatternmodules:28:0.9
 params:
     "train.data.file": "inputs/DP_4_BRCA_HUGO_symbols.preprocessed.gct"
