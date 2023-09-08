@@ -1,5 +1,5 @@
 #RandomForest.GPU
-#Thu Sep 07 20:46:22 PDT 2023
+#Thu Sep 07 21:01:49 PDT 2023
 JVMLevel=
 LSID=urn\:lsid\:8080.genepattern.genepattern.sdsc.edu\:genepatternmodules\:28\:0.9
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
@@ -14,7 +14,7 @@ job.docker.image=
 job.memory=
 job.walltime=02\:00\:00
 language=any
-name=RandomForestGPU
+name=RandomForest.GPU
 os=any
 p10_MODE=
 p10_TYPE=Integer

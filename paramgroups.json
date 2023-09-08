@@ -33,7 +33,7 @@
     },
     {
         "name": "Optional Classifier Parameters:",
-        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to <a href=https://tiny.cc/scikit_rnd_forest>this</a>",
+        "description": "The following parameters for classifier specifications are optional as default values are passed in. For details, please refer to <a href=https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier.get_json>this</a>",
         "hidden": true,
         "parameters": [
             "bootstrap",
