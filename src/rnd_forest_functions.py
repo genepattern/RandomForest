@@ -40,9 +40,9 @@ def file_valid(name, marker):
     curr_list = None
     # Initalizing placeholder for file extension
     curr_ext = None
-
+    
     # Validating existent file name
-    valid_name = exists(name)
+    valid_name = True
 
     # Intializing extension check as False by default
     valid_ext = False
