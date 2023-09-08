@@ -1,3 +1,4 @@
+# Source: https://github.com/genepattern/nmf-gpu/blob/master/docker/Dockerfile 
 FROM nvcr.io/nvidia/rapidsai/rapidsai-core:22.08-cuda11.0-runtime-ubuntu20.04-py3.9
 
 #Install CUDA toolkit 11.0
