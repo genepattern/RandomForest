@@ -1,0 +1,540 @@
+[
+{"nodeid": 0, "split_feature": 12468, "split_threshold": 2.4871313498037901, "gain": 0.40685185185185174, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 13},
+  {"nodeid": 2, "split_feature": 11957, "split_threshold": 4.1977771375681598, "gain": 0.071330589849108408, "instance_count": 27, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 26},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 4003, "split_threshold": 6.3458308152596903, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 19},
+  {"nodeid": 2, "split_feature": 12536, "split_threshold": 2.1772490322140601, "gain": 0.090702947845805029, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 20}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 11450, "split_threshold": 6.7251768984610596, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 4449, "split_threshold": 4.6094911289478899, "gain": 0.45500000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 14},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 26}
+]},
+{"nodeid": 0, "split_feature": 12523, "split_threshold": 2.8090680070501901, "gain": 0.40685185185185174, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11764, "split_threshold": 7.0569626734421096, "gain": 0.071330589849108408, "instance_count": 27, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 26},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 13}
+]},
+{"nodeid": 0, "split_feature": 5139, "split_threshold": 4.0676537727136699, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 10626, "split_threshold": 4.63460312529046, "gain": 0.43199999999999983, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 15},
+  {"nodeid": 2, "split_feature": 12433, "split_threshold": 3.96602345942964, "gain": 0.076800000000000021, "instance_count": 25, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 24}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 1069, "split_threshold": 2.22277852920022, "gain": 0.49874999999999997, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 4450, "split_threshold": 2.91137482227666, "gain": 0.44763157894736844, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12146, "split_threshold": 6.3708064409139604, "gain": 0.09972299168975074, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 18},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 7689, "split_threshold": 3.3531678439047701, "gain": 0.45500000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 14},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 26}
+]},
+{"nodeid": 0, "split_feature": 8021, "split_threshold": 5.2047637431561498, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 25},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 15}
+]},
+{"nodeid": 0, "split_feature": 8011, "split_threshold": 5.3028143538780004, "gain": 0.47999999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 24},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 16}
+]},
+{"nodeid": 0, "split_feature": 12001, "split_threshold": 6.29120106716534, "gain": 0.39927631578947365, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11823, "split_threshold": 5.4399660390957996, "gain": 0.18836565096952915, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 2},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 17}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 11549, "split_threshold": 6.78010193525642, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 25},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 15}
+]},
+{"nodeid": 0, "split_feature": 4643, "split_threshold": 4.0925829763004504, "gain": 0.45125000000000004, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "split_feature": 11926, "split_threshold": 2.8351345542834299, "gain": 0.094999999999999946, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 19},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 7689, "split_threshold": 4.1951233202099099, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12001, "split_threshold": 6.5085529030192504, "gain": 0.090702947845805043, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 20},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 9016, "split_threshold": 5.7649741202933598, "gain": 0.49874999999999997, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 10861, "split_threshold": 3.1707756705855501, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 917, "split_threshold": 4.8956807396614099, "gain": 0.44717391304347831, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 17},
+  {"nodeid": 2, "split_feature": 12250, "split_threshold": 1.7004070061422401, "gain": 0.083175803402646478, "instance_count": 23, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 22}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 5466, "split_threshold": 7.2432308780541002, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 12277, "split_threshold": 7.0429127490802701, "gain": 0.10493827160493831, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 17},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 11516, "split_threshold": 2.8907283737361098, "gain": 0.49875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 7447, "split_threshold": 2.7767322679819699, "gain": 0.47999999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 16},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 24}
+]},
+{"nodeid": 0, "split_feature": 5588, "split_threshold": 5.5522873117986196, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 6004, "split_threshold": 3.8777035880889499, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 11339, "split_threshold": 6.4431056796911204, "gain": 0.42187500000000011, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 24},
+  {"nodeid": 2, "split_feature": 12433, "split_threshold": 5.2611633941421303, "gain": 0.1171875, "instance_count": 16, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 15},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 11679, "split_threshold": 3.4276206993435498, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11800, "split_threshold": 0.17378210571810501, "gain": 0.090702947845805043, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 20}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 984, "split_threshold": 4.7669197096148901, "gain": 0.45124999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 20},
+  {"nodeid": 2, "split_feature": 12629, "split_threshold": 2.7216657220458802, "gain": 0.094999999999999932, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 19}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 8465, "split_threshold": 7.0800285445556304, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 18},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 1736, "split_threshold": 5.6630430899937503, "gain": 0.49499999999999994, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 9082, "split_threshold": 7.89878376144752, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 17},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 23}
+]},
+{"nodeid": 0, "split_feature": 7236, "split_threshold": 5.6338341663271398, "gain": 0.47999999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 16},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 24}
+]},
+{"nodeid": 0, "split_feature": 3881, "split_threshold": 3.6877717508374199, "gain": 0.45500000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 14},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 26}
+]},
+{"nodeid": 0, "split_feature": 12513, "split_threshold": 10.631384027223501, "gain": 0.40909090909090917, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 5430, "split_threshold": 5.8173746951607699, "gain": 0.165289256198347, "instance_count": 22, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 20},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 2}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 10293, "split_threshold": 4.3214583626926304, "gain": 0.47999999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 24},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 16}
+]},
+{"nodeid": 0, "split_feature": 5473, "split_threshold": 1.8624398666923001, "gain": 0.44083333333333319, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 16},
+  {"nodeid": 2, "split_feature": 12382, "split_threshold": 3.4359341560002501, "gain": 0.079861111111111202, "instance_count": 24, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 23}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 9897, "split_threshold": 4.8927091789884001, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 18},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 538, "split_threshold": 5.9668332840347897, "gain": 0.44763157894736838, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12434, "split_threshold": 3.5415736848592001, "gain": 0.099722991689750712, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 18},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 8006, "split_threshold": 5.9718632272180097, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 11829, "split_threshold": 2.71652570685692, "gain": 0.10493827160493831, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 17}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 7791, "split_threshold": 3.8892040190457902, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 15},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 25}
+]},
+{"nodeid": 0, "split_feature": 6217, "split_threshold": 4.6054968587989897, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 12565, "split_threshold": 3.1275736762956501, "gain": 0.10493827160493829, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 17}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 7720, "split_threshold": 8.7789267328344103, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 9276, "split_threshold": 6.76447604147788, "gain": 0.49875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 19},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 4975, "split_threshold": 7.3786355059981901, "gain": 0.49499999999999994, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 1374, "split_threshold": 4.3862646669764302, "gain": 0.44763157894736838, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12334, "split_threshold": 1.67532749313412, "gain": 0.099722991689750712, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 18}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 11032, "split_threshold": 8.2739722678579106, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12638, "split_threshold": 4.9203456033167798, "gain": 0.090702947845805029, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 20},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 7734, "split_threshold": 5.5776554193543602, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 17},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 23}
+]},
+{"nodeid": 0, "split_feature": 6466, "split_threshold": 2.4673988541101401, "gain": 0.43294117647058816, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 23},
+  {"nodeid": 2, "split_feature": 12321, "split_threshold": 4.0349266991433597, "gain": 0.11072664359861592, "instance_count": 17, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 16},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 9036, "split_threshold": 4.7558272583194903, "gain": 0.40499999999999992, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 10812, "split_threshold": 5.7967378642276097, "gain": 0.18000000000000005, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 18},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 2}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 6135, "split_threshold": 6.7607157882398203, "gain": 0.36299999999999999, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 9996, "split_threshold": 4.6988945070539403, "gain": 0.2112, "instance_count": 25, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 22},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 3}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 15}
+]},
+{"nodeid": 0, "split_feature": 9418, "split_threshold": 6.3977902741605401, "gain": 0.39111111111111097, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 11665, "split_threshold": 9.2814840718922191, "gain": 0.19753086419753091, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 2},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 16}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 11080, "split_threshold": 5.4859259252301804, "gain": 0.45125000000000004, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12602, "split_threshold": 2.15626382400841, "gain": 0.094999999999999946, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 19},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 8845, "split_threshold": 4.4689898878454803, "gain": 0.43294117647058816, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12500, "split_threshold": 3.5180296609093502, "gain": 0.11072664359861589, "instance_count": 17, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 16},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 23}
+]},
+{"nodeid": 0, "split_feature": 10941, "split_threshold": 3.6474169130577501, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12077, "split_threshold": 9.0867311186890696, "gain": 0.10493827160493829, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 17},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 2614, "split_threshold": 5.6858983750158698, "gain": 0.45125000000000004, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "split_feature": 12453, "split_threshold": 1.77807143343281, "gain": 0.094999999999999946, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 19}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 6870, "split_threshold": 3.3126224522520999, "gain": 0.49874999999999997, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 7579, "split_threshold": 3.1216418178189298, "gain": 0.49499999999999994, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 18},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 10859, "split_threshold": 4.0986984866568097, "gain": 0.4510227272727273, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12411, "split_threshold": 2.5298925786469302, "gain": 0.08677685950413222, "instance_count": 22, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 21}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 6500, "split_threshold": 2.24902516725821, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 19},
+  {"nodeid": 2, "split_feature": 12130, "split_threshold": 4.4314303142715703, "gain": 0.090702947845805043, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 20},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 9552, "split_threshold": 2.4375617352405499, "gain": 0.49875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 1418, "split_threshold": 2.5142084602921999, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 9235, "split_threshold": 5.9523447545672896, "gain": 0.10493827160493831, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 17},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 1540, "split_threshold": 3.5428945689250901, "gain": 0.49875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 19},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 11296, "split_threshold": 3.4024608641921801, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 15},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 25}
+]},
+{"nodeid": 0, "split_feature": 11450, "split_threshold": 6.8058563135339396, "gain": 0.44717391304347831, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12318, "split_threshold": 2.02652811427228, "gain": 0.083175803402646478, "instance_count": 23, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 22}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 8104, "split_threshold": 1.9016903514196399, "gain": 0.49499999999999994, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 18},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 10580, "split_threshold": 4.4170365973977104, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 25},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 15}
+]},
+{"nodeid": 0, "split_feature": 5867, "split_threshold": 4.7692986842760003, "gain": 0.44717391304347831, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 17},
+  {"nodeid": 2, "split_feature": 12249, "split_threshold": 4.63819978904582, "gain": 0.083175803402646478, "instance_count": 23, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 22},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 6719, "split_threshold": 7.9560564244141796, "gain": 0.45124999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11140, "split_threshold": 6.2726167884881701, "gain": 0.094999999999999932, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 19},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 10824, "split_threshold": 3.6112288304902398, "gain": 0.39111111111111097, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11089, "split_threshold": 5.4830114594173702, "gain": 0.19753086419753091, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 16},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 2}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 11590, "split_threshold": 3.8940004097526399, "gain": 0.46875, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 15},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 25}
+]},
+{"nodeid": 0, "split_feature": 10900, "split_threshold": 4.0288527631658404, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 11682, "split_threshold": 2.13843110839872, "gain": 0.40909090909090917, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 18},
+  {"nodeid": 2, "split_feature": 12172, "split_threshold": 2.9247637561929398, "gain": 0.16528925619834703, "instance_count": 22, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 2},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 20}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 8756, "split_threshold": 2.8368319186610802, "gain": 0.39927631578947365, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 21},
+  {"nodeid": 2, "split_feature": 12558, "split_threshold": 3.6790699165906502, "gain": 0.18836565096952917, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 17},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 2}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 1717, "split_threshold": 3.1450645853416899, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 11745, "split_threshold": 7.2905466104277501, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 11516, "split_threshold": 2.2994107376673001, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 17},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 23}
+]},
+{"nodeid": 0, "split_feature": 3836, "split_threshold": 5.0369576394894802, "gain": 0.40499999999999992, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11828, "split_threshold": 2.72742611266482, "gain": 0.18000000000000005, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 2},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 18}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 6301, "split_threshold": 4.7585064840176399, "gain": 0.44763157894736844, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 12445, "split_threshold": 1.97786599557269, "gain": 0.09972299168975074, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 18}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 21}
+]},
+{"nodeid": 0, "split_feature": 8756, "split_threshold": 2.8368319186610802, "gain": 0.45500000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 14},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 26}
+]},
+{"nodeid": 0, "split_feature": 12388, "split_threshold": 4.3169083395432502, "gain": 0.43294117647058816, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 23},
+  {"nodeid": 2, "split_feature": 11990, "split_threshold": 8.2634243631044306, "gain": 0.11072664359861592, "instance_count": 17, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 16},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 1736, "split_threshold": 5.6630430899937503, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 7010, "split_threshold": 6.0174611213781404, "gain": 0.49875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 9515, "split_threshold": 5.1751275548413203, "gain": 0.47999999999999998, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 24},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 16}
+]},
+{"nodeid": 0, "split_feature": 9127, "split_threshold": 4.8831000321754399, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 7447, "split_threshold": 2.7767322679819699, "gain": 0.49874999999999997, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 21},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 19}
+]},
+{"nodeid": 0, "split_feature": 1367, "split_threshold": 7.6380592082911001, "gain": 0.45125000000000004, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11965, "split_threshold": 3.33082639064473, "gain": 0.094999999999999946, "instance_count": 20, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 19}
+  ]},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 6337, "split_threshold": 4.5479554564091398, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 9630, "split_threshold": 7.4749884021239099, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 11706, "split_threshold": 2.21794706594895, "gain": 0.40685185185185174, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 13},
+  {"nodeid": 2, "split_feature": 11868, "split_threshold": 4.0420361266248301, "gain": 0.071330589849108408, "instance_count": 27, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 26}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 8011, "split_threshold": 5.0342069107591296, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 3626, "split_threshold": 4.4556771325020899, "gain": 0.48875000000000002, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 23},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 17}
+]},
+{"nodeid": 0, "split_feature": 12637, "split_threshold": 5.2238385490881196, "gain": 0.45238095238095244, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 19},
+  {"nodeid": 2, "split_feature": 12300, "split_threshold": 2.201966175206, "gain": 0.090702947845805029, "instance_count": 21, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 1},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 20}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 6349, "split_threshold": 7.4913561254211096, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 12445, "split_threshold": 1.97786599557269, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 10465, "split_threshold": 2.45018166992958, "gain": 0.44763157894736827, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 21},
+  {"nodeid": 2, "split_feature": 11876, "split_threshold": 7.5519981410346801, "gain": 0.099722991689750712, "instance_count": 19, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 18},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]}
+]},
+{"nodeid": 0, "split_feature": 7689, "split_threshold": 3.3531678439047701, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 18},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 22}
+]},
+{"nodeid": 0, "split_feature": 7188, "split_threshold": 2.07302863317708, "gain": 0.5, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 20},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 20}
+]},
+{"nodeid": 0, "split_feature": 1115, "split_threshold": 2.42324311160192, "gain": 0.43875000000000003, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 27},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 13}
+]},
+{"nodeid": 0, "split_feature": 9036, "split_threshold": 4.8488817613975801, "gain": 0.43294117647058816, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "split_feature": 11540, "split_threshold": 4.8804511266702697, "gain": 0.11072664359861589, "instance_count": 17, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [0, 1], "instance_count": 16},
+    {"nodeid": 4, "leaf_value": [1, 0], "instance_count": 1}
+  ]},
+  {"nodeid": 2, "leaf_value": [1, 0], "instance_count": 23}
+]},
+{"nodeid": 0, "split_feature": 5729, "split_threshold": 4.3002349770869204, "gain": 0.495, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [1, 0], "instance_count": 22},
+  {"nodeid": 2, "leaf_value": [0, 1], "instance_count": 18}
+]},
+{"nodeid": 0, "split_feature": 8377, "split_threshold": 2.02980357026741, "gain": 0.44152777777777763, "instance_count": 40, "yes": 1, "no": 2, "children": [
+  {"nodeid": 1, "leaf_value": [0, 1], "instance_count": 22},
+  {"nodeid": 2, "split_feature": 12702, "split_threshold": 6.5174058616588697, "gain": 0.10493827160493829, "instance_count": 18, "yes": 3, "no": 4, "children": [
+    {"nodeid": 3, "leaf_value": [1, 0], "instance_count": 17},
+    {"nodeid": 4, "leaf_value": [0, 1], "instance_count": 1}
+  ]}
+]}
+]
