@@ -14,6 +14,7 @@ import argparse as ap
 import os
 import re
 import warnings
+from cuml.explainer import TreeExplainer
 
 # For pickling UserWarning messages from cuML
 warnings.simplefilter("ignore", UserWarning)
@@ -28,8 +29,8 @@ warnings.simplefilter("ignore", UserWarning)
                     - Validate feature (.gct) & target (.cls) data file inputs
                     - Call functions to process files into DataFrames
                     - Perform Random Forest classification using either:
-                      leave-one-out cross-validation (given 2 files) or
-                      test-train prediction (given 4 files)
+                      leave-one-out cross-validation (given 1 dataset) or
+                      test-train prediction (given 2 datasets)
                     - Predict feature dataset and compare to "true" target file
                    Outputs a results (.pred.odf) file (& optional details too).
                    Designed to allow for further file type implementation.
@@ -67,7 +68,6 @@ def str_bool(value):
 # .pred.odf file output, scikit RandomForest classifier parameters, & debugging
 parser = ap.ArgumentParser(description='cuML Random Forest Classifier')
 
-
 # Adding file input arguments (required)
 # Feature file input (.gct):
 parser.add_argument("-f", "--feature", help="classifier feature data filename"
@@ -76,10 +76,13 @@ parser.add_argument("-f", "--feature", help="classifier feature data filename"
 parser.add_argument("-t", "--target", help="classifier target data filename"
                     + " Valid file format(s): .cls", required=True)
 
+# Optional model export as JSON and treelite files, either True or False, False by default
+parser.add_argument("--model_output", help="export model of entire training data file",
+                    nargs="?", const=1, default=False, type=str_bool)
+
 # Assigning results file's name (.pred.odf) (optional as default value exists):
 parser.add_argument("-p", "--pred_odf", help="prediction output filename",
                     nargs="?", const=1)
-
 
 # Test-train classification arguments (optional as can opt for LOOCV):
 # Feature file input (.gct):
@@ -88,7 +91,6 @@ parser.add_argument("--test_feat", help="classifier test feature data filename"
 # Target file input (.cls):
 parser.add_argument("--test_tar", help="classifier test target data filename"
                     + " Valid file format(s): .cls")
-
 
 # Random Forest Classifier arguments (optional) as defaults exist for all:
 # Either True or False
@@ -142,12 +144,12 @@ parser.add_argument("--n_estimators",
                     help="number of trees in forest",
                     nargs="?", const=1, default=100, type=int)
 
-# Range is all nonzero integers
+# Range is greater than or equal to 1
 parser.add_argument("--n_bins",
                     help="max num of bins used by split algorithm per feature",
                     nargs="?", const=1, default=128, type=int)
 
-# Range is all nonzero integers
+# Range is greater than or equal to 1
 parser.add_argument("--n_streams",
                     help="number of parallel streams for building the forest",
                     nargs="?", const=1, default=4, type=int)
@@ -157,21 +159,10 @@ parser.add_argument("--random_state",
                     help="seed for random number generator",
                     nargs="?", const=1, default=None, type=none_or_int)
 
-# # TODO: look into how/if to implement
-# # If None, a new cuml.handle is created
-# parser.add_argument("--handle",
-#                     help="cuml.handle that holds internal CUDA state for model's computation",
-#                     nargs="?", const=1, default=None)
-
-# Range is all nonzero integers
+# Range is greater than or equal to 0
 parser.add_argument("--max_batch_size",
                     help="maximum number of nodes that can be processed in a given batch",
                     nargs="?", const=1, default=4096, type=int)
-
-# # TODO: Look into whether or not to implement
-# parser.add_argument("--output_type",
-#                     help="",
-#                     nargs="?", const=1, default=None, type=none_or_str)
 
 # 0 for no verbosity, 1 for basic verbosity, values greater for more verbosity
 # Range is integers greater than or equal to 0
@@ -180,10 +171,6 @@ parser.add_argument("-v", "--verbose", help="classifier verbosity flag",
 
 # Program debug argument, either True or False, False by default
 parser.add_argument("-d", "--debug", help="program debug messages",
-                    nargs="?", const=1, default=False, type=str_bool)
-
-# Model export as JSON, either True or False, False by default
-parser.add_argument("-j", "--json", help="export model as JSON string",
                     nargs="?", const=1, default=False, type=str_bool)
 
 # Parsing arguments for future calls within script to utilize
@@ -259,11 +246,6 @@ if ((feature_ext != None) and (target_ext != None)):
             # Raveling y_train for data classification format, see last source
             clf.fit(X_train, y_train.values.ravel())
 
-            if (args.json):
-               os.makedirs("json", exist_ok=True) if not os.path.exists("json") else None
-               with open("json/"+"json_model_"+str(i+1)+".txt", "w") as f:
-                  f.write(clf.get_json())
-
             # Initialzing iteration's X_test value
             # Reshaping necessary as array always 1D (single sample's data)
             X_test = (feature_df.loc[:,col].T).values.reshape(1, -1)
@@ -288,6 +270,12 @@ if ((feature_ext != None) and (target_ext != None)):
 
         # Initializing variable for true target values (train in this case)
         true = target_df.iloc[0].values
+
+        # Fitting model to entire feature dataset if a model is to be output
+        if (args.model_output):
+            X_train = feature_df.T
+            y_train = target_df.T
+            clf.fit(X_train, y_train.values.ravel())
 
 
     # Case of test-train prediction (4 files given, 2 test and 2 train)
@@ -321,11 +309,6 @@ if ((feature_ext != None) and (target_ext != None)):
         # Raveling y_train for data classification format, see last source
         clf.fit(X_train, y_train.values.ravel())
 
-        if (args.json):
-           os.makedirs("json", exist_ok=True) if not os.path.exists("json") else None
-           with open("json/json_model.txt", "w") as f:
-              f.write(clf.get_json())
-
         # Predicting using test features
         y_pred=clf.predict(X_test)
 
@@ -333,6 +316,7 @@ if ((feature_ext != None) and (target_ext != None)):
         true = test_tar_df.iloc[0].values
 
         pred_arr = y_pred
+
 
     # If no value was provided for pred_odf filename,
     # uses name of feature target (or test, if provided) file:
@@ -343,6 +327,13 @@ if ((feature_ext != None) and (target_ext != None)):
 
     # Removing all /path/before/ (output file in curr dir)
     pred_odf = re.sub('.*/', '', pred_odf)
+
+    # Model output of training data file
+    if (args.model_output):
+        model_basename = pred_odf.replace(".pred.odf", "")
+        with open(model_basename+"_json_model.txt", "w") as f:
+            f.write(clf.get_json())
+        clf.convert_to_treelite_model().to_treelite_checkpoint(model_basename+"_model.tl")
 
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
