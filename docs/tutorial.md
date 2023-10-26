@@ -78,16 +78,12 @@ Outputs prediction results (.pred.odf) and feature importance files (.feat.odf) 
 ALL_AML Dataset Inputs (**<ins>Without</ins>** Model Input):
 [all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_tt.pred.odf](/data/example_output/all_aml_tt_no_model.pred.odf)
-[all_aml_tt.feat.odf](/data/example_output/all_aml_tt_no_model.feat.odf)
-[all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl)
+[all_aml_tt.pred.odf](/data/example_output/all_aml_tt_no_model.pred.odf), [all_aml_tt.feat.odf](/data/example_output/all_aml_tt_no_model.feat.odf), and [all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl)
 
 ALL_AML Dataset Inputs (**<ins>With</ins>** Model Input):
 [all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_tt_with_model.pred.odf](/data/example_output/all_aml_tt_with_model.pred.odf)
-[all_aml_tt_with_model.feat.odf](/data/example_output/all_aml_tt_with_model.feat.odf)
-[all_aml_tt_with_model.pkl](/data/example_output/all_aml_tt_with_model.pkl) (if model.output is True, this file is outputted and is exactly the same as the input model file)
+[all_aml_tt_with_model.pred.odf](/data/example_output/all_aml_tt_with_model.pred.odf), [all_aml_tt_with_model.feat.odf](/data/example_output/all_aml_tt_with_model.feat.odf), and [all_aml_tt_with_model.pkl](/data/example_output/all_aml_tt_with_model.pkl) (if model.output is True, this file is outputted and is exactly the same as the input model file)
 
 
 ## Cross-Validation Example Data
@@ -95,20 +91,17 @@ ALL_AML Example Outputs:
 ALL_AML Dataset Inputs:
 [all_aml_train.gct](/data/all_aml_train.gct) and [all_aml_train.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_loocv.pred.odf](/data/example_output/all_aml_loocv.pred.odf
-[all_aml_loocv.pkl](/data/example_output/all_aml_loocv.pkl)
+[all_aml_loocv.pred.odf](/data/example_output/all_aml_loocv.pred.odf) and [all_aml_loocv.pkl](/data/example_output/all_aml_loocv.pkl)
 
 BRCA_HUGO Dataset Inputs:
 [DP_4_BRCA_HUGO_symbols.preprocessed.gct](/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
 BRCA_HUGO Example Outputs:
-[BRCA_loocv.pred.odf](/data/example_output/BRCA_loocv.pred.odf)
-[BRCA_loocv.pkl](/data/example_output/BRCA_loocv.pkl)
+[BRCA_loocv.pred.odf](/data/example_output/BRCA_loocv.pred.odf) and [BRCA_loocv.pkl](/data/example_output/BRCA_loocv.pkl)
 
 Iris Dataset Inputs:
 [iris.gct](/data/iris.gct) and [iris.cls](/data/iris.cls)  
 Iris Example Outputs:
-[iris_loocv.pred.odf](/data/example_output/iris_loocv.pred.odf)
-[iris_loocv.pkl](/data/example_output/iris_loocv.pkl)
+[iris_loocv.pred.odf](/data/example_output/iris_loocv.pred.odf) and [iris_loocv.pkl](/data/example_output/iris_loocv.pkl)
 
 ## Requirements
 
