@@ -38,4 +38,3 @@ assertions:
         all_aml_tt_with_model.feat.odf: !!null
         all_aml_tt_with_model.pkl: !!null
         all_aml_tt_with_model.pred.odf: !!null
-        stderr.txt: !!null
