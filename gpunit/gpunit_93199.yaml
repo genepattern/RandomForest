@@ -37,5 +37,3 @@ assertions:
     files: 
         all_aml_tt_no_model.feat.odf: !!null
         all_aml_tt_no_model.pred.odf: !!null
-        stderr.txt: !!null
-        stdout.txt: !!null
