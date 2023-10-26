@@ -1,14 +1,18 @@
 
 name: RandomForest_loocv_test
-# description: created from job 91436, debugging off so NO stdout output, random_state is 0 to reproduce easily
+# description: created from job 93197, debugging off so NO stdout output, random_state is 64 to reproduce easily
 # server:  https://beta.genepattern.org/gp
 module: RandomForest
 # lsid: urn:lsid:genepattern.org:module.analysis:00436
 params:
-    "train.data.filename": "inputs/DP_4_BRCA_HUGO_symbols.preprocessed.gct"
-    "train.class.filename": "inputs/Pred_2_BRCA_HUGO_symbols.preprocessed.cls"
+    "train.data.file": "inputs/DP_4_BRCA_HUGO_symbols.preprocessed.gct"
+    "train.class.file": "inputs/Pred_2_BRCA_HUGO_symbols.preprocessed.cls"
+    "model.output": "True"
+    "model.output.filename": "BRCA_loocv.pkl"
     "test.data.filename": ""
     "test.class.filename": ""
+    "prediction.results.filename": "BRCA_loocv.pred.odf"
+    "feature.importance.filename": "BRCA_loocv.feat.odf"
     "bootstrap": "True"
     "ccp_alpha": "0.0"
     "class_weight": "None"
@@ -23,12 +27,13 @@ params:
     "min_weight_fraction_leaf": "0.0"
     "n_estimators": "100"
     "oob_score": "False"
-    "random_state": "0"
+    "random_state": "64"
     "debug": "False"
     "verbose": "0"
-    "prediction.results.filename": "<train.data.filename_basename>.pred.odf"
 
 assertions:
     jobStatus: success
     files:
-        DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf: !!null
+        BRCA_loocv.pred.odf: !!null
+        BRCA_loocv.feat.odf: !!null
+        BRCA_loocv.pkl: !!null        
