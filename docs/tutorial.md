@@ -1,6 +1,6 @@
 # Random Forest
 
-**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process.
+**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train, with the option of using a pickle file of an already-fitted model instead of the training dataset). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses Scikit-learn's RandomForestClassifier (v1.2). Also includes several optional parameters for specifying the classification algorithm process.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -11,31 +11,32 @@
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
 
-It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction results file (.pred.odf) that compares the "true" class to the model's prediction. Created for module usage through optional arguments for classifier parameters.
+It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. Created for module usage through optional arguments for classifier parameters.
 
 
 ## Source Links
 * [The GenePattern RandomForest source repository](/../../)
-* RandomForest uses the [genepattern/randomforest:0.3](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore) docker image
+* RandomForest uses the [omarhalawa/randomforest:2.0](https://hub.docker.com/layers/omarhalawa/randomforest/2.0/images/sha256-170091c18192c525b3361561526c972d10339e3f039d0689b2396a1c8611e565?context=repo) docker image
 
 ## Usage
-For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module **additionally** requires another dataset in the form of a testing feature (.gct) and testing target (.cls) data file. Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
+For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module requires a testing dataset in the form of a testing feature (.gct) and testing target (.cls) data file **<ins>and</ins> either one of:** a fitted model pickle file or a training dataset (with a training feature (.gct) and training target (.cls) data file). Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
 
 ## Parameters
 
 | Name | Description | Default Value | Cross-Validation | Test-Train Prediction
 ---------|--------------|----------------|----------------|----------------
-| train.data.filename* |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
-| train.class.filename* |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
+| train.data.filename |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
+| train.class.filename |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
 | test.data.filename |  Optional (only provide when doing test-train prediction) testing feature data file to be read from user (.gct) | No default value |  | ✔ |
 | test.class.filename |  Optional (only provide when doing test-train prediction) testing target data file to be read from user (.cls) | No default value |  | ✔ |
-| prediction.results.filename* | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
+| prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
+| feature.importance.filename | Optional feature importance results filename - only outputted for test-train prediction (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
 | criterion | Optional string for node-splitting criterion of one of the following: {“gini”, “entropy”, “log_loss”} | "gini" |
 | max_depth | Optional int for maximum tree depth (>= 1), also takes None | None |
-| max_features | Optional string for number of features per split of either one of the following: {"sqrt," "log2"} ("auto" to be removed in Scikit 1.3), (**future implementation:** handle input of float/int) | "sqrt" |
+| max_features | Optional string for number of features to consider for best split: {"sqrt," "log2", "None" (will use all features} ("auto" is removed in Scikit 1.3 and later versions), (**future implementation:** handle input of float/int) | "sqrt" |
 | max_leaf_nodes | Optional int for maximum leaf nodes per tree (>= 2), also takes None | None |
 | max_samples | Optional float for ratio of datasets to use per tree (between 0.0 and 1.0, inclusive for both), also takes None; if bootstrap is False, can only be None | None |
 | min_impurity_decrease | Optional float for minimum impurity decrease needed per node split (>= 0.0) | 0.0 |
@@ -47,8 +48,6 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
 | debug | Optional boolean for program debugging | False |
 | verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
-
-\*  required
 
 ## Input Files
 
