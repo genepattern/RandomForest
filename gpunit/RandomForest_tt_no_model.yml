@@ -14,7 +14,7 @@ params:
     "test.class.file": "inputs/all_aml_test.cls"
     "prediction.results.filename": "all_aml_tt_no_model.pred.odf"
     "feature.importance.filename": "all_aml_tt_no_model.feat.odf"
-    "bootstrap": "False"
+    "bootstrap": "True"
     "ccp_alpha": "5.0"
     "class_weight": "balanced_subsample"
     "criterion": "log_loss"
