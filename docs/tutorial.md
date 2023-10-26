@@ -78,7 +78,7 @@ Outputs prediction results (.pred.odf) and feature importance files (.feat.odf) 
 ALL_AML Dataset Inputs (**<ins>Without</ins>** Model Input):
 [all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_tt.pred.odf](/data/example_output/all_aml_tt_no_model.pred.odf), [all_aml_tt.feat.odf](/data/example_output/all_aml_tt_no_model.feat.odf), and [all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl)
+[all_aml_tt_no_model.pred.odf](/data/example_output/all_aml_tt_no_model.pred.odf), [all_aml_tt_no_model.feat.odf](/data/example_output/all_aml_tt_no_model.feat.odf), and [all_aml_tt_no_model.pkl](/data/example_output/all_aml_tt_no_model.pkl)
 
 ALL_AML Dataset Inputs (**<ins>With</ins>** Model Input):
 [all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
