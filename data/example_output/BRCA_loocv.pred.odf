@@ -1,0 +1,50 @@
+ODF 1.0
+HeaderLines=8
+COLUMN_NAMES:	Samples	True Class	Predicted Class	Confidence	Correct?
+COLUMN_TYPES:	String 	String	String	float	boolean
+Model=Prediction Results
+PredictorModel=Random Forest Classifier
+NumFeatures=0
+NumCorrect=39
+NumErrors=1
+DataLines=40
+1	A7-A0CE-normal	matched_normal	matched_normal	0.85	TRUE
+2	A7-A0CH-normal	matched_normal	matched_normal	0.9	TRUE
+3	A7-A0D9-normal	matched_normal	matched_normal	0.95	TRUE
+4	A7-A0DB-normal	matched_normal	matched_normal	0.85	TRUE
+5	A7-A13E-normal	matched_normal	matched_normal	0.96	TRUE
+6	A7-A13F-normal	matched_normal	matched_normal	1.0	TRUE
+7	A7-A13G-normal	matched_normal	matched_normal	0.98	TRUE
+8	AC-A23H-normal	matched_normal	matched_normal	0.93	TRUE
+9	AC-A2FB-normal	matched_normal	matched_normal	0.99	TRUE
+10	AC-A2FF-normal	matched_normal	matched_normal	0.62	TRUE
+11	AC-A2FM-normal	matched_normal	matched_normal	0.74	TRUE
+12	BH-A0AU-normal	matched_normal	matched_normal	0.82	TRUE
+13	BH-A0AY-normal	matched_normal	matched_normal	0.98	TRUE
+14	BH-A0AZ-normal	matched_normal	matched_normal	0.85	TRUE
+15	BH-A0B3-normal	matched_normal	matched_normal	0.95	TRUE
+16	BH-A0B5-normal	matched_normal	matched_normal	0.95	TRUE
+17	BH-A0B7-normal	matched_normal	matched_normal	0.76	TRUE
+18	BH-A0B8-normal	matched_normal	matched_normal	0.99	TRUE
+19	BH-A0BA-normal	matched_normal	matched_normal	0.93	TRUE
+20	BH-A0Bc-normal	matched_normal	matched_normal	0.96	TRUE
+21	A7-A0CE-primary	primary_tumor	primary_tumor	0.72	TRUE
+22	A7-A0CH-primary	primary_tumor	primary_tumor	0.93	TRUE
+23	A7-A0D9-primary	primary_tumor	primary_tumor	0.73	TRUE
+24	A7-A0DB-primary	primary_tumor	primary_tumor	0.9	TRUE
+25	A7-A13E-primary	primary_tumor	primary_tumor	0.8	TRUE
+26	A7-A13F-primary	primary_tumor	primary_tumor	0.93	TRUE
+27	A7-A13G-primary	primary_tumor	primary_tumor	0.74	TRUE
+28	AC-A23H-primary	primary_tumor	primary_tumor	0.92	TRUE
+29	AC-A2FB-primary	primary_tumor	primary_tumor	0.74	TRUE
+30	AC-A2FF-primary	primary_tumor	matched_normal	0.58	FALSE
+31	AC-A2FM-primary	primary_tumor	primary_tumor	0.86	TRUE
+32	BH-A0AU-primary	primary_tumor	primary_tumor	0.97	TRUE
+33	BH-A0AY-primary	primary_tumor	primary_tumor	0.83	TRUE
+34	BH-A0AZ-primary	primary_tumor	primary_tumor	0.65	TRUE
+35	BH-A0B3-primary	primary_tumor	primary_tumor	0.86	TRUE
+36	BH-A0B5-primary	primary_tumor	primary_tumor	0.95	TRUE
+37	BH-A0B7-primary	primary_tumor	primary_tumor	0.89	TRUE
+38	BH-A0B8-primary	primary_tumor	primary_tumor	0.92	TRUE
+39	BH-A0BA-primary	primary_tumor	primary_tumor	0.87	TRUE
+40	BH-A0BC-primary	primary_tumor	primary_tumor	0.94	TRUE
