@@ -23,14 +23,17 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 
 ## Parameters
 
-| Name | Description | Default Value | Cross-Validation | Test-Train Prediction
----------|--------------|----------------|----------------|----------------
-| train.data.filename |  Required feature data file to be read from user (.gct) | No default value | ✔ | ✔ |
-| train.class.filename |  Required target data file to be read from user (.cls) | No default value | ✔ | ✔ |
-| test.data.filename |  Optional (only provide when doing test-train prediction) testing feature data file to be read from user (.gct) | No default value |  | ✔ |
-| test.class.filename |  Optional (only provide when doing test-train prediction) testing target data file to be read from user (.cls) | No default value |  | ✔ |
+| Name | Description | Default Value | Cross-Validation | Test-Train Prediction (without model input) | Test-Train Prediction (with model input)
+---------|--------------|----------------|----------------|----------------|----------------
+| train.data.file | Training feature data file to be read from user (.gct) (can be subsituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
+| train.class.file | Training target data file to be read from user (.cls) (can be subsituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
+| model.input.file | model file input (.pkl, similar to model.output file) to serve as a substitute for the training dataset, and **<ins>if both are provided, is used</ins>**.| No default value |  |  | ✔ |
+| test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
+| test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
+| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction | False |
+| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
 | prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
-| feature.importance.filename | Optional feature importance results filename - only outputted for test-train prediction (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
+| feature.importance.filename | Optional feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
@@ -65,7 +68,7 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
     
 ## Output Files
 
-Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. It contains a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values.
+Outputs a results file (.pred.odf) file that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. They contain a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values for the pred.odf file and a main data block of all the features and their importance scores (sum of all is 1) in the case of the feat.odf file.
 
 
 ## Test-Train Example Data
@@ -81,21 +84,21 @@ ALL_AML Example Output:
 ALL_AML Dataset Inputs:
 [all_aml_train.gct](/data/all_aml_train.gct) and [all_aml_train.cls](/data/all_aml_train.cls)  
 ALL_AML Example Output:
-[all_aml_xval.pred.odf](/data/example_output/all_aml_xval.pred.odf)
+[all_aml_loocv.pred.odf](/data/example_output/all_aml_loocv.pred.odf)
 
 BRCA_HUGO Dataset Inputs:
 [DP_4_BRCA_HUGO_symbols.preprocessed.gct](/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
 BRCA_HUGO Example Output:
-[DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf](/data/example_output/DP_4_BRCA_HUGO_symbols.preprocessed.pred.odf)
+[BRCA_loocv.pred.odf](/data/example_output/BRCA_loocv.pred.odf)
 
 Iris Dataset Inputs:
 [iris.gct](/data/iris.gct) and [iris.cls](/data/iris.cls)  
 Iris Example Output:
-[iris.pred.odf](/data/example_output/iris.pred.odf)
+[iris_loocv.pred.odf](/data/example_output/iris_loocv.pred.odf)
 
 ## Requirements
 
-Requires the [genepattern/randomforest:0.3](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore) docker image
+Requires the [omarhalawa/randomforest:2.0](https://hub.docker.com/layers/omarhalawa/randomforest/2.0/images/sha256-170091c18192c525b3361561526c972d10339e3f039d0689b2396a1c8611e565?context=repo) docker image
 
 ## Miscellaneous
 
@@ -111,4 +114,6 @@ Future development ideas:
 
 | Version | Release Date | Description                                 |
 ----------|--------------|---------------------------------------------|
-| 1.0.0 | Jan 2, 2023 | Initial version for team use. |
+| 1.0 | Jan 2, 2023 | Initial version for public use. |
+| 2.0 | Oct 25th, 2023 | Second release with confidence scores, feature importance output, and model input and output implementation. |
+
