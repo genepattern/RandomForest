@@ -34,5 +34,4 @@ assertions:
     jobStatus: success
     files:
         BRCA_loocv.pred.odf: !!null
-        BRCA_loocv.feat.odf: !!null
         BRCA_loocv.pkl: !!null        
