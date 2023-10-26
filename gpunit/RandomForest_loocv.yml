@@ -1,4 +1,4 @@
-name: RandomForest_loocv_test
+name: RandomForest_loocv
 # description: created from job 93197, debugging off so NO stdout output, random_state is 64 to reproduce easily
 # server:  https://beta.genepattern.org/gp
 module: RandomForest
