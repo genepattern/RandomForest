@@ -60,7 +60,7 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 2. Training Data Class File   
     This is the input file of classifier training target data which is used to create the random forest model (for the case of test-train prediction, the training dataset can be substituted by a model pickle file input). For cross-validation, this is the only target data input whose values are considered as "true." The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
 
-3. Model Input File
+3. Model Input File   
     This is the input file of a fitted Scikit RandomForestClassifier model as a compressed pickel (.pkl) file. It can serve as a substitute for the training dataset in the case of test-train prediction, and if both are provided, the model input file takes precedence and is used.
     
 4. Testing Data Feature File   
