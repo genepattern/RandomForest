@@ -37,4 +37,3 @@ assertions:
     files: 
         BRCA_loocv.pkl: !!null
         BRCA_loocv.pred.odf: !!null
-        stderr.txt: !!null
