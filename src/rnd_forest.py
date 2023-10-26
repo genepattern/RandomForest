@@ -2,7 +2,7 @@
 
 # Importing file processing functions
 from rnd_forest_functions import *
-# Importing class to differentiate feature & target logic
+# Importing class to differentiate feature & target logic & specify module mode
 from Marker import *
 
 # Importing modules
@@ -11,6 +11,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import LeaveOneOut
 import pandas as pd
 import argparse as ap
+import joblib
+import re
 
 """
     Name:          Omar Halawa
@@ -23,9 +25,10 @@ import argparse as ap
                     - Call functions to process files into DataFrames
                     - Perform Random Forest classification using either:
                       leave-one-out cross-validation (given 2 files) or 
-                      test-train prediction (given 4 files)
+                      test-train prediction (given 4 files or 2 files & model)
                     - Predict feature dataset and compare to "true" target file
-                   Outputs a results (.pred.odf) file (& optional details too).
+                   Outputs results (.pred.odf) & feature importance (.feat.odf)
+                   (feature importance only for test-train prediction)
                    Designed to allow for further file type implementation.
                    Created for GenePattern module usage.
                    
@@ -33,6 +36,8 @@ import argparse as ap
                    datacamp.com/tutorial/random-forests-classifier-python
                    tiny.cc/7cl2vz
 """
+
+###############################################################################
 
 # Helper method to account for str type or None input
 def none_or_str(value):
@@ -60,34 +65,46 @@ def str_bool(value):
         return eval(value)
     else:
         return value
+    
+###############################################################################
         
-
 # Adding arguments to script for classifier feature & target file input,
-# .pred.odf file output, scikit RandomForest classifier parameters, & debugging
+# .pred.odf & .feat.odf outputs, scikit RFC parameters, & debugging
 parser = ap.ArgumentParser(description='Scikit Random Forest Classifier')
 
-
-# Adding file input arguments (required)
+# Adding file input arguments (combinations of these dictate mode)
 # Feature file input (.gct):
-parser.add_argument("-f", "--feature", help="classifier feature data filename"
-                    + " Valid file format(s): .gct", required=True)
-# Target file input (.cls):
-parser.add_argument("-t", "--target", help="classifier target data filename"
-                    + " Valid file format(s): .cls", required=True)
-
-# Assigning results file's name (.pred.odf) (optional as default value exists):
-parser.add_argument("-p", "--pred_odf", help="prediction output filename",
-                    nargs="?", const=1)
-
-
-# Test-train classification arguments (optional as can opt for LOOCV):
-# Feature file input (.gct):
-parser.add_argument("--test_feat", help="classifier test feature data filename"
+parser.add_argument("-f", "--feature", help="classifier feature data file"
                     + " Valid file format(s): .gct")
+
 # Target file input (.cls):
-parser.add_argument("--test_tar", help="classifier test target data filename"
+parser.add_argument("-t", "--target", help="classifier target data file"
                     + " Valid file format(s): .cls")
 
+# Feature file input (.gct):
+parser.add_argument("--test_feat", help="classifier test feature data file"
+                    + " Valid file format(s): .gct")
+
+# Target file input (.cls):
+parser.add_argument("--test_tar", help="classifier test target data file"
+                    + " Valid file format(s): .cls")
+
+# Assigning results file's name (.pred.odf):
+parser.add_argument("--pred_odf", help="prediction results filename")
+
+# Assigning results file's name (.feat.odf):
+parser.add_argument("--feat_odf", help="feature importances filename" +
+                    "this is only outputted for the test-train prediction mode")
+
+# Output model of training data (.pkl file output):
+parser.add_argument("--model_output", help="output model of training data",
+                    nargs="?", const=1, default=False, type=str_bool)
+
+# Output model of training data (.pkl file output):
+parser.add_argument("--model_output_filename", help="name of output model")
+
+# Input model (.pkl file output)
+parser.add_argument("--model_input", help="input model for training data")
 
 # Random Forest Classifier arguments (optional) as defaults exist for all:
 # Either True or False
@@ -113,10 +130,10 @@ parser.add_argument("--criterion", help="criterion of node splitting",
 parser.add_argument("--max_depth", help="maximum tree depth",
                     nargs="?", const=1, default=None, type=none_or_int)
 
-# TODO, can be "sqrt", "log2", "auto" ("auto" removed in 1.3), a float, or int
+# TODO, can be "sqrt", "log2", "None" ("auto" removed in 1.3), a float, or int
 parser.add_argument("--max_features", 
-                    help="number (ratio in cuML) of features per split",
-                    nargs="?", const=1, default="sqrt", type=str)
+                    help="number of features to consider for best split",
+                    nargs="?", const=1, default="sqrt", type=none_or_str)
 
 # Range is all integers betwen greater than or equal to 2
 # Also takes None (default value)
@@ -190,68 +207,101 @@ args = parser.parse_args()
 if (args.debug):
     print("Debugging on.\n")
 
+###############################################################################
 
 # Checking for feature and target data file validity by calling file_valid
 # Obtained output corresponds to file extension if valid, None if invalid
 # Train input (required)
-feature_ext = file_valid(args.feature, Marker.FEAT)
-target_ext = file_valid(args.target, Marker.TAR)
-# Test input (optional)
+train_feat_ext = file_valid(args.feature, Marker.FEAT)
+train_tar_ext = file_valid(args.target, Marker.TAR)
+# Test & model input (optional)
 test_feat_ext = file_valid(args.test_feat, Marker.FEAT)
 test_tar_ext = file_valid(args.test_tar, Marker.TAR)
+model_in_ext = file_valid(args.model_input, Marker.MODEL)
 
-# Only carrying out Random Forest Classification if both files are valid
-if ((feature_ext != None) and (target_ext != None)):
+# Establishing what mode to run
+if all(item != None for item in [train_feat_ext,  train_tar_ext, 
+                                 test_feat_ext, test_tar_ext]):
+    mode = Marker.TT
+elif all(item != None for item in [model_in_ext, test_feat_ext, test_tar_ext]):
+    mode = Marker.TT
+elif all(item != None for item in [train_feat_ext,  train_tar_ext]): 
+    mode = Marker.LOOCV
+else:
+    mode = Marker.FAIL
 
-    # Processing the valid files into dataframes with parent function "process"
-    feature_df = process(args.feature, feature_ext, None, Marker.FEAT)
-    target_df = process(args.target, target_ext, None, Marker.TAR)
+model_exists = model_in_ext != None
 
-    # Creating instance of Random Forest Classifier with arguments parsed
-    clf = RandomForestClassifier(
-        bootstrap=args.bootstrap, ccp_alpha=args.ccp_alpha, 
-        class_weight=args.class_weight, criterion=args.criterion,
-        max_depth=args.max_depth, max_features=args.max_features,
-        max_leaf_nodes=args.max_leaf_nodes, max_samples=args.max_samples,
-        min_impurity_decrease=args.min_impurity_decrease,
-        min_samples_leaf=args.min_samples_leaf,
-        min_samples_split=args.min_samples_split,
-        min_weight_fraction_leaf=args.min_weight_fraction_leaf,
-        n_estimators=args.n_estimators, n_jobs=args.n_jobs, 
-        oob_score=args.oob_score, random_state=args.random_state)
+if (args.debug):
+    print(mode)
+
+###############################################################################
+
+# Input validity check
+if (mode != Marker.FAIL):
+
+    # If using a training dataset and not a model input
+    if (not model_exists or mode == Marker.LOOCV):
         
-    if (args.debug):
-        print(clf.get_params(deep=True), "\n")
+        # Processing valid files into dataframes with parent function "process"
+        train_feat_df = process(args.feature, train_feat_ext, None, Marker.FEAT)
+        train_tar_df = process(args.target, train_tar_ext, None, Marker.TAR)
+
+        # Obtaining feature names and descriptions
+        row_names = train_feat_df["Name"].tolist()
+        row_desc = train_feat_df["Description"].tolist()
+        # Cleaving them off after
+        train_feat_df = train_feat_df.set_index("Name")
+        train_feat_df.pop("Description")
+
+        # Creating instance of Random Forest Classifier with arguments parsed
+        clf = RandomForestClassifier(
+            bootstrap=args.bootstrap, ccp_alpha=args.ccp_alpha, 
+            class_weight=args.class_weight, criterion=args.criterion,
+            max_depth=args.max_depth, max_features=args.max_features,
+            max_leaf_nodes=args.max_leaf_nodes, max_samples=args.max_samples,
+            min_impurity_decrease=args.min_impurity_decrease,
+            min_samples_leaf=args.min_samples_leaf,
+            min_samples_split=args.min_samples_split, verbose=args.verbose,
+            min_weight_fraction_leaf=args.min_weight_fraction_leaf,
+            n_estimators=args.n_estimators, n_jobs=args.n_jobs,
+            oob_score=args.oob_score, random_state=args.random_state)
+            
+        if (args.debug):
+            print(clf.get_params(deep=True), "\n")
 
     # Creating array for holding target prediction values
     pred_arr = []
+    proba_arr = []
+
+    ###########################################################################
 
     # Case of no test dataset provided, so doing LOOCV
-    if ((test_feat_ext == None) and (test_tar_ext == None)):
+    if (mode == Marker.LOOCV):
         
         # Instantiating variable to hold value of column names
         # to use for prediction results
-        cols = feature_df.columns
+        cols = train_feat_df.columns
 
         # Creating instance of Leave-One-Out Cross Validation
         loo = LeaveOneOut()
         
         if (args.debug):
             print("Number of splitting iterations in LOOCV:", 
-                    loo.get_n_splits(feature_df.T), "\n")
-            print("Feature DataFrame: \n", feature_df, "\n")
-            print("Target DataFrame: \n", target_df, "\n\n")
+                    loo.get_n_splits(train_feat_df.T), "\n")
+            print("Feature DataFrame: \n", train_feat_df, "\n")
+            print("Target DataFrame: \n", train_tar_df, "\n\n")
 
         # Iterating through each sample to do RF Classification by LOOCV
-        for i, (train_index, test_index) in enumerate(loo.split(feature_df.T)):
+        for i, (train_index, test_index) in enumerate(loo.split(train_feat_df.T)):
 
             # Obtaining column and row names
-            col = feature_df.columns[i]
-            row = target_df.columns[i]
-
+            col = train_feat_df.columns[i]
+            row = train_tar_df.columns[i]
+            
             # Doing LOOCV by creating training data without left-out sample
-            X_train = (feature_df.drop(col, axis=1)).T
-            y_train = (target_df.drop(row, axis=1)).T
+            X_train = (train_feat_df.drop(col, axis=1)).T
+            y_train = (train_tar_df.drop(row, axis=1)).T
 
             # Training the model with training sets of X and y
             # Raveling y_train for data classification format, see last source
@@ -259,118 +309,180 @@ if ((feature_ext != None) and (target_ext != None)):
 
             # Initialzing iteration's X_test value
             # Reshaping necessary as array always 1D (single sample's data)
-            X_test = (feature_df.loc[:,col].T).values.reshape(1, -1)
+            X_test = (train_feat_df.loc[:,col].T).values.reshape(1, -1)
 
             # Predicting target value of left-out sample feature data
             pred = clf.predict(X_test)
+            proba = clf.predict_proba(X_test)
 
             # Using [0] for X_test and pred for formatting
             if (args.debug):
-                print("Sample:", i, "\n")
+                print("Sample:", col, "\n")
                 print ("Feature training set with debug sample removed:\n",
-                    X_train, "\n")
+                    X_train.T, "\n")
                 print("Target training set with debug sample removed:\n",
-                    y_train, "\n")
+                    y_train.T, "\n")
                 print ("LOOCV run feature testing data (debug sample):\n",
-                    X_test[0], "\n")
+                    X_test[0].T, "\n")
                 print("LOOCV run target pred. (debug sample prediction):\n",
-                    pred[0], "\n\n")
+                    pred[0].T, "\n\n")
 
             # Appending prediction to list (pred is array, hence pred[0])
             pred_arr.append(pred[0])
+            proba_arr.append([max(sublist) for sublist in proba][0])
 
         # Initializing variable for true target values (train in this case)
-        true = target_df.iloc[0].values
+        true = train_tar_df.iloc[0].values
 
+        # Fitting model to entire feature dataset if a model is to be output
+        # (else would have to output one of the LOOCV models)
+        if (args.model_output):
+            X_train = train_feat_df.T
+            y_train = train_tar_df.T
+            clf.fit(X_train, y_train.values.ravel())
+            clf.feature_names = row_names
 
-    # Case of test-train prediction (4 files given, 2 test and 2 train)
+    ###########################################################################
+
+    # Case of test-train prediction (2 datasets OR 1 dataset + model input)
     else:
 
         # Processing test files into dataframes with parent function "process"
-        test_feat_df = process(args.test_feat, feature_ext, args.feature, 
+        test_feat_df = process(args.test_feat, test_feat_ext, args.feature, 
                                Marker.FEAT)
-        test_tar_df = process(args.test_tar, target_ext, None, Marker.TAR)
+        test_tar_df = process(args.test_tar, test_tar_ext, None, Marker.TAR)
+        
+        # Obtaining feature names and descriptions
+        prefilt_row_names = test_feat_df["Name"].tolist()
+        prefilt_row_desc = test_feat_df["Description"].tolist()
+        row_names = []
+        row_desc = []
+        # Cleaving them off after
+        test_feat_df = test_feat_df.set_index("Name")
+        test_feat_df.pop("Description")
 
         # Instantiating variable to hold value of column names
         #  to use for prediction results
         cols = test_feat_df.columns
 
-        # Assigning variables for training feature and target data
-        X_train = feature_df.T
-        y_train = target_df.T
+        # If no model input is provided
+        if (not model_exists):
+            # Assigning variables for training feature and target data
+            X_train = train_feat_df.T
+            y_train = train_tar_df.T
 
         # Assigning variable for testing feature and target data
         X_test = test_feat_df.T
         y_test = test_tar_df.T
 
-        if (args.debug):
-            print("Training Feature DataFrame: \n", feature_df, "\n")
-            print("Training Target DataFrame: \n", target_df, "\n\n")
+        # If no input model provided
+        if (not model_exists):
+            # Training the model with training sets of X and y
+            # Raveling y_train for data classification format, see last source
+            clf.fit(X_train, y_train.values.ravel())
+            # No filtering in this case
+            row_names, row_desc = prefilt_row_names, prefilt_row_desc
+            clf.feature_names = row_names
+        else:
+            clf = joblib.load(args.model_input)
+            # Filtering test data to only include features from fitted model 
+            X_test = X_test[clf.feature_names]
+            # Doing the same to lists of feature names and descriptions
+            for i in range(len(prefilt_row_names)): 
+                if prefilt_row_names[i] in clf.feature_names:
+                    row_names.append(prefilt_row_names[i])
+                    row_desc.append(prefilt_row_desc[i]) 
+
+        if (args.debug and not model_exists):
+            print("Training Feature DataFrame: \n", train_feat_df, "\n")
+            print("Training Target DataFrame: \n", train_tar_df, "\n\n")
         if (args.debug):
             print("Testing Feature DataFrame: \n", test_feat_df, "\n")
             print("Testing Target DataFrame: \n", test_tar_df, "\n\n")
-    
-        # Training the model with training sets of X and y
-        # Raveling y_train for data classification format, see last source
-        clf.fit(X_train, y_train.values.ravel())
+        
+        print(X_test)
 
         # Predicting using test features
-        y_pred=clf.predict(X_test)
+        y_pred = clf.predict(X_test)
+        proba = clf.predict_proba(X_test)
 
         # Initializing variable for true target values (test in this case)
         true = test_tar_df.iloc[0].values
 
         pred_arr = y_pred
+        proba_arr = [max(sublist) for sublist in proba]
 
-
-    # If no value was provided for pred_odf filename, 
-    # uses name of feature target (or test, if provided) file:
-    if ((args.pred_odf == None) and (args.test_feat != None)):
-        pred_odf = pred_filename(args.test_feat)
+    ###########################################################################
+    
+    # If no value was provided for pred_odf filename and feat_odf filename, 
+    # use name of feature training file:
+    # Not the nicest code, but I think it's much clearer this way (very simple)
+    if ((args.pred_odf == None)):
+        pred_odf = pred_filename(args.feature)
     else:
         pred_odf = args.pred_odf
+        if not pred_odf.endswith(".pred.odf"):
+            pred_odf += ".pred.odf"
+
+    if ((args.feat_odf == None)):
+        feat_odf = feat_filename(args.feature)
+    else:
+        feat_odf = args.feat_odf
+        if not feat_odf.endswith(".feat.odf"):
+            feat_odf += ".feat.odf"
+    
+    # Removing all /path/before/ (outputs file in curr dir)
+    pred_odf = re.sub('.*/', '', pred_odf)
+    feat_odf = re.sub('.*/', '', feat_odf)
+
+    # Outputting model file of training data if option is specified
+    if (args.model_output):
+        if (args.model_output_filename == None):
+            joblib.dump(clf, 'model.pkl', compress=('zlib', 3))
+        else:
+            if not args.model_output_filename.endswith(".pkl"):
+                args.model_output_filename += ".pkl"
+            joblib.dump(clf, args.model_output_filename, compress=('zlib', 3))
 
     if (args.debug):
         print("True target values:\n", *true, "\n", sep=" ")
         print("Predicted target values:\n", *pred_arr, "\n", sep=" ")
 
-    if (args.debug):
         # Classifier accuracy check
         accuracy = accuracy_score(true, pred_arr) * 100
         print(f"Accuracy score: " + "{0:.2f}%".format(accuracy), "\n") 
 
-    # Creating pred.odf dataframe
-    df = pd.DataFrame(columns=range(true.size))
+    ###########################################################################
+
+    # Creating pred.odf and feat.odf dataframes
+    pred_df = pd.DataFrame(columns=range(true.size))
+    feat_df = pd.DataFrame(columns=range(len(proba_arr)))
 
     # Initializing counter for mismatches
     counter = 0
 
-    # Initializing array for target name values (e.g, ["all", "aml"])
-    tar = tar_array(args.target, target_ext)
+    if (args.target != None):
+        # Initializing array for target name values (e.g, ["all", "aml"])
+        tar = tar_array(args.target, train_tar_ext)
+    else:
+        tar = tar_array(args.test_tar, test_tar_ext)
 
     if (args.debug):
         print("Target names array:", tar, "\n")
 
+    counter = sum(true != pred_arr)
+    value = ["TRUE" if check else "FALSE" for check in true == pred_arr]
 
-    # Iterating through each sample
-    for i in range(0,true.size):
+    # Assigning true's and preds's values to the respective sample values
+    # and evaluating differences. Using tar array to specify target names
+    result_list = [[i + 1, list(cols)[i], tar[true[i]], tar[pred_arr[i]],
+                    proba_arr[i], value[i]] for i in range(len(cols))]
 
-        # Creating boolean for mismatch check
-        check = true[i] == pred_arr[i]
-        
-        if (check == True):
-            value = "TRUE"
-        else:
-            value = "FALSE"
-            counter+=1
+    # Create DataFrames for pred.odf and feat.odf
+    pred_df = pd.DataFrame(result_list, columns=["0", "1", "2", "3", "4", "5"]).T
 
-        # Assigning true's and preds's values to the respective sample values
-        # and evaluating differences. Using tar array to specify target names
-        df[i] = [i+1, list(cols)[i], tar[true[i]],
-                tar[pred_arr[i]], 1, value]
-
-    # Creating dictionary for pred_odf file header
-    header_dict = {
+    # Creating dictionary for pred.odf file header
+    pred_header_dict = {
         "HeaderLines" : "",
         "COLUMN_NAMES" : "Samples\t" + "True Class\t" + "Predicted Class\t" 
             + "Confidence\t" + "Correct?",
@@ -385,11 +497,35 @@ if ((feature_ext != None) and (target_ext != None)):
     }
 
     if (args.debug):
-        print("Output filename: " + pred_odf)
+        print("Output .pred.odf filename: " + pred_odf)
+        if (mode == Marker.TT):
+            print("Output .feat.odf filename: " + feat_odf)
 
-    # Passing transposed odf dataframe and header_dict into GP write_odf()
-    write_odf(df.T, pred_odf, header_dict)
+    # Passing transposed odf dataframe and header_dict into GP's write_odf()
+    write_pred_odf(pred_df.T, pred_odf, pred_header_dict)
+
+    # Only doing feature importance output for test-train mode
+    if (mode == Marker.TT):
+
+        feat_df = pd.DataFrame({
+            '0': range(1, len(row_names) + 1),
+            '1': row_names,
+            '2': row_desc,
+            '3': clf.feature_importances_
+        }).T
+
+        # Creating dictionary for feat.odf file header
+        feat_header_dict = {
+            "HeaderLines" : "",
+            "COLUMN_NAMES" : "Feature Name\t" + "Description\t" + "Count\t",
+            "COLUMN_TYPES" : "String \t" + "String\t" + "float\t",
+            "Model" : "Prediction Feature Importance",
+            "PredictorModel" : "Random Forest Classifier",
+            "DataLines" : len(row_names)
+        }
+
+        write_feat_odf(feat_df.T, feat_odf, feat_header_dict)
 
 # Otherwise, printing error message to notify user (in dev case CLI-usage)
 else:
-    print("Error in file input, please check above for details.")
+    print("Please review module instructions.")
