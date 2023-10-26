@@ -8,6 +8,7 @@ params:
     "train.class.file": "inputs/Pred_2_BRCA_HUGO_symbols.preprocessed.cls"
     "model.output": "True"
     "model.output.filename": "BRCA_loocv.pkl"
+    "model.input.file": ""
     "test.data.filename": ""
     "test.class.filename": ""
     "prediction.results.filename": "BRCA_loocv.pred.odf"
