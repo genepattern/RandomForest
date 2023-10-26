@@ -25,8 +25,8 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 
 | Name | Description | Default Value | Cross-Validation | Test-Train Prediction (without model input) | Test-Train Prediction (with model input)
 ---------|--------------|----------------|----------------|----------------|----------------
-| train.data.file | Training feature data file to be read from user (.gct) (can be subsituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
-| train.class.file | Training target data file to be read from user (.cls) (can be subsituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
+| train.data.file | Training feature data file to be read from user (.gct) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
+| train.class.file | Training target data file to be read from user (.cls) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
 | model.input.file | model file input (.pkl, similar to model.output file) to serve as a substitute for the training dataset, and **<ins>if both are provided, is used</ins>**.| No default value |  |  | ✔ |
 | test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
