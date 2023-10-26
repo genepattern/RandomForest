@@ -1,9 +1,9 @@
 # Random Forest
 #### Omar Halawa (ohalawa@ucsd.edu) of the GenePattern Team @ Mesirov Lab - UCSD
 \
-The following repository is a GenePattern module written in Python 3, using the following [Docker image](https://hub.docker.com/layers/genepattern/randomforest/0.3/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore). 
+The following repository is a GenePattern module written in Python 3, using the following [Docker image](https://hub.docker.com/layers/genepattern/randomforest/0.4/images/sha256-c8568e0bcc7740b95d19065a47cde1a40df8c436b8ca8eb69892f5c56b02e0d2?context=explore). 
 \
-It performs either <ins>cross-validation</ins> (takes one dataset as input) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score and a prediction results file (.pred.odf) that compares the "true" class to the model's prediction. Created for module usage through optional arguments for classifier parameters.
+It performs either <ins>cross-validation</ins> (takes one dataset as input) or <ins>test-train prediction</ins> (takes two datasets, test and train, with the option of using a pickle file of an already-fitted model instead of the training dataset). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. Created for module usage through optional arguments for classifier parameters.
 
 Documentation on usage and implementation is found [here](/docs/tutorial.md).
 A detailed step-by-step explanation behind how the Random Forest algorithm works is found [here](/docs/randomforest.md).
