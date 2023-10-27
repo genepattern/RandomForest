@@ -276,9 +276,9 @@ def tar_array(name, ext):
 
         # Processing file's 2nd line by reading it in, stripping newline char,
         # and removing first character ("#")
-        tar_file = open(name, "r")
-        tar_file.readline()
-        tar = tar_file.readline().strip('\n')
+        with open(name, "r") as tar_file:
+            tar_file.readline()
+            tar = tar_file.readline().strip('\n')
         
         # Removing any string of spaces (tab or whitespace) as .cls head delim
         tar = tar.split(sep=None)

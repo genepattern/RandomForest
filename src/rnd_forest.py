@@ -68,7 +68,14 @@ def str_bool(value):
         return value
     
 ###############################################################################
-        
+
+# Masking LOOCV feature names warning ("fix" by 1D array with feature name)
+# Masking LOOCV deprecation warning from pd side ("fix" by version update,TODO) 
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+###############################################################################
+
 # Adding arguments to script for classifier feature & target file input,
 # .pred.odf & .feat.odf outputs, scikit RFC parameters, & debugging
 parser = ap.ArgumentParser(description='Scikit Random Forest Classifier')
@@ -312,12 +319,9 @@ if (mode != Marker.FAIL):
             # Reshaping necessary as array always 1D (single sample's data)
             X_test = (train_feat_df.loc[:,col].T).values.reshape(1, -1)
 
-            # Masking warning here about feature names ("fix" requires 1D array with feature name)
-            warnings.filterwarnings("ignore", category=UserWarning)
             # Predicting target value of left-out sample feature data
             pred = clf.predict(X_test)
             proba = clf.predict_proba(X_test)
-            warnings.resetwarnings()
 
             # Using [0] for X_test and pred for formatting
             if (args.debug):
