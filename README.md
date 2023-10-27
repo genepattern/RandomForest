@@ -1,7 +1,7 @@
 # Random Forest
 #### Omar Halawa (ohalawa@ucsd.edu) of the GenePattern Team @ Mesirov Lab - UCSD
 \
-The following repository is a GenePattern module written in Python 3, using the following [Docker image](https://hub.docker.com/layers/omarhalawa/randomforest/2.0/images/sha256-170091c18192c525b3361561526c972d10339e3f039d0689b2396a1c8611e565?context=repo). 
+The following repository is a GenePattern module written in Python 3, using the following [Docker image](https://hub.docker.com/layers/omarhalawa/randomforest/2.0/images/sha256-9f3613302046e3c66d22de4a6fe677dfad5bce183be18f60994cbf07342b410c?context=repo). 
 \
 It performs either <ins>cross-validation</ins> (takes one dataset as input) or <ins>test-train prediction</ins> (takes two datasets, test and train, with the option of using a pickle file of an already-fitted model instead of the training dataset). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using Scikit-learn's RandomForestClassifier, generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. Created for module usage through optional arguments for classifier parameters.
 
