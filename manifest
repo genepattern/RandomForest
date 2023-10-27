@@ -1,7 +1,7 @@
 #RandomForest
-#Thu Oct 26 06:25:42 UTC 2023
+#Fri Oct 27 15:35:07 UTC 2023
 JVMLevel=
-LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:726\:2
+LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:729\:2.1
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
 categories=beta;classifier;prediction;random forest;scikit
 commandLine=python /RandomForest/rnd_forest.py <train.data.file> <train.class.file> <test.data.file> <test.class.file> <model.output>  <model.input.file>  <prediction.results.filename>  <feature.importance.filename> --n_jobs <job.cpuCount> <bootstrap> <ccp_alpha> <class_weight> <criterion> <max_depth> <max_features> <max_leaf_nodes> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <min_weight_fraction_leaf> <n_estimators> <oob_score> <random_state> <verbose> <debug> <model.output.filename>
@@ -10,7 +10,7 @@ description=Performs random forest classification by cross-validation or test-tr
 documentationUrl=https\://github.com/genepattern/RandomForest/blob/main/docs/tutorial.md
 fileFormat=.pred.odf
 job.cpuCount=
-job.docker.image=genepattern/randomforest\:v0.4
+job.docker.image=genepattern/randomforest\:v0.5
 job.memory=
 job.walltime=
 language=any
@@ -365,8 +365,8 @@ p9_prefix=--bootstrap
 p9_prefix_when_specified=--bootstrap 
 p9_type=java.lang.String
 p9_value=True\=True;False\=False
-privacy=private
-publicationDate=05/17/2023 15\:32 
+privacy=public
+publicationDate=10/26/2023 15\:09 
 quality=production
 requiredPatchLSIDs=
 requiredPatchURLs=
@@ -374,4 +374,4 @@ src.repo=https\://github.com/genepattern/RandomForest/
 taskDoc=
 taskType=beta
 userid=omarhalawabeta
-version=Version 2, includes confidence scores, feature importance, and model in/output
+version=Fixes stdout issues from version 2
