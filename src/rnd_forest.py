@@ -311,9 +311,12 @@ if (mode != Marker.FAIL):
             # Reshaping necessary as array always 1D (single sample's data)
             X_test = (train_feat_df.loc[:,col].T).values.reshape(1, -1)
 
+            # Masking warning here about feature names ("fix" requires 1D array with feature name)
+            warnings.filterwarnings("ignore", category=UserWarning)
             # Predicting target value of left-out sample feature data
             pred = clf.predict(X_test)
             proba = clf.predict_proba(X_test)
+            warnings.resetwarnings()
 
             # Using [0] for X_test and pred for formatting
             if (args.debug):
@@ -400,8 +403,6 @@ if (mode != Marker.FAIL):
             print("Testing Feature DataFrame: \n", test_feat_df, "\n")
             print("Testing Target DataFrame: \n", test_tar_df, "\n\n")
         
-        print(X_test)
-
         # Predicting using test features
         y_pred = clf.predict(X_test)
         proba = clf.predict_proba(X_test)
