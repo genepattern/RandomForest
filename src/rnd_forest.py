@@ -255,12 +255,14 @@ if (mode != Marker.FAIL):
         train_feat_df = process(args.feature, train_feat_ext, None, Marker.FEAT)
         train_tar_df = process(args.target, train_tar_ext, None, Marker.TAR)
 
-        # Obtaining feature names and descriptions
-        row_names = train_feat_df["Name"].tolist()
-        row_desc = train_feat_df["Description"].tolist()
-        # Cleaving them off after
-        train_feat_df = train_feat_df.set_index("Name")
-        train_feat_df.pop("Description")
+        # Obtain feature names and descriptions using column indices (0 and 1)
+        row_names = train_feat_df.iloc[:, 0].tolist()
+        row_desc = train_feat_df.iloc[:, 1].tolist()
+
+        # Remove the "Description" column by its index (1)
+        train_feat_df = train_feat_df.drop(train_feat_df.columns[1], axis=1)
+        # Setting index to "Name" column
+        train_feat_df = train_feat_df.set_index(train_feat_df.columns[0])
 
         # Creating instance of Random Forest Classifier with arguments parsed
         clf = RandomForestClassifier(
@@ -354,20 +356,22 @@ if (mode != Marker.FAIL):
 
     # Case of test-train prediction (2 datasets OR 1 dataset + model input)
     else:
-
+        
         # Processing test files into dataframes with parent function "process"
         test_feat_df = process(args.test_feat, test_feat_ext, args.feature, 
                                Marker.FEAT)
         test_tar_df = process(args.test_tar, test_tar_ext, None, Marker.TAR)
         
         # Obtaining feature names and descriptions
-        prefilt_row_names = test_feat_df["Name"].tolist()
-        prefilt_row_desc = test_feat_df["Description"].tolist()
+        prefilt_row_names = test_feat_df.iloc[:, 0].tolist()
+        prefilt_row_desc = test_feat_df.iloc[:, 1].tolist()
         row_names = []
         row_desc = []
-        # Cleaving them off after
-        test_feat_df = test_feat_df.set_index("Name")
-        test_feat_df.pop("Description")
+        
+        # Remove the "Description" column by its index (1)
+        test_feat_df = test_feat_df.drop(test_feat_df.columns[1], axis=1)
+        # Setting index to "Name" column
+        test_feat_df = test_feat_df.set_index(test_feat_df.columns[0])
 
         # Instantiating variable to hold value of column names
         #  to use for prediction results
