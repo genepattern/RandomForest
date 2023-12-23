@@ -1,0 +1,39 @@
+
+name: all_aml_tt_model_no_dataset
+# description: created from job 93681
+# ET(ms): 374000# from server:  https://beta.genepattern.org/gp/
+module: RandomForest
+# lsid: urn:lsid:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal:genepatternmodules:730:2
+params: 
+    "train.data.file": ""
+    "train.class.file": ""
+    "model.output": "True"
+    "model.output.filename": "<train.data.file_basename>.pkl"
+    "test.data.file": "inputs/all_aml_test.gct"
+    "test.class.file": "inputs/all_aml_test.cls"
+    "prediction.results.filename": "all_aml_tt_model_no_dataset.pred.odf"
+    "feature.importance.filename": "all_aml_tt_model_no_dataset.feat.odf"
+    "bootstrap": "True"
+    "ccp_alpha": "0.0"
+    "class_weight": "None"
+    "criterion": "gini"
+    "max_depth": "None"
+    "max_features": "sqrt"
+    "max_leaf_nodes": "None"
+    "max_samples": "None"
+    "min_impurity_decrease": "0.0"
+    "min_samples_leaf": "1"
+    "min_samples_split": "2"
+    "min_weight_fraction_leaf": "0.0"
+    "n_estimators": "100"
+    "oob_score": "False"
+    "random_state": "64"
+    "debug": "False"
+    "verbose": "0"
+    "model.input.file": "inputs/all_aml_train.pkl"
+
+assertions: 
+    jobStatus: success
+    files: 
+        all_aml_tt_model_no_dataset.feat.odf: !!null
+        all_aml_tt_model_no_dataset.pred.odf: !!null
