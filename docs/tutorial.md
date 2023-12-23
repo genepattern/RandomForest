@@ -27,11 +27,11 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 ---------|--------------|----------------|----------------|----------------|----------------
 | train.data.file | Training feature data file to be read from user (.gct) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
 | train.class.file | Training target data file to be read from user (.cls) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
-| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, the module will simply return the model file input as output | False |
-| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
 | model.input.file | model file input (.pkl, similar to model.output file) to serve as a substitute for the training dataset, and **<ins>if both are provided, is used</ins>**.| No default value |  |  | ✔ |
 | test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
+| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, the module will simply return the model file input as output | False |
+| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
 | prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
 | feature.importance.filename | Optional feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
