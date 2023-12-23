@@ -105,7 +105,7 @@ Iris Example Outputs:
 
 ## Requirements
 
-Requires the [genepattern/randomforest:v0.4](https://hub.docker.com/layers/genepattern/randomforest/v0.4/images/sha256-3afaa5c1ae1e65d34e4b344b0e890ab0ad73fc5eb41024245ec72baa3696b3d3?context=explore) docker image.
+Requires the [genepattern/randomforest:v0.5]() docker image.
 
 ## Miscellaneous
 
