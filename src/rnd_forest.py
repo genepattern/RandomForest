@@ -485,11 +485,11 @@ if (mode != Marker.FAIL):
 
     # Assigning true's and preds's values to the respective sample values
     # and evaluating differences. Using tar array to specify target names
-    result_list = [[i + 1, list(cols)[i], tar[true[i]], tar[pred_arr[i]],
+    result_list = [[list(cols)[i], tar[true[i]], tar[pred_arr[i]],
                     proba_arr[i], value[i]] for i in range(len(cols))]
 
     # Create DataFrames for pred.odf and feat.odf
-    pred_df = pd.DataFrame(result_list, columns=["0", "1", "2", "3", "4", "5"]).T
+    pred_df = pd.DataFrame(result_list, columns=["0", "1", "2", "3", "4"]).T
 
     # Creating dictionary for pred.odf file header
     pred_header_dict = {
@@ -518,10 +518,9 @@ if (mode != Marker.FAIL):
     if (mode == Marker.TT):
 
         feat_df = pd.DataFrame({
-            '0': range(1, len(row_names) + 1),
-            '1': row_names,
-            '2': row_desc,
-            '3': clf.feature_importances_
+            '0': row_names,
+            '1': row_desc,
+            '2': clf.feature_importances_
         }).T
 
         # Creating dictionary for feat.odf file header
