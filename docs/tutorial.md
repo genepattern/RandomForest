@@ -96,7 +96,7 @@ ALL_AML Example Outputs:
 BRCA_HUGO Dataset Inputs:
 [DP_4_BRCA_HUGO_symbols.preprocessed.gct](/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
 BRCA_HUGO Example Outputs:
-[BRCA_xval.pred.odf](/data/example_output/BRCA_xval.pred.odf) and [BRCA_loocv.pkl](/data/example_output/brca.pkl)
+[BRCA_xval.pred.odf](/data/example_output/BRCA_xval.pred.odf) and [BRCA.pkl](/data/example_output/BRCA.pkl)
 
 Iris Dataset Inputs:
 [iris.gct](/data/iris.gct) and [iris.cls](/data/iris.cls)  
