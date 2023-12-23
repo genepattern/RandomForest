@@ -16,7 +16,7 @@ It processes files into DataFrames and performs random forest classification (us
 
 ## Source Links
 * [The GenePattern RandomForest source repository](/../../)
-* RandomForest uses the [genepattern/randomforest:v0.4](https://hub.docker.com/layers/genepattern/randomforest/v0.4/images/sha256-3afaa5c1ae1e65d34e4b344b0e890ab0ad73fc5eb41024245ec72baa3696b3d3?context=explore) docker image.
+* RandomForest uses the [genepattern/randomforest:v0.5]() docker image.
 
 ## Usage
 For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module requires a testing dataset in the form of a testing feature (.gct) and testing target (.cls) data file **<ins>and</ins> either one of:** a fitted model pickle file or a training dataset (with a training feature (.gct) and training target (.cls) data file). Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
@@ -27,11 +27,11 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 ---------|--------------|----------------|----------------|----------------|----------------
 | train.data.file | Training feature data file to be read from user (.gct) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
 | train.class.file | Training target data file to be read from user (.cls) (can be substituted by model input in test-train prediction case) | No default value | ✔ | ✔ |  |
+| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, the module will simply return the model file input as output | False |
+| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
 | model.input.file | model file input (.pkl, similar to model.output file) to serve as a substitute for the training dataset, and **<ins>if both are provided, is used</ins>**.| No default value |  |  | ✔ |
 | test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
-| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, the module will simply return the model file input as output | False |
-| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
 | prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
 | feature.importance.filename | Optional feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
@@ -71,37 +71,37 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
     
 ## Output Files
 
-Outputs prediction results (.pred.odf) and feature importance files (.feat.odf) that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. They contain a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values with confidence scores (using [Scikit RandomForestClassifier _predict_proba_](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba)) for the pred.odf file and a main data block of all the features and their importance scores (sum of all is 1) in the case of the feat.odf file.
+Outputs prediction results (.pred.odf) and feature importance files (.feat.odf) that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. They contain a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values with confidence scores (using [Scikit RandomForestClassifier _predict_proba](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba)) for the pred.odf file and a main data block of all the features and their importance scores (sum of all is 1) in the case of the feat.odf file.
 
 ## Test-Train Example Data
 
 ALL_AML Dataset Inputs (**<ins>Without</ins>** Model Input):
-[all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
+[all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)
 ALL_AML Example Outputs:
-[all_aml_tt_no_model.pred.odf](/data/example_output/all_aml_tt_no_model.pred.odf), [all_aml_tt_no_model.feat.odf](/data/example_output/all_aml_tt_no_model.feat.odf), and [all_aml_tt_no_model.pkl](/data/example_output/all_aml_tt_no_model.pkl)
+[all_aml_tt_dataset.pred.odf](/data/example_output/all_aml_tt_dataset.pred.odf), [all_aml_tt_dataset.feat.odf](/data/example_output/all_aml_tt_dataset.feat.odf), and [all_aml_train.pkl](/data/example_output/all_aml_train.pkl)
 
 ALL_AML Dataset Inputs (**<ins>With</ins>** Model Input):
-[all_aml_tt.pkl](/data/example_output/all_aml_tt_no_model.pkl), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
+[all_aml_train.pkl](/data/example_output/all_aml_train.pkl), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_tt_with_model.pred.odf](/data/example_output/all_aml_tt_with_model.pred.odf), [all_aml_tt_with_model.feat.odf](/data/example_output/all_aml_tt_with_model.feat.odf), and [all_aml_tt_with_model.pkl](/data/example_output/all_aml_tt_with_model.pkl) (if model.output is True, this file is outputted and is exactly the same as the input model file)
+[all_aml_tt_model.pred.odf](/data/example_output/all_aml_tt_model.pred.odf), [all_aml_tt_with_model.feat.odf](/data/example_output/all_aml_tt_model.feat.odf) (only if model.output is True and the training dataset is provided, which it is not in this case, will there be an output pickle file of training data)
 
 
 ## Cross-Validation Example Data
 
 ALL_AML Dataset Inputs:
-[all_aml_train.gct](/data/all_aml_train.gct) and [all_aml_train.cls](/data/all_aml_train.cls)  
+[all_aml_train.gct](/data/all_aml_train.gct) and [all_aml_train.cls](/data/all_aml_train.cls)
 ALL_AML Example Outputs:
-[all_aml_loocv.pred.odf](/data/example_output/all_aml_loocv.pred.odf) and [all_aml_loocv.pkl](/data/example_output/all_aml_loocv.pkl)
+[all_aml_xval.pred.odf](/data/example_output/all_aml_xval.pred.odf) and [all_aml_train.pkl](/data/example_output/all_aml_train.pkl)
 
 BRCA_HUGO Dataset Inputs:
 [DP_4_BRCA_HUGO_symbols.preprocessed.gct](/data/DP_4_BRCA_HUGO_symbols.preprocessed.gct) and [Pred_2_BRCA_HUGO_symbols.preprocessed.cls](/data/Pred_2_BRCA_HUGO_symbols.preprocessed.cls)  
 BRCA_HUGO Example Outputs:
-[BRCA_loocv.pred.odf](/data/example_output/BRCA_loocv.pred.odf) and [BRCA_loocv.pkl](/data/example_output/BRCA_loocv.pkl)
+[BRCA_xval.pred.odf](/data/example_output/BRCA_xval.pred.odf) and [BRCA_loocv.pkl](/data/example_output/brca.pkl)
 
 Iris Dataset Inputs:
 [iris.gct](/data/iris.gct) and [iris.cls](/data/iris.cls)  
 Iris Example Outputs:
-[iris_loocv.pred.odf](/data/example_output/iris_loocv.pred.odf) and [iris_loocv.pkl](/data/example_output/iris_loocv.pkl)
+[iris_xval.pred.odf](/data/example_output/iris_xval.pred.odf) and [iris.pkl](/data/example_output/iris.pkl)
 
 ## Requirements
 
