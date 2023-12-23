@@ -177,8 +177,8 @@ def write_pred_odf(df, path, headers):
 
     # Add HeaderLines
     head += 'HeaderLines=' + str(len(headers)-1) + '\n'
-    head += 'COLUMN_NAMES:\t' + str(headers['COLUMN_NAMES']) + '\n'
-    head += 'COLUMN_TYPES:\t' + str(headers['COLUMN_TYPES']) + '\n'
+    head += 'COLUMN_NAMES:' + str(headers['COLUMN_NAMES']) + '\n'
+    head += 'COLUMN_TYPES:' + str(headers['COLUMN_TYPES']) + '\n'
     head += 'Model=' + str(headers['Model']) + '\n'
     head += 'PredictorModel=' + str(headers['PredictorModel']) + '\n'
     head += 'NumFeatures=' + str(headers['NumFeatures']) + '\n'
@@ -207,8 +207,8 @@ def write_feat_odf(df, path, headers):
 
     # Add HeaderLines
     head += 'HeaderLines=' + str(len(headers)-1) + '\n'
-    head += 'COLUMN_NAMES:\t' + str(headers['COLUMN_NAMES']) + '\n'
-    head += 'COLUMN_TYPES:\t' + str(headers['COLUMN_TYPES']) + '\n'
+    head += 'COLUMN_NAMES:' + str(headers['COLUMN_NAMES']) + '\n'
+    head += 'COLUMN_TYPES:' + str(headers['COLUMN_TYPES']) + '\n'
     head += 'Model=' + str(headers['Model']) + '\n'
     head += 'PredictorModel=' + str(headers['PredictorModel']) + '\n'
     head += 'DataLines=' + str(headers['DataLines']) + '\n'
