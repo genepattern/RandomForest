@@ -1,9 +1,9 @@
 #RandomForest
-#Sat Dec 23 16:26:53 UTC 2023
+#Fri Jan 05 02:39:38 UTC 2024
 JVMLevel=
 LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:730\:2
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
-categories=beta;classifier;prediction;random forest;scikit;sklearn
+categories=prediction
 commandLine=python /RandomForest/rnd_forest.py <train.data.file> <train.class.file> <test.data.file> <test.class.file> <model.output> <model.output.filename> <model.input.file>  <prediction.results.filename>  <feature.importance.filename> --n_jobs <job.cpuCount> <bootstrap> <ccp_alpha> <class_weight> <criterion> <max_depth> <max_features> <max_leaf_nodes> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <min_weight_fraction_leaf> <n_estimators> <oob_score> <random_state> <verbose> <debug>
 cpuType=any
 description=Performs random forest classification on data and class files (cross-validation or test-train prediction), outputting a prediction results file.
@@ -372,6 +372,6 @@ requiredPatchLSIDs=
 requiredPatchURLs=
 src.repo=https\://github.com/genepattern/RandomForest/
 taskDoc=
-taskType=beta
+taskType=prediction
 userid=omarhalawabeta
 version=Module filename bug fixes
