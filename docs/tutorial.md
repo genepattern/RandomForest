@@ -31,9 +31,9 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, the module will simply return the model file input as output | False |
-| model.output.filename | Optional string to name the model output file if model.output is True | model.pkl |
-| prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).pred.odf |
-| feature.importance.filename | Optional feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | (train.data.file_basename).feat.odf |
+| model.output.filename | Optional string to name the model output file if model.output is True | <train.data.file_basename>.pkl |
+| prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | results.pred.odf |
+| feature.importance.filename | Optional feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | model.feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
