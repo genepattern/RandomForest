@@ -1,6 +1,6 @@
 
 name: iris_xval
-# description: created from job 93685
+# description: created from job 93818
 # ET(ms): 219000# from server:  https://beta.genepattern.org/gp/
 module: RandomForest
 # lsid: urn:lsid:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal:genepatternmodules:730:2
