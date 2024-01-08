@@ -1,6 +1,6 @@
 
 name: all_aml_xval
-# description: created from job 93682
+# description: created from job 93817
 # ET(ms): 312000# from server:  https://beta.genepattern.org/gp/
 module: RandomForest
 # lsid: urn:lsid:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal:genepatternmodules:730:2
