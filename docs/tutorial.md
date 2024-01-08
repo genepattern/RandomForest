@@ -16,7 +16,7 @@ It processes files into DataFrames and performs random forest classification (us
 
 ## Source Links
 * [The GenePattern RandomForest source repository](/../../)
-* RandomForest uses the [genepattern/randomforest:v0.5]() docker image.
+* RandomForest uses the [genepattern/randomforest:v0.5](https://hub.docker.com/layers/genepattern/randomforest/v0.5/images/sha256-5727ecbb059902b1fd6d1e76d2d11b556c4ef8b0c4f193292cd2d965576583d9?context=explore) docker image.
 
 ## Usage
 For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module requires a testing dataset in the form of a testing feature (.gct) and testing target (.cls) data file **<ins>and</ins> either one of:** a fitted model pickle file or a training dataset (with a training feature (.gct) and training target (.cls) data file). Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
@@ -105,7 +105,7 @@ Iris Example Outputs:
 
 ## Requirements
 
-Requires the [genepattern/randomforest:v0.5]() docker image.
+Requires the [genepattern/randomforest:v0.5](https://hub.docker.com/layers/genepattern/randomforest/v0.5/images/sha256-5727ecbb059902b1fd6d1e76d2d11b556c4ef8b0c4f193292cd2d965576583d9?context=explore) docker image.
 
 ## Miscellaneous
 
