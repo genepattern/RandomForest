@@ -1,6 +1,6 @@
 
 name: all_aml_xval
-# description: created from job 93817
+# description: created from job 93830
 # ET(ms): 312000# from server:  https://beta.genepattern.org/gp/
 module: RandomForest
 # lsid: urn:lsid:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal:genepatternmodules:730:2
@@ -26,7 +26,6 @@ params:
     "min_samples_split": "2"
     "min_weight_fraction_leaf": "0.0"
     "n_estimators": "100"
-    "oob_score": "False"
     "random_state": "64"
     "debug": "False"
     "verbose": "0"
