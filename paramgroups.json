@@ -59,7 +59,6 @@
             "min_samples_split",
             "min_weight_fraction_leaf",
             "n_estimators",
-            "oob_score",
             "random_state"
         ]
     },
