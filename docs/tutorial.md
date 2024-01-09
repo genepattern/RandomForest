@@ -47,7 +47,6 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | min_samples_split | Optional int for minimum sample number to split node (>= 2) | 2 |
 | min_weight_fraction_leaf | Optional float for min weighted fraction of weight sum total to be leaf (between 0.0 and 0.5, inclusive for both) | 0.0 |
 | n_estimators | Optional int for number of trees in forest (>= 1) | 100 |
-| oob_score | Optional boolean for if out-of-bag samples used for generalization score; if bootstrap is False, can only be False | False |
 | random_state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
 | debug | Optional boolean for program debugging | False |
 | verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
