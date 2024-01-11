@@ -1,0 +1,38 @@
+
+name: iris_xval
+# description: created from job 93831
+# ET(ms): 219000# from server:  https://beta.genepattern.org/gp/
+module: RandomForest
+# lsid: urn:lsid:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal:genepatternmodules:730:2
+params: 
+    "train.data.file": "inputs/iris.gct"
+    "train.class.file": "inputs/iris.cls"
+    "model.output": "True"
+    "model.output.filename": "<train.data.file_basename>.pkl"
+    "test.data.file": ""
+    "test.class.file": ""
+    "prediction.results.filename": "iris_xval.pred.odf"
+    "feature.importance.filename": "iris_xval.feat.odf"
+    "bootstrap": "True"
+    "ccp_alpha": "0.0"
+    "class_weight": "None"
+    "criterion": "gini"
+    "max_depth": "None"
+    "max_features": "sqrt"
+    "max_leaf_nodes": "None"
+    "max_samples": "None"
+    "min_impurity_decrease": "0.0"
+    "min_samples_leaf": "1"
+    "min_samples_split": "2"
+    "min_weight_fraction_leaf": "0.0"
+    "n_estimators": "100"
+    "random_state": "64"
+    "debug": "False"
+    "verbose": "0"
+    "model.input.file": ""
+
+assertions: 
+    jobStatus: success
+    files: 
+        iris.pkl: !!null
+        iris_xval.pred.odf: !!null

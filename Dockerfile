@@ -1,7 +1,7 @@
 ### Copyright 2003-2023. GenePattern Team @ Mesirov Lab - University of California, San Diego. All rights reserved.
 #
-# Currently, module uses python:3 image.
-FROM python:3
+# Currently, module uses python:3.10 image.
+FROM python:3.10
 
 # Based off of ExampleModule Dockerfile found at https://github.com/genepattern/ExampleModule 
 LABEL maintainer="Omar Halawa ohalawa@ucsd.edu"

@@ -1,33 +1,44 @@
 [
     {
         "name": "Inputs (for cross-validation, only use 'Training Data'):",
-        "description": "To perform cross-validation, only provide the data and class files in 'Training Data.' Otherwise, for test-train prediction, provide inputs in both 'Training Data' and 'Testing Data.'",
+        "description": "To perform cross-validation, only provide the data and class files in 'Training Data.' Otherwise, for test-train prediction, provide inputs in both 'Training Data' (or 'Model Input') and 'Testing Data.'",
         "hidden": false
     },
     {
         "name": "Inputs (for cross-validation, only use 'Training Data'):/Training Data",
-        "description": "Provide data (feature) and class (target) files for training dataset (required).",
+        "description": "Provide data (feature) and class (target) files for training dataset.",
         "hidden": false,
         "parameters": [
-            "train.data.filename",
-            "train.class.filename"
+            "train.data.file",
+            "train.class.file",
+            "model.output",
+            "model.output.filename"
+        ]
+    },
+    {
+        "name": "Inputs (for cross-validation, only use 'Training Data'):/Model Input",
+        "description": "Provide model input as pickle file (takes priority over Training Data if both are provided).",
+        "hidden": true,
+        "parameters": [
+            "model.input.file"
         ]
     },
     {
         "name": "Inputs (for cross-validation, only use 'Training Data'):/Testing Data",
         "description": "Provide data (feature) and class (target) files for test dataset (only needed for test-train prediction, not cross-validation).",
-        "hidden": true,
+        "hidden": false,
         "parameters": [
-            "test.data.filename",
-            "test.class.filename"
+            "test.data.file",
+            "test.class.file"
         ]
     },
     {
-        "name": "Inputs (for cross-validation, only use 'Training Data'):/Prediction Result",
-        "description": "Provide prediction results filename. Default is to use training data base filename.",
+        "name": "Inputs (for cross-validation, only use 'Training Data'):/Result Filenames",
+        "description": "Provide result filenames. Default is to use training data base filename.",
         "hidden": true,
         "parameters": [
-            "prediction.results.filename"
+            "prediction.results.filename",
+            "feature.importance.filename"
         ]
     },
     {
@@ -48,7 +59,6 @@
             "min_samples_split",
             "min_weight_fraction_leaf",
             "n_estimators",
-            "oob_score",
             "random_state"
         ]
     },

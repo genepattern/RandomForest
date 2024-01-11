@@ -57,6 +57,8 @@ def file_valid(name, marker):
     # Target data file case
     elif (marker == Marker.TAR):
         curr_list = Extension.TAR_EXT
+    elif (marker == Marker.MODEL):
+        curr_list = Extension.MODEL_EXT
 
     # Carrying out the extension check logic using the now-updated curr_list
     for ext in curr_list:
@@ -139,10 +141,6 @@ def gct_process(name, train_df):
 
         # Resetting index after the intersection
         gct_file = gct_file.reset_index(drop=True)
-
-    # Removing non-biological data columns
-    gct_file.pop("Name")
-    gct_file.pop("Description")
     
     # Returning processed df
     return gct_file
@@ -164,7 +162,7 @@ def cls_process(name):
     return cls_file
 
 
-def write_odf(df, path, headers):
+def write_pred_odf(df, path, headers):
     """ Function to write out result .pred.odf file and creates its header str
 
     Argument:
@@ -179,13 +177,40 @@ def write_odf(df, path, headers):
 
     # Add HeaderLines
     head += 'HeaderLines=' + str(len(headers)-1) + '\n'
-    head += 'COLUMN_NAMES:\t' + str(headers['COLUMN_NAMES']) + '\n'
-    head += 'COLUMN_TYPES:\t' + str(headers['COLUMN_TYPES']) + '\n'
+    head += 'COLUMN_NAMES:' + str(headers['COLUMN_NAMES']) + '\n'
+    head += 'COLUMN_TYPES:' + str(headers['COLUMN_TYPES']) + '\n'
     head += 'Model=' + str(headers['Model']) + '\n'
     head += 'PredictorModel=' + str(headers['PredictorModel']) + '\n'
     head += 'NumFeatures=' + str(headers['NumFeatures']) + '\n'
     head += 'NumCorrect=' + str(headers['NumCorrect']) + '\n'
     head += 'NumErrors=' + str(headers['NumErrors']) + '\n'
+    head += 'DataLines=' + str(headers['DataLines']) + '\n'
+
+    # Processes headers using gp method and and writes out file, see reference 
+    with open(path, 'w') as file:
+        file.write(head)
+        df.to_csv(file, sep='\t', header=False, index=False, mode='w+')
+
+
+def write_feat_odf(df, path, headers):
+    """ Function to write out result .feat.odf file and creates its header str
+
+    Argument:
+        df:         DataFrame for file to contain
+        path        path to output file to (and name)
+    Returns:
+        Nothing, just outputs file
+    """
+
+    # Add the initial ODF version line
+    head = 'ODF 1.0\n'
+
+    # Add HeaderLines
+    head += 'HeaderLines=' + str(len(headers)-1) + '\n'
+    head += 'COLUMN_NAMES:' + str(headers['COLUMN_NAMES']) + '\n'
+    head += 'COLUMN_TYPES:' + str(headers['COLUMN_TYPES']) + '\n'
+    head += 'Model=' + str(headers['Model']) + '\n'
+    head += 'PredictorModel=' + str(headers['PredictorModel']) + '\n'
     head += 'DataLines=' + str(headers['DataLines']) + '\n'
 
     # Processes headers using gp method and and writes out file, see reference 
@@ -217,12 +242,24 @@ def pred_filename(name):
         # Checking for match
         if (feature_end == ext):
             # Returning pre-extension str if so
-            return (feature_name + Extension.ODF_EXT)
+            return (feature_name + Extension.PRED_ODF_EXT)
 
         else:
             return None
+        
 
+# Ditto to pred_filename (aside from extension)
+def feat_filename(name):
+    feature_end = "." + name.rsplit(".", 1)[1]
+    feature_name = name.rsplit(".", 1)[0]
+
+    for ext in Extension.FEAT_EXT:
+        if (feature_end == ext):
+            return (feature_name + Extension.FEAT_ODF_EXT)
+        else:
+            return None
     
+
 def tar_array(name, ext):
     """ Function that takes in a a target data filename and its extension
         and returns an array of all possible target values in the same order. 
@@ -239,9 +276,9 @@ def tar_array(name, ext):
 
         # Processing file's 2nd line by reading it in, stripping newline char,
         # and removing first character ("#")
-        tar_file = open(name, "r")
-        tar_file.readline()
-        tar = tar_file.readline().strip('\n')
+        with open(name, "r") as tar_file:
+            tar_file.readline()
+            tar = tar_file.readline().strip('\n')
         
         # Removing any string of spaces (tab or whitespace) as .cls head delim
         tar = tar.split(sep=None)
@@ -249,3 +286,5 @@ def tar_array(name, ext):
 
         # Returning the array of target values
         return tar
+
+
