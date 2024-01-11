@@ -1,3 +1,5 @@
+#prerelease version number
+#Thu, 11 Jan 2024 00:19:04 -0500
 #updated after building 3.1
 #Thu, 11 Jan 2024 00:17:34 -0500
 #prerelease version number
@@ -19,5 +21,5 @@
 #updated after building 0.1
 #Thu, 27 Apr 2023 16:05:02 -0400
 #prerelease version number
-prerelease.number=2
+prerelease.number=1
 
