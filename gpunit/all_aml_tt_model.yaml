@@ -1,5 +1,5 @@
 
-name: gpunit_22985
+name: all_aml_tt_model
 # description: created from job 22985
 # ET(ms): 65000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
