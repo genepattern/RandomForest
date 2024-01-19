@@ -1,5 +1,5 @@
 
-name: gpunit_22981
+name: brca_xval
 # description: created from job 22981
 # ET(ms): 247000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
