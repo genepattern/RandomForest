@@ -11,7 +11,7 @@
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
 
-It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using <ins>rapidsAI cuML's</ins> [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. Created for module usage through optional arguments for classifier parameters.
+It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using <ins>rapidsAI cuML's</ins> [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. Created for module usage through optional arguments for classifier parameters.
 
 
 ## Source Links
@@ -33,7 +33,7 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, there model will be **<ins>no output</ins>** | False |
 | model.output.filename | Optional string to name the model output file if model.output is True | <train.data.file_basename>.pkl |
 | prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | results.pred.odf |
-| feature.importance.filename | Optional Gain-based (see "Output Files") feature importance results filename - **<ins>only outputted for test-train prediction</ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | model.feat.odf |
+| feature.importance.filename | Optional Gain-based (see "Output Files") feature importance results filename - **<ins>only outputted for test-train prediction that uses a training dataset and NOT a model input file (training dataset required due to package limitations) </ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | model.feat.odf |
 | bootstrap | Optional boolean to turn on classifier bootstrapping | True |
 | ccp_alpha | Optional float for complexity parameter of min cost-complexity pruning (>= 0.0) | 0.0 |
 | class_weight | Optional string for class weight specification of either of: {"balanced," "balanced_subsample"}, also takes None ; (**future implementation:** to handle input of dictionary/list of); Note: "balanced" or "balanced_subsample" are not recommended for warm start if the fitted data differs from the full dataset | None |
@@ -69,23 +69,11 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
       
 5. Testing Data Class File   
     This is the input file of classifier testing target data whose values are considered as "true" (only passed in for test-train prediction). The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
-    
-## Output Files
-1. Training Data Feature File   
-    This is the required input file of classifier training feature data which is used to create the random forest model. For cross-validation, this is the only feature data input which also has prediction done against it via LOOCV. The parameter expects a GCT file (.gct) that follows the [GenePattern GCT](https://www.genepattern.org/file-formats-guide#GCT) file standard.
-      
-2. Training Data Class File   
-    This is the required input file of classifier training target data which is used to create the random forest model. For cross-validation, this is the only target data input whose values are considered as "true." The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
 
-3. Testing Data Feature File   
-    This is the optional (only passed in for test-train prediction) input file of classifier testing feature data which the random forest model will predict the class values of. The parameter expects a GCT file (.gct) that follows the [GenePattern GCT](https://www.genepattern.org/file-formats-guide#GCT) file standard.
-      
-4. Testing Data Class File   
-    This is the optional (only passed in for test-train prediction) input file of classifier testing target data whose values are considered as "true." The parameter expects a CLS file (.cls) that follows the [GenePattern CLS](https://www.genepattern.org/file-formats-guide#CLS) file standard.
-    
+        
 ## Output Files
 
-Outputs prediction results (.pred.odf) and feature importance files (.feat.odf) that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. They contain a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values with confidence scores (using rapidsAI cuML's RandomForestClassifier [_predict_proba_](https://docs.rapids.ai/api/cuml/stable/api/#cuml.RandomForestClassifier.predict_proba)) for the pred.odf file and a main data block of all the features and their importance scores (sum of all is 1; calculated as Gain-based impurity similarly to Scikit's built-in method [here](https://datascience.stackexchange.com/questions/66280/how-is-the-feature-importance-value-calculated-in-sklearn-random-forest-regre)) in the case of the feat.odf file.
+Outputs prediction results (.pred.odf) and feature importance files (.feat.odf, only for test-train prediction with a dataset input) that follows the [GenePattern ODF (Output Description Format)](https://www.genepattern.org/file-formats-guide#ODF) file standard. They contain a specific set of descriptive headers followed by a main data block comparing the random forest classification's predictions on the entire feature dataset against the true values with confidence scores (using rapidsAI cuML's RandomForestClassifier [_predict_proba_](https://docs.rapids.ai/api/cuml/stable/api/#cuml.RandomForestClassifier.predict_proba)) for the pred.odf file and a main data block of all the features and their importance scores (sum of all is 1; calculated as Gain-based impurity similarly to Scikit's built-in method [here](https://datascience.stackexchange.com/questions/66280/how-is-the-feature-importance-value-calculated-in-sklearn-random-forest-regre)) in the case of the feat.odf file. In addition, an optional model pickle (.pkl) file could be outputted if the user provides a training dataset (.gct and .cls) to be trained in its entirety.
 
 
 ## Test-Train Example Data
@@ -98,7 +86,7 @@ ALL_AML Example Outputs:
 ALL_AML Dataset Inputs (**<ins>With</ins>** Model Input):
 [all_aml_train.pkl](/data/example_output/all_aml_train.pkl), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
-[all_aml_tt_model.pred.odf](/data/example_output/all_aml_tt_model.pred.odf), [all_aml_tt_with_model.feat.odf](/data/example_output/all_aml_tt_model.feat.odf) (only if model.output is True and the training dataset is provided, which it is not in this case, will there be an output pickle file of training data)
+[all_aml_tt_model_no_dataset.pred.odf](/data/example_output/all_aml_tt_model_no_dataset.pred.odf) (no feature importance _feat.odf_ file output as this is only outputted for test-train prediction with a dataset input and not a model input) (only if model.output is True and the training dataset is provided, which it is not in this case, will there be an output pickle file of training data)
 
 
 ## Cross-Validation Example Data
