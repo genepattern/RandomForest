@@ -1,5 +1,5 @@
 
-name: gpunit_22980
+name: iris_xval
 # description: created from job 22980
 # ET(ms): 188000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
