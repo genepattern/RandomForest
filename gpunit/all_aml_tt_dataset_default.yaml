@@ -1,5 +1,5 @@
 
-name: gpunit_22978
+name: all_aml_tt_dataset_default
 # description: created from job 22978
 # ET(ms): 71000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
