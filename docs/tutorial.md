@@ -30,7 +30,7 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | model.input.file | model file input (.pkl, similar to model.output file) to serve as a substitute for the training dataset, and **<ins>if both are provided, is used</ins>**.| No default value |  |  | ✔ |
 | test.data.file | Testing feature data file to be read from user (.gct) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
 | test.class.file | Testing target data file to be read from user (.cls) (only provide when doing test-train prediction)  | No default value |  | ✔ | ✔ |
-| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, there model will be **<ins>no output</ins>** | False |
+| model.output | Optional boolean to export model trained on the dataset input in "Training Data" as a compressed pickle file (.pkl). Note: This model will **<ins>always</ins>** be fitted using all samples of train.data.file regardless of if LOOCV is carried out for prediction. **<ins>In the case of a model being provided</ins>**, there will be **<ins>no model output</ins>** | False |
 | model.output.filename | Optional string to name the model output file if model.output is True | <train.data.file_basename>.pkl |
 | prediction.results.filename | Optional prediction results filename (.pred.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | results.pred.odf |
 | feature.importance.filename | Optional Gain-based (see "Output Files") feature importance results filename - **<ins>only outputted for test-train prediction that uses a training dataset and NOT a model input file (training dataset required due to package limitations) </ins>** (.feat.odf, follows [GP ODF format](https://www.genepattern.org/file-formats-guide#ODF)) | model.feat.odf |
@@ -79,7 +79,7 @@ Outputs prediction results (.pred.odf) and feature importance files (.feat.odf, 
 ## Test-Train Example Data
 
 ALL_AML Dataset Inputs (**<ins>Without</ins>** Model Input):
-[all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)
+[all_aml_train.gct](/data/all_aml_train.gct), [all_aml_train.cls](/data/all_aml_train.cls), [all_aml_test.gct](/data/all_aml_train.gct), and [all_aml_test.cls](/data/all_aml_train.cls)  
 ALL_AML Example Outputs:
 [all_aml_tt_dataset.pred.odf](/data/example_output/all_aml_tt_dataset.pred.odf), [all_aml_tt_dataset.feat.odf](/data/example_output/all_aml_tt_dataset.feat.odf), and [all_aml_train.pkl](/data/example_output/all_aml_train.pkl)
 
