@@ -1,5 +1,5 @@
 
-name: gpunit_22977
+name: all_aml_tt_dataset.yaml
 # description: created from job 22977
 # ET(ms): 125000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
