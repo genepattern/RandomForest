@@ -1,5 +1,5 @@
 
-name: gpunit_22979
+name: all_aml_xval
 # description: created from job 22979
 # ET(ms): 127000# from server:  https://genepattern.ucsd.edu/gp/
 module: RandomForest.GPU
