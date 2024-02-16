@@ -1,12 +1,12 @@
 #RandomForest
-#Tue Jan 09 00:18:40 UTC 2024
+#Fri Feb 16 20:49:45 GMT 2024
 JVMLevel=
 LSID=urn\:lsid\:8080.gpserver.ip-172-31-26-71.ip-172-31-26-71.ec2.internal\:genepatternmodules\:730\:2
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
 categories=prediction
 commandLine=python /RandomForest/rnd_forest.py <train.data.file> <train.class.file> <test.data.file> <test.class.file> <model.output> <model.output.filename> <model.input.file>  <prediction.results.filename>  <feature.importance.filename> --n_jobs <job.cpuCount> <bootstrap> <ccp_alpha> <class_weight> <criterion> <max_depth> <max_features> <max_leaf_nodes> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <min_weight_fraction_leaf> <n_estimators>  <random_state> <verbose> <debug>
 cpuType=any
-description=Performs random forest classification on data and class files (cross-validation or test-train prediction), outputting a prediction results file.
+description=Performs random forest classification (cross-validation or test-train prediction), outputting a prediction results file (and feature importance for test-train mode). See the RandomForest.GPU module for potentially faster jobs.
 documentationUrl=https\://github.com/genepattern/RandomForest/blob/main/docs/tutorial.md
 fileFormat=.pred.odf
 job.cpuCount=
@@ -196,8 +196,8 @@ p21_type=java.lang.Integer
 p21_value=
 p22_MODE=
 p22_TYPE=Integer
-p22_default_value=None
-p22_description=Optional int for seed of random number generator.\n\nPossible input range is non-negative ints (caps at 4294967295, 2^32 - 1). \nDefault value is None.\nNote\: Setting this to a specific integer for a specific dataset will always yield the same prediction results file; see random_state in documentation for more details.
+p22_default_value=
+p22_description=Optional int for seed of random number generator.\n\nPossible input range is non-negative ints (caps at 4294967295, 2^32 - 1). \nDefault value is None.\nNote\: Setting this to a specific integer for a specific dataset will always yield the same prediction results file; see random_state in the <a href\=https\://scikit-learn.org/stable/glossary.html\#term-random_state>Scikit documentation</a> for more details.
 p22_fileFormat=
 p22_flag=--random_state 
 p22_name=random_state
@@ -224,7 +224,7 @@ p23_value=False\=False;True\=True
 p24_MODE=
 p24_TYPE=Integer
 p24_default_value=0
-p24_description=Optional int (0 \= no verbose, 1 \= base verbosity) to increase classifier verbosity. For other values, see Scikit documentation linked above.\n\nPossible input range is non-negative ints.\nDefault value is 0.\n
+p24_description=Optional int (0 \= no verbose, 1 \= base verbosity) to increase classifier verbosity. For other values, see <a href\=https\://scikit-learn.org/stable/glossary.html\#term-verbose>Scikit documentation</a>.\n\nPossible input range is non-negative ints.\nDefault value is 0.\n
 p24_fileFormat=
 p24_flag=--verbose 
 p24_name=verbose
@@ -329,7 +329,7 @@ p7_value=
 p8_MODE=
 p8_TYPE=TEXT
 p8_default_value=model.feat.odf
-p8_description=Classifier feature importance filename; only outputted for test-train prediction (.feat.odf, follows GenePattern ODF format). Default is model.feat.odf. See documentation for more details.
+p8_description=Classifier feature importance filename; only outputted for test-train prediction (.feat.odf, follows GenePattern ODF format). Default is model.feat.odf. See <a href\=https\://github.com/genepattern/RandomForest/blob/develop/docs/tutorial.md>documentation</a> for more details.
 p8_fileFormat=
 p8_flag=--feat_odf 
 p8_name=feature.importance.filename
