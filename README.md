@@ -10,4 +10,4 @@ A detailed step-by-step explanation behind how the Random Forest algorithm works
 All source files, including cross-validation runs for all_aml_train ([.gct](/data/all_aml_train.gct), [.cls](/data/all_aml_train.cls)), BRCA_HUGO ([.gct](/data/all_aml_train.gct), [.cls](/data/all_aml_train.cls)), and iris ([.gct](/data/iris.gct), [.cls](/data/iris.cls)) datasets as well as a test-train run with all_aml_test ([.gct](/data/all_aml_test.gct), [.cls](/data/all_aml_test.cls)) and all_aml_train ([.gct](/data/all_aml_train.gct), [.cls](/data/all_aml_train.cls)) all with [output examples](/data/example_output) ("examples," as the classifier utilizes randomness, so each run varies) are available for better reproducibility and portability. However, to see how randomness can be "reproduced," read [this](/data/example_output/reproduc.md).
 
 
-Also see the GPU-backed CuPy-based implementation of this module, [RandomForest.GPU](https://github.com/genepattern/RandomForest.GPU), for potentially faster jobs.
+Also see the GPU-backed CuPy-based implementation of this module, [RandomForest.GPU](https://github.com/genepattern/RandomForest-GPU), for potentially faster jobs.
