@@ -112,12 +112,6 @@ Iris Example Outputs:
 
 Requires the [genepattern/randomforest:v0.5](https://hub.docker.com/layers/genepattern/randomforest/v0.5/images/sha256-5727ecbb059902b1fd6d1e76d2d11b556c4ef8b0c4f193292cd2d965576583d9?context=explore) docker image.
 
-## Miscellaneous
-
-Future development ideas:
-* Handling the following miscellaneous input arguments: class_weight input of dictionary/list of; max_features input of int/float
-
-
 ## License
 
 `RandomForest` is distributed under a modified BSD license available [here](/LICENSE.txt)
