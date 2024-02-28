@@ -8,12 +8,13 @@
 
 ## Summary
 
-The module processes files and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of one dataset rather than test-train prediction used for two datasets) on them using [Scikit-learn's RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier), generating a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. It also includes options for importing and exporting trained model files as well as various parameters for the algorithm itself. Created for GenePattern module usage through optional arguments for classifier parameters.
+The module processes files and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of one dataset rather than test-train prediction used for two datasets) on them, generating a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction. It also includes options for importing and exporting trained model files as well as various parameters for the algorithm itself. Created for GenePattern module usage through optional arguments for classifier parameters.
 
-It is written in [Python 3](https://www.python.org/download/releases/3.0/) and uses [Scikit-learn's RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) (v1.2)
+
 
 ## Source Links
 * [The GenePattern RandomForest source repository](/../../)
+* The module is written in [Python 3](https://www.python.org/download/releases/3.0/) and uses [Scikit-learn's RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) (v1.2)
 * RandomForest uses the [genepattern/randomforest:v0.5](https://hub.docker.com/layers/genepattern/randomforest/v0.5/images/sha256-5727ecbb059902b1fd6d1e76d2d11b556c4ef8b0c4f193292cd2d965576583d9?context=explore) docker image.
 
 ## Usage
